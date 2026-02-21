@@ -32,50 +32,39 @@ export default function Hero() {
       className="relative min-h-screen bg-ivory-gradient overflow-hidden"
       style={{ backgroundAttachment: 'fixed' }}
     >
-      {/* Eiffel Tower Background - Premium layering */}
+      {/* Eiffel Tower Background - Sharp, no blur */}
       <div 
-        className="absolute inset-0 opacity-[0.18]"
+        className="absolute inset-0 opacity-[0.75]"
         style={{
           backgroundImage: `url('/eiffel-tower-bg.jpg')`,
           backgroundPosition: 'left center',
           backgroundSize: 'cover',
-          filter: 'blur(2.5px) grayscale(0.25)',
+          backgroundAttachment: 'fixed',
         }}
       />
 
-      {/* Gradient overlay - Stronger behind text, fading to right */}
+      {/* Dark tonal overlay for consistency - very subtle */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
-          background: 'linear-gradient(to right, rgba(244, 241, 234, 0.95) 0%, rgba(244, 241, 234, 0.85) 35%, rgba(244, 241, 234, 0.4) 85%, rgba(244, 241, 234, 0.15) 100%)',
+          background: 'linear-gradient(to right, rgba(14, 26, 43, 0.03) 0%, rgba(14, 26, 43, 0) 50%)',
         }}
       />
 
-      {/* Text zone blur enhancement - targeted to left side */}
+      {/* Left-to-right gradient mask - text protection zone */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to right, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 40%)',
-          backdropFilter: 'blur(1.5px)',
+          background: 'linear-gradient(to right, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.98) 40%, rgba(244, 241, 234, 0.7) 50%, rgba(244, 241, 234, 0.3) 75%, transparent 100%)',
         }}
       />
 
-      {/* Refined grain/noise texture for architectural feel */}
-      <div className="absolute inset-0 opacity-[0.025]">
+      {/* Premium grain texture - very subtle */}
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%230E1A2B'/%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
-
-      {/* Subtle architectural pattern texture */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230E1A2B' fill-opacity='0.4'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%230E1A2B'/%3E%3C/svg%3E")`,
           }}
         />
       </div>

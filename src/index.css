@@ -279,7 +279,7 @@
     transition-duration: 400ms;
   }
   
-  /* Desktop: Subtle parallax effect with fixed background */
+  /* Desktop: Fixed parallax background */
   @media (min-width: 768px) {
     #hero {
       background-attachment: fixed;
@@ -290,34 +290,35 @@
     }
   }
   
-  /* Mobile optimization: Centered positioning, increased opacity, scroll attachment */
+  /* Mobile optimization: Center tower, increase gradient coverage to 60% */
   @media (max-width: 767px) {
     #hero {
       background-attachment: scroll;
     }
     
+    /* Eiffel Tower image - centered on mobile */
     #hero > div:nth-child(1) {
-      opacity: 0.22 !important;
-      background-position: center center;
-      background-attachment: scroll;
+      background-position: center center !important;
+      background-attachment: scroll !important;
+      opacity: 0.72 !important;
     }
     
-    #hero > div:nth-child(2) {
-      background: 'linear-gradient(to bottom, rgba(244, 241, 234, 0.96) 0%, rgba(244, 241, 234, 0.92) 50%, rgba(244, 241, 234, 0.3) 100%)' !important;
-    }
-  }
-  
-  /* Fallback for browsers without backdrop-filter support */
-  @supports not (backdrop-filter: blur(1px)) {
+    /* Gradient mask - increased left coverage to 60% for headline safety */
     #hero > div:nth-child(3) {
-      display: none;
+      background: linear-gradient(to right, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.98) 50%, rgba(244, 241, 234, 0.65) 60%, rgba(244, 241, 234, 0.25) 80%, transparent 100%) !important;
     }
   }
   
-  /* Light-only adjustments for text readability */
-  @media (prefers-color-scheme: light) {
-    #hero {
-      --text-layer-color: rgba(244, 241, 234, 0.95);
+  /* Prevent awkward tower cropping on smaller mobile screens */
+  @media (max-width: 480px) {
+    #hero > div:nth-child(1) {
+      background-size: contain !important;
+      background-repeat: no-repeat !important;
+      background-position: center bottom !important;
+    }
+    
+    #hero > div:nth-child(3) {
+      background: linear-gradient(to bottom, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.98) 40%, rgba(244, 241, 234, 0.5) 65%, transparent 100%) !important;
     }
   }
 }
