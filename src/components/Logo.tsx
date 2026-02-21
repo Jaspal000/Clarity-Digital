@@ -9,14 +9,14 @@ interface LogoProps {
  */
 function LogoMark({ textColor, accentColor }: { textColor: string; accentColor: string }) {
   return (
-    <div className="flex items-center gap-3">
-      {/* Geometric Icon: Vertical line + arc */}
+    <div className="flex items-center gap-3.5">
+      {/* Geometric Icon: Vertical line + arc — 32px mobile, 40px desktop */}
       <svg
-        width="36"
-        height="36"
+        width="40"
+        height="40"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
-        className="flex-shrink-0 w-[30px] h-[30px] lg:w-[36px] lg:h-[36px]"
+        className="w-[32px] h-[32px] lg:w-[40px] lg:h-[40px]"
       >
         {/* Vertical gold line */}
         <line x1="10" y1="2" x2="10" y2="18" stroke={accentColor} strokeWidth="1.5" strokeLinecap="round" />
@@ -30,17 +30,17 @@ function LogoMark({ textColor, accentColor }: { textColor: string; accentColor: 
         />
       </svg>
 
-      {/* Wordmark: Clarté Digital */}
+      {/* Wordmark: Clarte Digital */}
       <div className="flex flex-col items-start leading-tight">
         <span
-          className="font-sans text-[19px] lg:text-[22px]"
-          style={{ color: textColor, letterSpacing: '-0.01em', fontWeight: 620 }}
+          className="font-sans text-[20px] lg:text-[24px]"
+          style={{ color: textColor, letterSpacing: '-0.01em', fontWeight: 600 }}
         >
-          Clarté
+          Clarte
         </span>
         <span
-          className="font-sans font-normal text-[13px] lg:text-[15px] tracking-wide"
-          style={{ color: textColor, letterSpacing: '0.04em', opacity: 0.7, fontWeight: 450 }}
+          className="font-sans text-[13px] lg:text-[15px] tracking-wide"
+          style={{ color: textColor, letterSpacing: '0.04em', opacity: 0.65, fontWeight: 450 }}
         >
           Digital
         </span>
