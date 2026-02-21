@@ -292,52 +292,101 @@
     transition-duration: 400ms;
   }
   
-  /* HERO DESKTOP: Fixed parallax with left positioning */
+  /* HERO DESKTOP: Fixed parallax with right-of-center positioning */
   @media (min-width: 768px) {
     #hero {
-      min-height: 95vh;
+      min-height: 92vh;
     }
     
+    /* Eiffel Tower - positioned right of center, fully visible, sharp mid-section */
     #hero > div:nth-child(1) {
       background-attachment: fixed;
-      background-position: left center;
+      background-position: 60% center;
       background-size: cover;
+      opacity: 0.85 !important;
+    }
+    
+    /* Directional top blur (6-8px) - top 25% only */
+    #hero > div:nth-child(2) {
+      display: block !important;
+    }
+    
+    /* Text safe zone - left 45% solid ivory, right open for tower */
+    #hero > div:nth-child(3) {
+      background: linear-gradient(90deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 45%, rgba(244, 241, 234, 0.5) 60%, transparent 100%) !important;
+    }
+    
+    /* Subtle bottom blur (2-3px) - bottom 25% only */
+    #hero > div:nth-child(4) {
+      display: block !important;
     }
   }
   
-  /* HERO MOBILE: Centered tower with vertical layered gradients */
+  /* HERO MOBILE: Absolute layered background, centered tower, NO stacking */
   @media (max-width: 767px) {
     #hero {
-      min-height: 90vh;
+      min-height: 92vh;
+      position: relative;
     }
     
-    /* Eiffel Tower - centered vertically */
+    /* Background layer - centered tower, showing upper tower behind headline */
     #hero > div:nth-child(1) {
-      background-position: center center;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-position: center 30%;
       background-attachment: scroll;
       background-size: cover;
+      opacity: 0.85 !important;
     }
     
-    /* Top blur fade (25-30%) */
+    /* Directional top blur - top 20% only, 5px max */
     #hero > div:nth-child(2) {
-      background: linear-gradient(180deg, rgba(244, 241, 234, 0.95) 0%, rgba(244, 241, 234, 0.85) 25%, rgba(244, 241, 234, 0) 35%) !important;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      height: auto;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 20%) !important;
+      mask: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%) !important;
+      WebkitMask: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%) !important;
+      backdropFilter: blur(5px) !important;
+      WebkitBackdropFilter: blur(5px) !important;
     }
     
-    /* Ivory text safe zone (top 30%) */
+    /* Mobile gradient overlay - top 60% solid ivory, middle 20% fade, bottom 20% open */
     #hero > div:nth-child(3) {
-      background: linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.95) 70%, transparent 100%) !important;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 60%, rgba(244, 241, 234, 0.6) 80%, transparent 100%) !important;
+    }
+    
+    /* Subtle bottom blur - minimal on mobile */
+    #hero > div:nth-child(4) {
+      display: none !important;
+    }
+    
+    /* Content layer */
+    #hero > div:nth-child(6) {
+      position: relative;
+      z-index: 2;
     }
   }
   
-  /* Small mobile: Ensure tower is fully visible */
+  /* Small mobile: Center tower, full visibility */
   @media (max-width: 480px) {
     #hero {
-      min-height: 90vh;
+      min-height: 92vh;
     }
     
     #hero > div:nth-child(1) {
-      background-position: center top;
-      background-size: cover;
+      background-position: center 25%;
+      opacity: 0.85 !important;
+    }
+    
+    /* Text safe zone - full width solid on small screens */
+    #hero > div:nth-child(3) {
+      background: linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 65%, rgba(244, 241, 234, 0.5) 80%, transparent 100%) !important;
     }
   }
 }
