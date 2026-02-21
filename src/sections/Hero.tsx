@@ -103,12 +103,12 @@ export default function Hero() {
       {/* LAYER 6: Content */}
       <div className="relative" style={{ zIndex: 2 }}>
         <div className="section-padding">
-          {/* pt-[120px] ensures content clears the fixed header; lg:pt-0 uses flexbox centering on desktop */}
-          <div className="min-h-screen flex items-start pt-[120px] lg:pt-0 lg:items-center">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center w-full pb-12 lg:pb-0">
+          {/* pt clears the fixed header on all breakpoints so the Google card never collides */}
+          <div className="min-h-screen flex items-start pt-[130px] lg:pt-[120px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-start w-full pb-12 lg:pb-0">
 
-              {/* Left: Text Content */}
-              <div className="max-w-xl">
+              {/* Left: Text Content — extra top push on desktop to visually center against the tower */}
+              <div className="max-w-xl lg:pt-16">
                 {/* Trust badge */}
                 <div
                   className={`inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-8 transition-all duration-700 ${
