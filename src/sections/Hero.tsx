@@ -102,9 +102,9 @@ export default function Hero() {
       {/* ====== LAYER 5: CONTENT — always above tower ====== */}
       <div className="relative" style={{ zIndex: 2 }}>
         <div className="section-padding">
-          {/* Mobile: pt-[90px] clears header. Desktop: pt-[120px] */}
-          <div className="min-h-screen flex items-start pt-[90px] lg:pt-[120px]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start w-full pb-12 lg:pb-0">
+          {/* Mobile: pt-[90px] clears header. Desktop: pt-[100px] — lifted up for healthy header gap */}
+          <div className="min-h-screen flex items-start pt-[90px] lg:pt-[100px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-start w-full pb-12 lg:pb-0">
 
               {/* ---- Left: Text Content ---- */}
               <div className="max-w-xl lg:pt-16">
@@ -153,7 +153,7 @@ export default function Hero() {
               </div>
 
               {/* ---- Right: Google Mockup ---- */}
-              {/* mt-6 on mobile pushes it below the hero text, away from header */}
+              {/* mt-6 on mobile pushes it below the hero text. Desktop: flush right, lifted up */}
               <div
                 className={`relative transition-all duration-1000 delay-400 mt-6 lg:mt-0 ${
                   isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
@@ -161,7 +161,7 @@ export default function Hero() {
                 style={{ zIndex: 5 }}
               >
                 <div className="animate-float">
-                  <div className="google-mockup w-full max-w-md mx-auto lg:ml-auto">
+                  <div className="google-mockup w-full max-w-md mx-auto lg:ml-auto lg:mr-0">
                     {/* Mockup Header */}
                     <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 flex items-center gap-3">
                       <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
