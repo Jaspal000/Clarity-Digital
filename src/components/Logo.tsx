@@ -30,13 +30,13 @@ function LogoMark({ textColor, accentColor }: { textColor: string; accentColor: 
         />
       </svg>
 
-      {/* Wordmark: Clarte Digital */}
+      {/* Wordmark: Clart&eacute; Digital */}
       <div className="flex flex-col items-start leading-tight">
         <span
           className="font-sans text-[20px] lg:text-[24px]"
           style={{ color: textColor, letterSpacing: '-0.01em', fontWeight: 600 }}
         >
-          Clarte
+          {'Clart\u00e9'}
         </span>
         <span
           className="font-sans text-[13px] lg:text-[15px] tracking-wide"

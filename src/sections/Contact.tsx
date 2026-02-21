@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Send, Check, MapPin } from 'lucide-react';
+import { Send, Check } from 'lucide-react';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -188,15 +188,7 @@ export default function Contact() {
             </div>
           </form>
 
-          {/* Location indicator */}
-          <div
-            className={`flex items-center justify-center gap-2 mt-12 text-ivory/40 transition-all duration-700 delay-400 ${
-              isVisible ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <MapPin size={14} />
-            <span className="text-sm">Paris, France</span>
-          </div>
+
         </div>
       </div>
     </section>
