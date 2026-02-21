@@ -162,6 +162,11 @@
     @apply py-24 lg:py-32;
   }
   
+  /* Hero manages its own full-viewport layout */
+  main > section#hero {
+    @apply py-0;
+  }
+  
   /* Elegant input */
   .input-elegant {
     @apply w-full px-5 py-4 bg-white/50 border border-charcoal/10 text-charcoal placeholder:text-charcoal/40 text-sm rounded-sm;
@@ -292,118 +297,31 @@
     transition-duration: 400ms;
   }
   
-  /* HERO DESKTOP: Fixed parallax with tower lifted to headline level (center 15%) */
-  @media (min-width: 768px) {
+  /* ===== HERO SECTION ===== */
+  /* The Eiffel Tower is now an <img> element (object-fit: contain), never cropped. */
+
+  /* Desktop hero */
+  @media (min-width: 1024px) {
     #hero {
-      min-height: 95vh;
-      display: flex;
-      align-items: stretch;
-    }
-    
-    /* Eiffel Tower - lifted upward so mid-to-upper tower sits behind headline (center 15%) */
-    #hero > div:nth-child(1) {
-      background-attachment: fixed;
-      background-position: center 15%;
-      background-size: cover;
-      opacity: 0.85 !important;
-      filter: saturate(0.85) !important;
-    }
-    
-    /* Directional top blur (6px max) - top 20% only */
-    #hero > div:nth-child(2) {
-      display: block !important;
-      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 20%) !important;
-      mask: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%) !important;
-      WebkitMask: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%) !important;
-      backdropFilter: blur(6px) !important;
-      WebkitBackdropFilter: blur(6px) !important;
-    }
-    
-    /* Text safe zone - left 40% solid ivory, middle 15% fade, right 45% clear */
-    #hero > div:nth-child(3) {
-      background: linear-gradient(90deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 40%, rgba(244, 241, 234, 0.5) 55%, transparent 100%) !important;
-    }
-    
-    /* Subtle bottom blur (2px) - bottom 25% only */
-    #hero > div:nth-child(4) {
-      display: block !important;
-      height: 25%;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 100%) !important;
-      backdropFilter: blur(2px) !important;
-      WebkitBackdropFilter: blur(2px) !important;
-      bottom: 0 !important;
+      min-height: 100vh;
     }
   }
-  
-  /* HERO MOBILE: Absolute positioned background, tower lifted for headline visibility */
-  @media (max-width: 767px) {
+
+  /* Mobile hero — slightly shorter, tower scales down */
+  @media (max-width: 1023px) {
     #hero {
-      min-height: 92vh;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding-top: 110px;
+      min-height: 100vh;
     }
-    
-    /* Background layer - tower lifted so upper half visible immediately behind headline */
-    #hero > div:nth-child(1) {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background-position: center 20%;
-      background-attachment: scroll;
-      background-size: cover;
-      opacity: 0.85 !important;
-    }
-    
-    /* Directional top blur - top 20% only, 4px max on mobile */
-    #hero > div:nth-child(2) {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 20%) !important;
-      mask: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%) !important;
-      WebkitMask: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%) !important;
-      backdropFilter: blur(4px) !important;
-      WebkitBackdropFilter: blur(4px) !important;
-    }
-    
-    /* Mobile gradient overlay - top 55% solid ivory, middle 20% fade, bottom 25% open for tower */
-    #hero > div:nth-child(3) {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 55%, rgba(244, 241, 234, 0.6) 75%, transparent 100%) !important;
-    }
-    
-    /* Hide bottom blur on mobile */
-    #hero > div:nth-child(4) {
-      display: none !important;
-    }
-    
-    /* Content layer */
-    #hero > div:nth-child(6) {
-      position: relative;
-      z-index: 2;
-      width: 100%;
+
+    #hero > img {
+      height: 75% !important;
     }
   }
-  
-  /* Small mobile: Tower at 25%, maximum visibility */
+
+  /* Small mobile — tower a bit smaller to avoid crowding content */
   @media (max-width: 480px) {
-    #hero {
-      min-height: 92vh;
-    }
-    
-    #hero > div:nth-child(1) {
-      background-position: center 25%;
-      opacity: 0.85 !important;
-    }
-    
-    /* Text safe zone - full width solid for readability */
-    #hero > div:nth-child(3) {
-      background: linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 65%, rgba(244, 241, 234, 0.5) 80%, transparent 100%) !important;
+    #hero > img {
+      height: 65% !important;
     }
   }
 }
