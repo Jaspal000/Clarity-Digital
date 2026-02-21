@@ -1,5 +1,6 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { Mail, Linkedin, MapPin } from 'lucide-react';
+import Logo from '@/components/Logo';
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -32,16 +33,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
           {/* Left: Company Info */}
           <div>
-            <div className="mb-6">
-              <span className="font-serif text-2xl text-ivory">Clarté</span>
-              <span className="font-sans text-2xl font-light text-ivory/80">
-                Digital
-              </span>
-            </div>
-            <p className="text-sm text-ivory/60 mb-4">
-              {t('footer.tagline')}
-            </p>
-            <div className="flex items-center gap-2 text-sm text-ivory/50">
+            <Logo variant="footer" color="ivory" />
+            <div className="flex items-center gap-2 text-sm text-ivory/50 mt-6">
               <MapPin size={14} strokeWidth={1.5} />
               <span>{t('footer.location')}</span>
             </div>
