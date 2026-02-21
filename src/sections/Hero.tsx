@@ -30,54 +30,67 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       className="relative overflow-hidden"
-      style={{ minHeight: '95vh' }}
+      style={{ minHeight: '92vh' }}
     >
-      {/* LAYER 1: Eiffel Tower Background - z-index 0 */}
+      {/* LAYER 1: Eiffel Tower Background (High-res, clean, 80%+ opacity) */}
       <div 
         className="absolute inset-0"
         style={{
           backgroundImage: `url('/eiffel-tower-bg.jpg')`,
-          backgroundPosition: 'left center',
+          backgroundPosition: '60% center',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',
           zIndex: 0,
-          filter: 'saturate(0.75)',
-          opacity: 0.7,
+          opacity: 0.85,
+          filter: 'saturate(0.85)',
         }}
       />
 
-      {/* LAYER 2: Vertical blur mask at top (25-30% blur fade) - z-index 1 */}
+      {/* LAYER 2: Directional Blur Mask (Top 25%, 6-8px blur max) */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(180deg, rgba(244, 241, 234, 0.95) 0%, rgba(244, 241, 234, 0.85) 25%, rgba(244, 241, 234, 0) 35%)',
-          backdropFilter: 'blur(8px)',
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 25%)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
           zIndex: 1,
-          WebkitBackdropFilter: 'blur(8px)',
+          mask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 25%)',
+          WebkitMask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 25%)',
         }}
       />
 
-      {/* LAYER 3: Ivory text safe zone (top 30%) - z-index 1 */}
+      {/* LAYER 3: Text Safe Zone Gradient (Left 45% solid, middle 15% fade, right 40% open) */}
       <div 
-        className="absolute top-0 left-0 right-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          height: '30%',
-          background: 'linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.95) 70%, transparent 100%)',
+          background: 'linear-gradient(90deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 45%, rgba(244, 241, 234, 0.5) 60%, transparent 100%)',
           zIndex: 1,
         }}
       />
 
-      {/* LAYER 4: Premium grain texture - z-index 1 */}
+      {/* LAYER 4: Subtle Bottom Blur (Bottom 25%, 2-3px only) */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: '25%',
+          background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 100%)',
+          backdropFilter: 'blur(2px)',
+          WebkitBackdropFilter: 'blur(2px)',
+          zIndex: 1,
+        }}
+      />
+
+      {/* LAYER 5: Premium grain texture (minimal, 1.2% opacity) */}
       <div className="absolute inset-0 opacity-[0.012] pointer-events-none" style={{ zIndex: 1 }}>
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%230E1A2B'/%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%23F4F1EA'/%3E%3C/svg%3E")`,
           }}
         />
       </div>
 
-      {/* LAYER 5: Content - z-index 2 */}
+      {/* LAYER 6: Content - Relative z-index 2 */}
       <div className="relative" style={{ zIndex: 2 }}>
         <div className="section-padding">
         <div className="min-h-screen flex items-center justify-center">
