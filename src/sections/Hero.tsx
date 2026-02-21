@@ -29,17 +29,16 @@ export default function Hero() {
       style={{ minHeight: '100vh' }}
     >
       {/* ====== LAYER 0: EIFFEL TOWER IMAGE ====== */}
-      {/* DESKTOP: full-width, full-height, object-cover centered so tower is */}
-      {/* in the middle of the page, visible behind everything. */}
-      {/* MOBILE: top-0, h-[60%] so it covers ONLY the hero text area, not */}
-      {/* the Google card below. object-contain keeps the full tower visible. */}
+      {/* DESKTOP: full-width, full-height, object-contain + object-center so the */}
+      {/* entire tower is visible without ANY clipping on any side. */}
+      {/* MOBILE: top-0, h-[60%] so it covers ONLY the hero text area. */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
         className="absolute top-0 left-0 w-full pointer-events-none
           h-[60%] object-contain object-[center_top]
-          lg:h-full lg:object-cover lg:object-[center_20%]"
+          lg:h-full lg:object-contain lg:object-center"
         style={{
           zIndex: 0,
           opacity: 0.7,
