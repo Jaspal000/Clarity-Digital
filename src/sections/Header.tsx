@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { Menu, X } from 'lucide-react';
+import Logo from '@/components/Logo';
 
 export default function Header() {
   const { language, setLanguage, t, isTransitioning } = useLanguage();
@@ -48,22 +49,12 @@ export default function Header() {
               e.preventDefault();
               scrollToSection('hero');
             }}
-            className="flex items-center"
+            className="flex items-center transition-opacity duration-300 hover:opacity-80"
           >
-            <span
-              className={`font-serif text-xl lg:text-2xl transition-colors duration-300 ${
-                isScrolled ? 'text-ivory' : 'text-navy'
-              }`}
-            >
-              Clarté
-            </span>
-            <span
-              className={`font-sans text-xl lg:text-2xl font-light transition-colors duration-300 ${
-                isScrolled ? 'text-ivory/80' : 'text-navy/80'
-              }`}
-            >
-              Digital
-            </span>
+            <Logo 
+              variant="header" 
+              color={isScrolled ? 'ivory' : 'navy'}
+            />
           </a>
 
           {/* Desktop Navigation */}
