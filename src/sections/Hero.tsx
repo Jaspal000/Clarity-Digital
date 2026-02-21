@@ -29,10 +29,10 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen bg-ivory-gradient overflow-hidden"
-      style={{ backgroundAttachment: 'fixed' }}
+      className="relative md:min-h-screen overflow-hidden"
+      style={{ minHeight: 'clamp(90vh, 100vh, 100vh)' }}
     >
-      {/* Eiffel Tower Background - Sharp, no blur */}
+      {/* Eiffel Tower Background - z-index 0 */}
       <div 
         className="absolute inset-0 opacity-[0.75]"
         style={{
@@ -40,27 +40,31 @@ export default function Hero() {
           backgroundPosition: 'left center',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',
+          zIndex: 0,
+          filter: 'saturate(0.80)',
         }}
       />
 
-      {/* Dark tonal overlay for consistency - very subtle */}
+      {/* Dark tonal overlay for consistency - z-index 1 */}
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
-          background: 'linear-gradient(to right, rgba(14, 26, 43, 0.03) 0%, rgba(14, 26, 43, 0) 50%)',
+          background: 'linear-gradient(to right, rgba(14, 26, 43, 0.04) 0%, rgba(14, 26, 43, 0) 50%)',
+          zIndex: 1,
         }}
       />
 
-      {/* Left-to-right gradient mask - text protection zone */}
+      {/* Gradient overlay for text readability - z-index 1 (bottom layer above image) */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to right, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.98) 40%, rgba(244, 241, 234, 0.7) 50%, rgba(244, 241, 234, 0.3) 75%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 58%, rgba(244, 241, 234, 0.7) 70%, rgba(244, 241, 234, 0.3) 85%, transparent 100%)',
+          zIndex: 1,
         }}
       />
 
-      {/* Premium grain texture - very subtle */}
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+      {/* Premium grain texture - z-index 1 */}
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ zIndex: 1 }}>
         <div 
           className="absolute inset-0"
           style={{
@@ -69,8 +73,9 @@ export default function Hero() {
         />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 section-padding">
+      {/* Content - z-index 2 */}
+      <div className="relative" style={{ zIndex: 2 }}>
+        <div className="section-padding">
         <div className="min-h-screen flex items-center">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full py-24 lg:py-0">
             
@@ -249,6 +254,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>

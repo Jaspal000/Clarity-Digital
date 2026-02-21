@@ -279,46 +279,46 @@
     transition-duration: 400ms;
   }
   
-  /* Desktop: Fixed parallax background */
+  /* Desktop: Fixed parallax background with left positioning */
   @media (min-width: 768px) {
-    #hero {
-      background-attachment: fixed;
-    }
-    
     #hero > div:nth-child(1) {
       background-attachment: fixed;
+      background-position: left center;
+      background-size: cover;
     }
   }
   
-  /* Mobile optimization: Center tower, increase gradient coverage to 60% */
+  /* Mobile: Centered tower with vertical gradient overlay (55-65% solid, fade to image) */
   @media (max-width: 767px) {
     #hero {
-      background-attachment: scroll;
+      min-height: 90vh;
     }
     
-    /* Eiffel Tower image - centered on mobile */
+    /* Eiffel Tower image - center vertically, ensure top is visible */
     #hero > div:nth-child(1) {
-      background-position: center center !important;
-      background-attachment: scroll !important;
-      opacity: 0.72 !important;
+      background-position: center top;
+      background-attachment: scroll;
+      background-size: cover;
+      opacity: 0.75;
     }
     
-    /* Gradient mask - increased left coverage to 60% for headline safety */
+    /* Gradient overlay - top 58% solid ivory for text, middle 12% fade, bottom visible */
     #hero > div:nth-child(3) {
-      background: linear-gradient(to right, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.98) 50%, rgba(244, 241, 234, 0.65) 60%, rgba(244, 241, 234, 0.25) 80%, transparent 100%) !important;
+      background: linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 58%, rgba(244, 241, 234, 0.7) 70%, rgba(244, 241, 234, 0.3) 85%, transparent 100%);
     }
   }
   
-  /* Prevent awkward tower cropping on smaller mobile screens */
+  /* Small mobile screens: Ensure tower is fully visible without awkward cropping */
   @media (max-width: 480px) {
-    #hero > div:nth-child(1) {
-      background-size: contain !important;
-      background-repeat: no-repeat !important;
-      background-position: center bottom !important;
+    #hero {
+      min-height: 90vh;
     }
     
-    #hero > div:nth-child(3) {
-      background: linear-gradient(to bottom, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.98) 40%, rgba(244, 241, 234, 0.5) 65%, transparent 100%) !important;
+    /* Center tower and show full image */
+    #hero > div:nth-child(1) {
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
     }
   }
 }
