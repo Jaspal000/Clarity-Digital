@@ -78,7 +78,7 @@ export default function Sectors() {
         </div>
 
         {/* Sectors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 max-w-6xl mx-auto">
           {sectors.map((sector, index) => (
             <div
               key={index}
@@ -87,28 +87,38 @@ export default function Sectors() {
               }`}
               style={{ transitionDelay: `${index * 150 + 200}ms` }}
             >
-              <div className="card-elegant overflow-hidden">
+              <div 
+                className="overflow-hidden rounded-lg transition-all duration-500"
+                style={{
+                  boxShadow: '0 8px 28px rgba(14, 26, 43, 0.08)',
+                }}
+              >
                 {/* Image */}
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={sector.image}
                     alt={sector.title as string}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    style={{
+                      filter: 'brightness(0.88)',
+                    }}
                   />
-                  {/* Subtle overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Warm tone overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-amber-900/15 mix-blend-multiply" />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <h3 className="font-serif text-xl text-navy mb-3 group-hover:text-gold transition-colors duration-300">
+                <div className="p-8 bg-white">
+                  <h3 className="font-serif text-xl text-navy mb-4 font-normal group-hover:text-gold transition-colors duration-300">
                     {sector.title}
                   </h3>
-                  <p className="text-sm text-charcoal/70 leading-relaxed mb-4">
+                  <p className="text-sm text-charcoal/70 leading-relaxed mb-6">
                     {sector.description}
                   </p>
                   <div className="flex items-center gap-2 text-sm text-navy/70 group-hover:text-gold transition-colors duration-300">
-                    <span className="font-medium">En savoir plus</span>
+                    <span className="font-medium relative pb-1 group-hover:after:w-full after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold after:w-0 after:transition-all after:duration-300">En savoir plus</span>
                     <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                 </div>

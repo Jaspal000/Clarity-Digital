@@ -67,10 +67,17 @@ export default function BeforeAfter() {
     <section
       id="before-after"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-navy"
+      className="relative py-24 lg:py-32 bg-navy overflow-hidden"
     >
-      {/* Stone texture overlay */}
-      <div className="stone-texture absolute inset-0" />
+      {/* Grid texture at 2% opacity */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23F4F1EA' fill-opacity='0.5'%3E%3Cpath d='M0 0h30v30H0V0zm30 30h30v30H30V30z'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
 
       <div className="relative z-10 section-padding">
         {/* Section Header */}
@@ -114,14 +121,14 @@ export default function BeforeAfter() {
 
         {/* Before/After Comparison */}
         <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto transition-all duration-700 delay-300 ${
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto transition-all duration-700 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {/* Before Card */}
-          <div className="bg-white rounded-xl overflow-hidden shadow-xl">
+          <div className="bg-white rounded-lg overflow-hidden" style={{ boxShadow: '0 8px 32px rgba(14, 26, 43, 0.08)' }}>
             {/* Header */}
-            <div className="bg-red-50 px-5 py-3 border-b border-red-100 flex items-center justify-between">
+            <div className="bg-red-50 px-6 py-4 border-b border-red-100 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-100 text-red-700 text-xs font-semibold uppercase tracking-wider rounded-full">
                 <X size={12} />
                 {t('beforeAfter.before.label')}
@@ -129,7 +136,7 @@ export default function BeforeAfter() {
               <span className="text-xs text-red-600/70">Avant optimisation</span>
             </div>
 
-            <div className="p-5">
+            <div className="p-7">
               {/* Business Info */}
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -189,9 +196,23 @@ export default function BeforeAfter() {
           </div>
 
           {/* After Card */}
-          <div className="bg-white rounded-xl overflow-hidden shadow-xl ring-2 ring-gold/30">
+          <div 
+            className="bg-white rounded-lg overflow-hidden relative"
+            style={{ 
+              boxShadow: '0 8px 32px rgba(14, 26, 43, 0.08)',
+              border: '1px solid rgba(184, 156, 94, 0.1)',
+            }}
+          >
+            {/* Muted green glow border at 10% opacity on top */}
+            <div 
+              className="absolute top-0 left-0 right-0 h-1"
+              style={{
+                background: 'linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent)',
+              }}
+            />
+            
             {/* Header */}
-            <div className="bg-green-50 px-5 py-3 border-b border-green-100 flex items-center justify-between">
+            <div className="bg-green-50 px-6 py-4 border-b border-green-100 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold uppercase tracking-wider rounded-full">
                 <Check size={12} />
                 {t('beforeAfter.after.label')}
@@ -199,7 +220,7 @@ export default function BeforeAfter() {
               <span className="text-xs text-green-600/70">Après optimisation</span>
             </div>
 
-            <div className="p-5">
+            <div className="p-7">
               {/* Business Info */}
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-16 h-16 bg-gradient-to-br from-gold/20 to-gold/5 rounded-lg flex items-center justify-center flex-shrink-0 border border-gold/20">
