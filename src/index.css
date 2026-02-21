@@ -278,4 +278,20 @@
   .transition-400 {
     transition-duration: 400ms;
   }
+  
+  /* Hero section mobile optimization */
+  @media (max-width: 768px) {
+    #hero {
+      background-attachment: scroll;
+    }
+  }
+  
+  /* Subtle parallax effect on desktop */
+  @supports (background-attachment: fixed) {
+    @media (min-width: 768px) {
+      #hero {
+        background-attachment: fixed;
+      }
+    }
+  }
 }

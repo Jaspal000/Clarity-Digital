@@ -31,7 +31,32 @@ export default function Hero() {
       ref={sectionRef}
       className="relative min-h-screen bg-ivory-gradient overflow-hidden"
     >
-      {/* Paris architectural texture background */}
+      {/* Eiffel Tower Background */}
+      <div 
+        className="absolute inset-0 opacity-[0.15]"
+        style={{
+          backgroundImage: `url('/eiffel-tower-bg.jpg')`,
+          backgroundPosition: 'left center',
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
+          filter: 'blur(2px) grayscale(0.2)',
+        }}
+      />
+
+      {/* Gradient overlay - stronger on left, fading right */}
+      <div className="absolute inset-0 bg-gradient-to-r from-ivory via-ivory/95 to-ivory/40" />
+
+      {/* Noise/grain texture for refinement */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%230E1A2B'/%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
+      {/* Subtle architectural texture */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div 
           className="absolute inset-0"
@@ -40,9 +65,6 @@ export default function Hero() {
           }}
         />
       </div>
-
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-ivory via-ivory to-ivory-dark/30" />
 
       {/* Content */}
       <div className="relative z-10 section-padding">
