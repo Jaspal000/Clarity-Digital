@@ -13,16 +13,12 @@ export default function Hero() {
 
   const scrollToContact = () => {
     const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToBeforeAfter = () => {
     const element = document.getElementById('before-after');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -32,53 +28,62 @@ export default function Hero() {
       className="relative overflow-hidden"
       style={{ minHeight: '100vh' }}
     >
-      {/* LAYER 0: Eiffel Tower — anchored top-center, object-fit contain, never cropped */}
+      {/* ====== LAYER 0: EIFFEL TOWER IMAGE ====== */}
+      {/* Mobile-first: absolutely positioned, centered via left-50% + translateX, */}
+      {/* height 65% of section, starts at top:0 so tower top is immediately visible. */}
+      {/* Desktop: height 90%, positioned on right half for the split layout. */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
-        className="absolute top-0 left-0 w-full pointer-events-none select-none"
         style={{
-          height: '100%',
+          position: 'absolute',
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          height: '65%',
+          width: 'auto',
+          maxWidth: 'none',
           objectFit: 'contain',
-          objectPosition: 'center top',
           zIndex: 0,
           opacity: 0.82,
           filter: 'saturate(0.85)',
+          pointerEvents: 'none',
         }}
+        className="lg:left-auto lg:right-0 lg:translate-x-0 lg:h-full lg:w-[55%] lg:object-cover lg:object-[center_20%]"
       />
 
-      {/* LAYER 1: Directional Blur Mask (Top 25%, 6px blur max) */}
+      {/* ====== LAYER 1: Top blur mask (top 15% only, 4px max) ====== */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 25%)',
-          backdropFilter: 'blur(6px)',
-          WebkitBackdropFilter: 'blur(6px)',
+          backdropFilter: 'blur(4px)',
+          WebkitBackdropFilter: 'blur(4px)',
           zIndex: 1,
-          mask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 25%)',
-          WebkitMask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 25%)',
+          mask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 15%)',
+          WebkitMask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 15%)',
         }}
       />
 
-      {/* LAYER 2: Text Safe Zone Gradient — Desktop: left-to-right */}
-      <div
-        className="absolute inset-0 pointer-events-none hidden lg:block"
-        style={{
-          background: 'linear-gradient(90deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 38%, rgba(244, 241, 234, 0.55) 52%, transparent 100%)',
-          zIndex: 1,
-        }}
-      />
-      {/* LAYER 2b: Text Safe Zone Gradient — Mobile: top-to-bottom */}
+      {/* ====== LAYER 2: Text safe zone gradient ====== */}
+      {/* Mobile: top 50% solid ivory, fading to transparent — tower visible in bottom half */}
       <div
         className="absolute inset-0 pointer-events-none lg:hidden"
         style={{
-          background: 'linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.97) 50%, rgba(244, 241, 234, 0.6) 75%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(244,241,234,1) 0%, rgba(244,241,234,0.97) 40%, rgba(244,241,234,0.65) 55%, rgba(244,241,234,0.15) 70%, transparent 85%)',
+          zIndex: 1,
+        }}
+      />
+      {/* Desktop: left-to-right gradient for split layout */}
+      <div
+        className="absolute inset-0 pointer-events-none hidden lg:block"
+        style={{
+          background: 'linear-gradient(90deg, rgba(244,241,234,1) 0%, rgba(244,241,234,1) 38%, rgba(244,241,234,0.55) 52%, transparent 100%)',
           zIndex: 1,
         }}
       />
 
-      {/* LAYER 3: Subtle Bottom Blend */}
+      {/* ====== LAYER 3: Subtle bottom blend (desktop only) ====== */}
       <div
         className="absolute bottom-0 left-0 right-0 pointer-events-none hidden lg:block"
         style={{
@@ -88,7 +93,7 @@ export default function Hero() {
         }}
       />
 
-      {/* LAYER 4: Premium grain texture (minimal, 1.2% opacity) */}
+      {/* ====== LAYER 4: Grain texture ====== */}
       <div className="absolute inset-0 opacity-[0.012] pointer-events-none" style={{ zIndex: 1 }}>
         <div
           className="absolute inset-0"
@@ -98,18 +103,18 @@ export default function Hero() {
         />
       </div>
 
-      {/* LAYER 5: Content — z-index: 10, always above tower */}
-      <div className="relative" style={{ zIndex: 10 }}>
+      {/* ====== LAYER 5: CONTENT — always above tower ====== */}
+      <div className="relative" style={{ zIndex: 2 }}>
         <div className="section-padding">
-          {/* pt clears the fixed header; items-start keeps content pinned below header */}
-          <div className="min-h-screen flex items-start pt-[110px] lg:pt-[120px]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-start w-full pb-12 lg:pb-0">
+          {/* Mobile: pt-[90px] clears header. Desktop: pt-[120px] */}
+          <div className="min-h-screen flex items-start pt-[90px] lg:pt-[120px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start w-full pb-12 lg:pb-0">
 
-              {/* Left: Text Content */}
+              {/* ---- Left: Text Content ---- */}
               <div className="max-w-xl lg:pt-16">
                 {/* Trust badge */}
                 <div
-                  className={`inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-8 transition-all duration-700 ${
+                  className={`inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                   }`}
                 >
@@ -119,7 +124,7 @@ export default function Hero() {
 
                 {/* Headline */}
                 <h1
-                  className={`font-serif text-4xl sm:text-5xl lg:text-6xl text-navy leading-tight mb-6 transition-all duration-700 delay-100 ${
+                  className={`font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-navy leading-tight mb-5 transition-all duration-700 delay-100 ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                   }`}
                 >
@@ -128,7 +133,7 @@ export default function Hero() {
 
                 {/* Subheadline */}
                 <p
-                  className={`text-lg text-charcoal/70 leading-relaxed mb-10 transition-all duration-700 delay-200 ${
+                  className={`text-base lg:text-lg text-charcoal/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                   }`}
                 >
@@ -141,31 +146,25 @@ export default function Hero() {
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                   }`}
                 >
-                  <button
-                    onClick={scrollToContact}
-                    className="btn-primary group"
-                  >
+                  <button onClick={scrollToContact} className="btn-primary group">
                     <span>{t('hero.cta')}</span>
                     <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
                   </button>
-                  <button
-                    onClick={scrollToBeforeAfter}
-                    className="btn-outline"
-                  >
+                  <button onClick={scrollToBeforeAfter} className="btn-outline">
                     Voir les exemples
                   </button>
                 </div>
               </div>
 
-              {/* Right: Google Mockup — z-5, always below header (z-50) but above tower (z-0) */}
+              {/* ---- Right: Google Mockup ---- */}
+              {/* mt-6 on mobile pushes it below the hero text, away from header */}
               <div
-                className={`relative transition-all duration-1000 delay-400 mt-4 lg:mt-0 ${
+                className={`relative transition-all duration-1000 delay-400 mt-6 lg:mt-0 ${
                   isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
                 }`}
                 style={{ zIndex: 5 }}
               >
                 <div className="animate-float">
-                  {/* Google Business Profile Mockup — max-w-full prevents overflow */}
                   <div className="google-mockup w-full max-w-md mx-auto lg:ml-auto">
                     {/* Mockup Header */}
                     <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 flex items-center gap-3">
