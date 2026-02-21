@@ -162,14 +162,14 @@ export default function Header() {
           <div className="flex items-center gap-4 mt-8 pt-6 border-t border-ivory/10">
             <button
               onClick={() => setLanguage('fr')}
-              className={`text-sm ${language === 'fr' ? 'text-ivory border-b border-gold pb-0.5' : 'text-ivory/50'}`}
+              className={`text-base font-semibold tracking-widest ${language === 'fr' ? 'text-ivory border-b-2 border-gold pb-0.5' : 'text-ivory/50'}`}
             >
               FR
             </button>
-            <span className="text-ivory/30">|</span>
+            <span className="text-ivory/30 text-base">|</span>
             <button
               onClick={() => setLanguage('en')}
-              className={`text-sm ${language === 'en' ? 'text-ivory border-b border-gold pb-0.5' : 'text-ivory/50'}`}
+              className={`text-base font-semibold tracking-widest ${language === 'en' ? 'text-ivory border-b-2 border-gold pb-0.5' : 'text-ivory/50'}`}
             >
               EN
             </button>
