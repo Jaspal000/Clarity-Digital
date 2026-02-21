@@ -111,14 +111,16 @@
   
   /* Primary button with elegant hover */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-navy text-ivory text-sm font-medium uppercase tracking-widest;
-    @apply transition-all duration-300 ease-out;
-    @apply shadow-lg shadow-navy/20;
+    @apply inline-flex items-center justify-center px-8 py-4 bg-navy text-ivory text-sm font-medium uppercase tracking-wide;
+    @apply transition-all duration-400 ease-out;
+    @apply rounded;
+    box-shadow: 0 4px 20px rgba(14, 26, 43, 0.15);
   }
   
   .btn-primary:hover {
-    @apply bg-navy-light shadow-xl shadow-navy/30;
-    transform: translateY(-2px);
+    @apply bg-navy-light;
+    box-shadow: 0 8px 32px rgba(14, 26, 43, 0.25);
+    transform: translateY(-3px);
   }
   
   /* Gold accent button */
@@ -135,18 +137,29 @@
   
   /* Outline button */
   .btn-outline {
-    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-navy text-navy text-sm font-medium uppercase tracking-widest;
-    @apply transition-all duration-300 ease-out;
+    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-navy text-navy text-sm font-medium uppercase tracking-wide;
+    @apply transition-all duration-400 ease-out rounded;
   }
   
   .btn-outline:hover {
-    @apply bg-navy text-ivory;
-    transform: translateY(-2px);
+    @apply bg-navy text-ivory border-navy;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(14, 26, 43, 0.12);
   }
   
-  /* Section padding */
+  /* Section padding with refined spacing */
   .section-padding {
-    @apply px-6 sm:px-8 lg:px-16 xl:px-24 2xl:px-32;
+    @apply px-6 sm:px-8 lg:px-16 xl:px-20 2xl:px-28;
+  }
+  
+  /* Section rhythm - alternating backgrounds */
+  section {
+    @apply relative;
+  }
+  
+  /* Improved vertical spacing for premium feel */
+  main > section {
+    @apply py-24 lg:py-32;
   }
   
   /* Elegant input */
@@ -187,16 +200,16 @@
     @apply text-charcoal/50 hover:text-charcoal/80;
   }
   
-  /* Card styles */
+  /* Card styles - refined for premium appearance */
   .card-elegant {
-    @apply bg-white rounded-lg overflow-hidden;
-    @apply transition-all duration-400 ease-out;
-    box-shadow: 0 4px 24px rgba(14, 26, 43, 0.06);
+    @apply bg-white rounded-lg overflow-hidden border border-transparent;
+    @apply transition-all duration-500 ease-out;
+    box-shadow: 0 8px 32px rgba(14, 26, 43, 0.07);
   }
   
   .card-elegant:hover {
-    box-shadow: 0 12px 40px rgba(14, 26, 43, 0.12);
-    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(14, 26, 43, 0.1);
+    transform: translateY(-6px);
   }
   
   /* Testimonial card */
@@ -279,8 +292,12 @@
     transition-duration: 400ms;
   }
   
-  /* Desktop: Fixed parallax background with left positioning */
+  /* HERO DESKTOP: Fixed parallax with left positioning */
   @media (min-width: 768px) {
+    #hero {
+      min-height: 95vh;
+    }
+    
     #hero > div:nth-child(1) {
       background-attachment: fixed;
       background-position: left center;
@@ -288,37 +305,39 @@
     }
   }
   
-  /* Mobile: Centered tower with vertical gradient overlay (55-65% solid, fade to image) */
+  /* HERO MOBILE: Centered tower with vertical layered gradients */
   @media (max-width: 767px) {
     #hero {
       min-height: 90vh;
     }
     
-    /* Eiffel Tower image - center vertically, ensure top is visible */
+    /* Eiffel Tower - centered vertically */
     #hero > div:nth-child(1) {
-      background-position: center top;
+      background-position: center center;
       background-attachment: scroll;
       background-size: cover;
-      opacity: 0.75;
     }
     
-    /* Gradient overlay - top 58% solid ivory for text, middle 12% fade, bottom visible */
+    /* Top blur fade (25-30%) */
+    #hero > div:nth-child(2) {
+      background: linear-gradient(180deg, rgba(244, 241, 234, 0.95) 0%, rgba(244, 241, 234, 0.85) 25%, rgba(244, 241, 234, 0) 35%) !important;
+    }
+    
+    /* Ivory text safe zone (top 30%) */
     #hero > div:nth-child(3) {
-      background: linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 58%, rgba(244, 241, 234, 0.7) 70%, rgba(244, 241, 234, 0.3) 85%, transparent 100%);
+      background: linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.95) 70%, transparent 100%) !important;
     }
   }
   
-  /* Small mobile screens: Ensure tower is fully visible without awkward cropping */
+  /* Small mobile: Ensure tower is fully visible */
   @media (max-width: 480px) {
     #hero {
       min-height: 90vh;
     }
     
-    /* Center tower and show full image */
     #hero > div:nth-child(1) {
-      background-position: center center;
-      background-size: contain;
-      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
     }
   }
 }

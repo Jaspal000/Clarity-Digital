@@ -29,42 +29,46 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative md:min-h-screen overflow-hidden"
-      style={{ minHeight: 'clamp(90vh, 100vh, 100vh)' }}
+      className="relative overflow-hidden"
+      style={{ minHeight: '95vh' }}
     >
-      {/* Eiffel Tower Background - z-index 0 */}
+      {/* LAYER 1: Eiffel Tower Background - z-index 0 */}
       <div 
-        className="absolute inset-0 opacity-[0.75]"
+        className="absolute inset-0"
         style={{
           backgroundImage: `url('/eiffel-tower-bg.jpg')`,
           backgroundPosition: 'left center',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',
           zIndex: 0,
-          filter: 'saturate(0.80)',
+          filter: 'saturate(0.75)',
+          opacity: 0.7,
         }}
       />
 
-      {/* Dark tonal overlay for consistency - z-index 1 */}
-      <div 
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          background: 'linear-gradient(to right, rgba(14, 26, 43, 0.04) 0%, rgba(14, 26, 43, 0) 50%)',
-          zIndex: 1,
-        }}
-      />
-
-      {/* Gradient overlay for text readability - z-index 1 (bottom layer above image) */}
+      {/* LAYER 2: Vertical blur mask at top (25-30% blur fade) - z-index 1 */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 58%, rgba(244, 241, 234, 0.7) 70%, rgba(244, 241, 234, 0.3) 85%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(244, 241, 234, 0.95) 0%, rgba(244, 241, 234, 0.85) 25%, rgba(244, 241, 234, 0) 35%)',
+          backdropFilter: 'blur(8px)',
+          zIndex: 1,
+          WebkitBackdropFilter: 'blur(8px)',
+        }}
+      />
+
+      {/* LAYER 3: Ivory text safe zone (top 30%) - z-index 1 */}
+      <div 
+        className="absolute top-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: '30%',
+          background: 'linear-gradient(180deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 0.95) 70%, transparent 100%)',
           zIndex: 1,
         }}
       />
 
-      {/* Premium grain texture - z-index 1 */}
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ zIndex: 1 }}>
+      {/* LAYER 4: Premium grain texture - z-index 1 */}
+      <div className="absolute inset-0 opacity-[0.012] pointer-events-none" style={{ zIndex: 1 }}>
         <div 
           className="absolute inset-0"
           style={{
@@ -73,10 +77,10 @@ export default function Hero() {
         />
       </div>
 
-      {/* Content - z-index 2 */}
+      {/* LAYER 5: Content - z-index 2 */}
       <div className="relative" style={{ zIndex: 2 }}>
         <div className="section-padding">
-        <div className="min-h-screen flex items-center">
+        <div className="min-h-screen flex items-center justify-center">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full py-24 lg:py-0">
             
             {/* Left: Text Content */}
