@@ -36,12 +36,12 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-navy/95 backdrop-blur-md shadow-lg'
+          ? 'bg-navy/90 backdrop-blur-sm border-b border-gold/10'
           : 'bg-transparent'
       }`}
     >
       <div className="section-padding">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
           <a
             href="#hero"
@@ -58,7 +58,7 @@ export default function Header() {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="hidden lg:flex items-center gap-12">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -67,14 +67,14 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className={`relative text-sm font-medium transition-colors duration-300 ${
+                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${
                   isScrolled
                     ? 'text-ivory/70 hover:text-ivory'
                     : 'text-charcoal/70 hover:text-charcoal'
                 }`}
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </nav>
@@ -113,10 +113,10 @@ export default function Header() {
                 e.preventDefault();
                 scrollToSection('contact');
               }}
-              className={`text-sm font-medium uppercase tracking-widest px-6 py-3 transition-all duration-300 ${
+              className={`text-sm font-semibold uppercase tracking-wide px-7 py-3 rounded transition-all duration-300 ${
                 isScrolled
-                  ? 'bg-gold text-navy hover:bg-gold-light'
-                  : 'bg-navy text-ivory hover:bg-navy-light'
+                  ? 'bg-navy text-ivory border border-gold/30 hover:bg-navy-light hover:border-gold/50'
+                  : 'bg-navy text-ivory border border-gold/30 hover:bg-navy-light hover:border-gold/50'
               }`}
             >
               {t('nav.cta')}
