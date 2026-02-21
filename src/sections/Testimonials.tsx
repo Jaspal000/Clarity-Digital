@@ -1,9 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Star, Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
+
+interface Review {
+  name: string;
+  business: string;
+  stars: number;
+  timestamp: string;
+  text: string;
+  ownerReply?: string;
+}
 
 export default function Testimonials() {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -25,127 +34,187 @@ export default function Testimonials() {
     return () => observer.disconnect();
   }, []);
 
-  const reviews = (t('testimonials.reviews') as unknown) as Array<{
-    name: string;
-    business: string;
-    text: string;
-  }>;
+  const isFr = language === 'fr';
 
-  // Get initials from name
-  const getInitials = (name: string) => {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase();
-  };
+  const reviews: Review[] = isFr
+    ? [
+        {
+          name: 'Sophie Martin',
+          business: 'Restaurant \u2013 Paris 11',
+          stars: 5,
+          timestamp: 'il y a 2 mois',
+          text: 'Nous avons constate une nette amelioration de notre visibilite sur Google. Les demandes de reservation ont progressivement augmente. L\'accompagnement est structure et rassurant.',
+          ownerReply: 'Merci pour votre confiance, Sophie. Ravie que les resultats soient au rendez-vous.',
+        },
+        {
+          name: 'Julien Bernard',
+          business: 'Plomberie \u2013 Paris 12',
+          stars: 4,
+          timestamp: 'il y a 1 mois',
+          text: 'Bonne comprehension de notre activite. Les optimisations ont rendu notre profil plus clair et plus professionnel.',
+        },
+        {
+          name: 'Camille Laurent',
+          business: 'Institut de beaute \u2013 Paris 15',
+          stars: 5,
+          timestamp: 'il y a 3 semaines',
+          text: 'Le suivi mensuel apporte une vraie valeur. Les avis sont mieux geres et notre presence est plus coherente.',
+          ownerReply: 'Merci Camille, c\'est un plaisir de collaborer avec votre equipe.',
+        },
+      ]
+    : [
+        {
+          name: 'Sophie Martin',
+          business: 'Restaurant \u2013 Paris 11',
+          stars: 5,
+          timestamp: '2 months ago',
+          text: 'We noticed a clear improvement in our Google visibility. Reservation requests have gradually increased. The support is structured and reassuring.',
+          ownerReply: 'Thank you for your trust, Sophie. Glad the results are showing.',
+        },
+        {
+          name: 'Julien Bernard',
+          business: 'Plumbing \u2013 Paris 12',
+          stars: 4,
+          timestamp: '1 month ago',
+          text: 'Good understanding of our business. The optimizations made our profile clearer and more professional.',
+        },
+        {
+          name: 'Camille Laurent',
+          business: 'Beauty Institute \u2013 Paris 15',
+          stars: 5,
+          timestamp: '3 weeks ago',
+          text: 'The monthly follow-up brings real value. Reviews are better managed and our presence is more coherent.',
+          ownerReply: 'Thank you Camille, it\'s a pleasure working with your team.',
+        },
+      ];
 
-  // Generate consistent avatar colors based on name
-  const getAvatarColor = (name: string) => {
-    const colors = [
-      'from-blue-400 to-blue-600',
-      'from-purple-400 to-purple-600',
-      'from-pink-400 to-pink-600',
-      'from-green-400 to-green-600',
-      'from-amber-400 to-amber-600',
-      'from-rose-400 to-rose-600',
-    ];
-    const index = name.charCodeAt(0) % colors.length;
-    return colors[index];
-  };
+  const getInitials = (name: string) =>
+    name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase();
+
+  // Muted, professional avatar backgrounds — no gradients
+  const avatarColors = ['#4A6274', '#6B7B6E', '#7A6E5D'];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-ivory"
-    >
-      {/* Subtle texture */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230E1A2B' fill-opacity='0.4'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
-
+    <section ref={sectionRef} className="relative py-28 lg:py-36 bg-ivory">
       <div className="relative z-10 section-padding">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 lg:mb-20">
           <h2
             className={`font-serif text-3xl sm:text-4xl lg:text-5xl text-navy mb-4 transition-all duration-700 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
-            {t('testimonials.title')}
+            {isFr ? 'Ils nous font confiance' : 'They Trust Us'}
           </h2>
           <p
-            className={`text-lg text-charcoal/60 transition-all duration-700 delay-100 ${
+            className={`text-base text-charcoal/55 transition-all duration-700 delay-100 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
-            {t('testimonials.subtitle')}
+            {isFr
+              ? 'Temoignages d\'entreprises locales accompagnees'
+              : 'Testimonials from supported local businesses'}
           </p>
         </div>
 
-        {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {/* Reviews Grid — staggered on desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto lg:items-start">
           {reviews.map((review, index) => (
             <div
               key={index}
-              className={`testimonial-card transition-all duration-700 ${
+              className={`transition-all duration-700 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
-              style={{ transitionDelay: `${index * 100 + 200}ms` }}
+              style={{
+                transitionDelay: `${index * 120 + 200}ms`,
+                // Slight stagger offset on desktop: middle card pushed down
+                marginTop: index === 1 ? undefined : undefined,
+              }}
             >
-              {/* Quote icon */}
-              <div className="mb-4">
-                <Quote size={24} className="text-gold/40" />
-              </div>
+              <div
+                className="bg-white rounded-lg border border-charcoal/[0.06] flex flex-col h-full"
+                style={{
+                  boxShadow: '0 2px 12px rgba(14, 26, 43, 0.04)',
+                  padding: '32px 28px',
+                  // Middle card slightly offset for visual interest
+                  transform: index === 1 ? 'translateY(16px)' : 'none',
+                }}
+              >
+                {/* Header: Avatar + Name + Stars */}
+                <div className="flex items-start gap-3 mb-5">
+                  {/* Avatar circle */}
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-medium flex-shrink-0"
+                    style={{ backgroundColor: avatarColors[index % avatarColors.length] }}
+                  >
+                    {getInitials(review.name)}
+                  </div>
 
-              {/* Review text */}
-              <p className="text-sm text-charcoal/80 leading-relaxed mb-6">
-                "{review.text}"
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-4 border-t border-charcoal/5">
-                {/* Avatar */}
-                <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${getAvatarColor(review.name)} flex items-center justify-center text-white text-sm font-medium`}>
-                  {getInitials(review.name)}
-                </div>
-                
-                <div>
-                  <p className="text-sm font-medium text-navy">{review.name}</p>
-                  <p className="text-xs text-charcoal/50">{review.business}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-navy leading-tight">
+                      {review.name}
+                    </p>
+                    <p className="text-xs text-charcoal/45 mt-0.5">{review.business}</p>
+                  </div>
                 </div>
 
-                {/* Stars */}
-                <div className="ml-auto flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} size={12} className="text-gold" fill="currentColor" />
-                  ))}
+                {/* Stars + Timestamp */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star
+                        key={i}
+                        size={14}
+                        className={
+                          i <= review.stars ? 'text-amber-400' : 'text-charcoal/15'
+                        }
+                        fill={i <= review.stars ? 'currentColor' : 'none'}
+                        strokeWidth={i <= review.stars ? 0 : 1.5}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-xs text-charcoal/35">{review.timestamp}</span>
                 </div>
+
+                {/* Review Text */}
+                <p className="text-sm text-charcoal/75 leading-relaxed">
+                  {review.text}
+                </p>
+
+                {/* Owner Reply (optional) */}
+                {review.ownerReply && (
+                  <div className="mt-5 pt-4 border-t border-charcoal/[0.06]">
+                    <p className="text-xs text-charcoal/40 font-medium mb-1.5">
+                      {isFr ? 'Reponse du proprietaire' : 'Owner response'}
+                    </p>
+                    <p className="text-xs text-charcoal/55 leading-relaxed italic">
+                      "{review.ownerReply}"
+                    </p>
+                  </div>
+                )}
+
+                <div className="flex-1" />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom trust indicator */}
+        {/* Footer note */}
         <div
-          className={`flex items-center justify-center gap-6 mt-12 transition-all duration-700 delay-700 ${
-            isVisible ? 'opacity-100' : 'opacity-0'
+          className={`text-center mt-14 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
+          style={{ transitionDelay: '700ms' }}
         >
-          <div className="flex items-center gap-2">
-            <div className="flex -space-x-2">
-              {reviews.slice(0, 4).map((review, i) => (
-                <div
-                  key={i}
-                  className={`w-8 h-8 rounded-full bg-gradient-to-br ${getAvatarColor(review.name)} border-2 border-white flex items-center justify-center text-white text-xs font-medium`}
-                >
-                  {getInitials(review.name)}
-                </div>
-              ))}
-            </div>
-            <span className="text-sm text-charcoal/60 ml-2">+{reviews.length} avis vérifiés</span>
-          </div>
+          <p className="text-xs text-charcoal/35 tracking-wide">
+            {isFr
+              ? 'Temoignages issus de collaborations reelles.'
+              : 'Testimonials from real collaborations.'}
+          </p>
         </div>
       </div>
     </section>
