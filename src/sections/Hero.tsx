@@ -29,19 +29,20 @@ export default function Hero() {
       style={{ minHeight: '100vh' }}
     >
       {/* ====== LAYER 0: EIFFEL TOWER IMAGE ====== */}
-      {/* Mobile: fills the ENTIRE section, centered via object-fit:contain so the */}
-      {/* full tower is visible and never cropped. It sits BEHIND the text. */}
-      {/* Desktop: positioned on the right half for the split layout. */}
+      {/* DESKTOP: full-width, full-height, object-cover centered so tower is */}
+      {/* in the middle of the page, visible behind everything. */}
+      {/* MOBILE: top-0, h-[60%] so it covers ONLY the hero text area, not */}
+      {/* the Google card below. object-contain keeps the full tower visible. */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full pointer-events-none
-          object-contain object-center
-          lg:object-cover lg:object-[center_20%] lg:left-auto lg:right-0 lg:w-[55%]"
+        className="absolute top-0 left-0 w-full pointer-events-none
+          h-[60%] object-contain object-[center_top]
+          lg:h-full lg:object-cover lg:object-[center_20%]"
         style={{
           zIndex: 0,
-          opacity: 0.75,
+          opacity: 0.7,
           filter: 'saturate(0.8)',
         }}
       />
@@ -59,21 +60,22 @@ export default function Hero() {
       />
 
       {/* ====== LAYER 2: Text safe zone gradient ====== */}
-      {/* Mobile: semi-transparent ivory wash — tower is visible BEHIND the text. */}
-      {/* Top portion slightly more opaque for headline readability, fading */}
-      {/* to near-transparent so the tower shows through everywhere. */}
+      {/* Mobile: covers top 60% where the tower lives — gentle ivory wash */}
+      {/* so the tower is clearly visible behind the headline text. */}
       <div
-        className="absolute inset-0 pointer-events-none lg:hidden"
+        className="absolute top-0 left-0 w-full pointer-events-none lg:hidden"
         style={{
-          background: 'linear-gradient(180deg, rgba(244,241,234,0.88) 0%, rgba(244,241,234,0.72) 35%, rgba(244,241,234,0.45) 55%, rgba(244,241,234,0.15) 75%, transparent 100%)',
+          height: '60%',
+          background: 'linear-gradient(180deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.6) 40%, rgba(244,241,234,0.35) 70%, rgba(244,241,234,0.15) 90%, transparent 100%)',
           zIndex: 1,
         }}
       />
-      {/* Desktop: left-to-right gradient for split layout */}
+      {/* Desktop: soft ivory wash over full section so text remains readable */}
+      {/* against the full-width tower behind. Left side more opaque for text. */}
       <div
         className="absolute inset-0 pointer-events-none hidden lg:block"
         style={{
-          background: 'linear-gradient(90deg, rgba(244,241,234,1) 0%, rgba(244,241,234,1) 38%, rgba(244,241,234,0.55) 52%, transparent 100%)',
+          background: 'linear-gradient(90deg, rgba(244,241,234,0.92) 0%, rgba(244,241,234,0.75) 30%, rgba(244,241,234,0.5) 50%, rgba(244,241,234,0.3) 70%, rgba(244,241,234,0.45) 100%)',
           zIndex: 1,
         }}
       />
