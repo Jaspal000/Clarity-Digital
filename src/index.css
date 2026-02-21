@@ -44,11 +44,14 @@
   
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   
   body {
     @apply bg-ivory text-charcoal font-sans antialiased;
     font-feature-settings: "kern" 1, "liga" 1;
+    overflow-x: hidden;
+    width: 100%;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -298,30 +301,17 @@
   }
   
   /* ===== HERO SECTION ===== */
-  /* The Eiffel Tower is now an <img> element (object-fit: contain), never cropped. */
+  /* Eiffel Tower is an <img> with object-fit: contain + object-position: center top. */
+  /* It fills the full section height — no cropping, no translateX overflow. */
 
-  /* Desktop hero */
-  @media (min-width: 1024px) {
-    #hero {
-      min-height: 100vh;
-    }
+  #hero {
+    min-height: 100vh;
+    overflow: hidden;
   }
 
-  /* Mobile hero — slightly shorter, tower scales down */
-  @media (max-width: 1023px) {
-    #hero {
-      min-height: 100vh;
-    }
-
-    #hero > img {
-      height: 75% !important;
-    }
-  }
-
-  /* Small mobile — tower a bit smaller to avoid crowding content */
-  @media (max-width: 480px) {
-    #hero > img {
-      height: 65% !important;
-    }
+  /* All sections prevent horizontal overflow */
+  main > section {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 }
