@@ -9,13 +9,13 @@ export default function Logo({ variant = 'header', color = 'navy' }: LogoProps) 
   const accentColor = '#B89C5E';
 
   if (variant === 'header') {
-    // Compact horizontal header version
+    // Compact horizontal header version - enlarged for premium presence
     return (
-      <div className="flex items-center gap-2.5">
-        {/* Geometric Icon: Vertical line + arc */}
+      <div className="flex items-center gap-3.5">
+        {/* Geometric Icon: Vertical line + arc - 30% larger */}
         <svg
-          width="20"
-          height="20"
+          width="26"
+          height="26"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
           className="flex-shrink-0"
@@ -32,17 +32,17 @@ export default function Logo({ variant = 'header', color = 'navy' }: LogoProps) 
           />
         </svg>
 
-        {/* Wordmark: Clarté Digital */}
+        {/* Wordmark: Clarté Digital - larger text sizes */}
         <div className="flex flex-col items-start leading-tight">
           <span
-            className="font-sans font-semibold text-base tracking-tight"
+            className="font-sans font-bold text-lg lg:text-xl tracking-tight"
             style={{ color: textColor, letterSpacing: '-0.01em' }}
           >
             Clarté
           </span>
           <span
-            className="font-sans font-medium text-xs tracking-wide"
-            style={{ color: textColor, letterSpacing: '0.04em', opacity: 0.7 }}
+            className="font-sans font-medium text-xs tracking-widest"
+            style={{ color: textColor, letterSpacing: '0.05em', opacity: 0.65 }}
           >
             Digital
           </span>

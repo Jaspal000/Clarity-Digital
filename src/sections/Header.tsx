@@ -41,7 +41,7 @@ export default function Header() {
       }`}
     >
       <div className="section-padding">
-        <div className="flex items-center justify-between h-20 lg:h-24">
+        <div className="flex items-center justify-between h-24 lg:h-28">
           {/* Logo */}
           <a
             href="#hero"
