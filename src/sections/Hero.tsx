@@ -29,20 +29,22 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative overflow-hidden"
-      style={{ minHeight: '92vh' }}
+      className="relative overflow-hidden flex items-flex-start pt-24 lg:pt-0 lg:flex-col lg:items-stretch"
+      style={{ minHeight: '95vh' }}
     >
-      {/* LAYER 1: Eiffel Tower Background (High-res, clean, 80%+ opacity) */}
+      {/* LAYER 1: Eiffel Tower Background (High-res, clean, 85%+ opacity) */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 lg:relative lg:flex-1"
         style={{
           backgroundImage: `url('/eiffel-tower-bg.jpg')`,
-          backgroundPosition: '60% center',
+          backgroundPosition: '55% center',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',
           zIndex: 0,
           opacity: 0.85,
           filter: 'saturate(0.85)',
+          position: 'absolute',
+          inset: 0,
         }}
       />
 
@@ -59,11 +61,11 @@ export default function Hero() {
         }}
       />
 
-      {/* LAYER 3: Text Safe Zone Gradient (Left 45% solid, middle 15% fade, right 40% open) */}
+      {/* LAYER 3: Text Safe Zone Gradient (Left 40% solid, middle 15% fade, right 45% open) */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(90deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 45%, rgba(244, 241, 234, 0.5) 60%, transparent 100%)',
+          background: 'linear-gradient(90deg, rgba(244, 241, 234, 1) 0%, rgba(244, 241, 234, 1) 40%, rgba(244, 241, 234, 0.5) 55%, transparent 100%)',
           zIndex: 1,
         }}
       />
@@ -93,8 +95,8 @@ export default function Hero() {
       {/* LAYER 6: Content - Relative z-index 2 */}
       <div className="relative" style={{ zIndex: 2 }}>
         <div className="section-padding">
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full py-24 lg:py-0">
+        <div className="min-h-screen flex items-center justify-center lg:flex-1">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full py-16 lg:py-0">
             
             {/* Left: Text Content */}
             <div className="max-w-xl">
