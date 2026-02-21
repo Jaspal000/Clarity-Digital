@@ -29,28 +29,21 @@ export default function Hero() {
       style={{ minHeight: '100vh' }}
     >
       {/* ====== LAYER 0: EIFFEL TOWER IMAGE ====== */}
-      {/* Mobile-first: absolutely positioned, centered via left-50% + translateX, */}
-      {/* height 65% of section, starts at top:0 so tower top is immediately visible. */}
-      {/* Desktop: height 90%, positioned on right half for the split layout. */}
+      {/* Mobile: fills the ENTIRE section, centered via object-fit:contain so the */}
+      {/* full tower is visible and never cropped. It sits BEHIND the text. */}
+      {/* Desktop: positioned on the right half for the split layout. */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
+        className="absolute inset-0 w-full h-full pointer-events-none
+          object-contain object-center
+          lg:object-cover lg:object-[center_20%] lg:left-auto lg:right-0 lg:w-[55%]"
         style={{
-          position: 'absolute',
-          top: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          height: '65%',
-          width: 'auto',
-          maxWidth: 'none',
-          objectFit: 'contain',
           zIndex: 0,
-          opacity: 0.82,
-          filter: 'saturate(0.85)',
-          pointerEvents: 'none',
+          opacity: 0.75,
+          filter: 'saturate(0.8)',
         }}
-        className="lg:left-auto lg:right-0 lg:translate-x-0 lg:h-full lg:w-[55%] lg:object-cover lg:object-[center_20%]"
       />
 
       {/* ====== LAYER 1: Top blur mask (top 15% only, 4px max) ====== */}
@@ -66,11 +59,13 @@ export default function Hero() {
       />
 
       {/* ====== LAYER 2: Text safe zone gradient ====== */}
-      {/* Mobile: top 50% solid ivory, fading to transparent — tower visible in bottom half */}
+      {/* Mobile: semi-transparent ivory wash — tower is visible BEHIND the text. */}
+      {/* Top portion slightly more opaque for headline readability, fading */}
+      {/* to near-transparent so the tower shows through everywhere. */}
       <div
         className="absolute inset-0 pointer-events-none lg:hidden"
         style={{
-          background: 'linear-gradient(180deg, rgba(244,241,234,1) 0%, rgba(244,241,234,0.97) 40%, rgba(244,241,234,0.65) 55%, rgba(244,241,234,0.15) 70%, transparent 85%)',
+          background: 'linear-gradient(180deg, rgba(244,241,234,0.88) 0%, rgba(244,241,234,0.72) 35%, rgba(244,241,234,0.45) 55%, rgba(244,241,234,0.15) 75%, transparent 100%)',
           zIndex: 1,
         }}
       />
