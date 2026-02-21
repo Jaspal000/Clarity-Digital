@@ -30,24 +30,38 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       className="relative min-h-screen bg-ivory-gradient overflow-hidden"
+      style={{ backgroundAttachment: 'fixed' }}
     >
-      {/* Eiffel Tower Background */}
+      {/* Eiffel Tower Background - Premium layering */}
       <div 
-        className="absolute inset-0 opacity-[0.15]"
+        className="absolute inset-0 opacity-[0.18]"
         style={{
           backgroundImage: `url('/eiffel-tower-bg.jpg')`,
           backgroundPosition: 'left center',
           backgroundSize: 'cover',
-          backgroundAttachment: 'fixed',
-          filter: 'blur(2px) grayscale(0.2)',
+          filter: 'blur(2.5px) grayscale(0.25)',
         }}
       />
 
-      {/* Gradient overlay - stronger on left, fading right */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ivory via-ivory/95 to-ivory/40" />
+      {/* Gradient overlay - Stronger behind text, fading to right */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(to right, rgba(244, 241, 234, 0.95) 0%, rgba(244, 241, 234, 0.85) 35%, rgba(244, 241, 234, 0.4) 85%, rgba(244, 241, 234, 0.15) 100%)',
+        }}
+      />
 
-      {/* Noise/grain texture for refinement */}
-      <div className="absolute inset-0 opacity-[0.02]">
+      {/* Text zone blur enhancement - targeted to left side */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to right, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 40%)',
+          backdropFilter: 'blur(1.5px)',
+        }}
+      />
+
+      {/* Refined grain/noise texture for architectural feel */}
+      <div className="absolute inset-0 opacity-[0.025]">
         <div 
           className="absolute inset-0"
           style={{
@@ -56,8 +70,8 @@ export default function Hero() {
         />
       </div>
 
-      {/* Subtle architectural texture */}
-      <div className="absolute inset-0 opacity-[0.03]">
+      {/* Subtle architectural pattern texture */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div 
           className="absolute inset-0"
           style={{
