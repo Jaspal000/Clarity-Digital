@@ -37,7 +37,7 @@ export default function Hero() {
         className="absolute inset-0 lg:relative lg:flex-1"
         style={{
           backgroundImage: `url('/eiffel-tower-bg.jpg')`,
-          backgroundPosition: '55% center',
+          backgroundPosition: 'center 15%',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',
           zIndex: 0,

@@ -74,9 +74,9 @@ export default function Methodology() {
         </div>
 
         {/* Steps */}
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           {/* Connector line (desktop) */}
-          <div className="hidden lg:block absolute top-24 left-[20%] right-[20%] h-px">
+          <div className="hidden lg:block absolute top-28 left-[20%] right-[20%] h-px">
             <div 
               className={`h-full bg-gradient-to-r from-transparent via-gold/50 to-transparent transition-all duration-1000 ${
                 isVisible ? 'opacity-100' : 'opacity-0'
@@ -85,7 +85,7 @@ export default function Methodology() {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 lg:items-stretch">
             {steps.map((step, index) => {
               const IconComponent = step.icon;
               
@@ -98,34 +98,47 @@ export default function Methodology() {
                   style={{ transitionDelay: `${index * 150 + 200}ms` }}
                 >
                   <div 
-                    className="bg-white rounded-lg p-8 transition-all duration-500"
+                    className="relative bg-white rounded-lg p-14 transition-all duration-500 h-full flex flex-col"
                     style={{
                       boxShadow: '0 8px 32px rgba(14, 26, 43, 0.08)',
+                      paddingTop: '56px',
+                      paddingRight: '44px',
+                      paddingBottom: '56px',
+                      paddingLeft: '44px',
                     }}
                   >
-                    {/* Step Number & Icon */}
-                    <div className="flex items-center justify-between mb-6">
-                      <span className="font-serif text-5xl text-gold/25 font-normal">
-                        {step.number}
-                      </span>
-                      <div className="w-12 h-12 rounded-full bg-navy/8 flex items-center justify-center group-hover:bg-gold/15 transition-all duration-400">
-                        <IconComponent 
-                          size={22} 
-                          strokeWidth={1.5}
-                          className="text-navy/50 group-hover:text-gold transition-colors duration-400"
-                        />
-                      </div>
+                    {/* Icon - Absolutely Positioned */}
+                    <div 
+                      className="absolute w-12 h-12 rounded-full bg-navy/8 flex items-center justify-center group-hover:bg-gold/15 transition-all duration-400"
+                      style={{
+                        top: '36px',
+                        right: '36px',
+                      }}
+                    >
+                      <IconComponent 
+                        size={22} 
+                        strokeWidth={1.5}
+                        className="text-navy/50 group-hover:text-gold transition-colors duration-400"
+                      />
                     </div>
 
+                    {/* Step Number */}
+                    <span className="font-serif text-5xl text-gold/25 font-normal mb-6 leading-none">
+                      {step.number}
+                    </span>
+
                     {/* Title */}
-                    <h3 className="font-serif text-xl text-navy mb-4 font-normal">
+                    <h3 className="font-serif text-xl text-navy mb-4 font-normal leading-tight">
                       {step.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm text-charcoal/70 leading-relaxed">
+                    <p className="text-sm text-charcoal/70 leading-relaxed mb-0">
                       {step.description}
                     </p>
+
+                    {/* Spacer for equal heights */}
+                    <div className="flex-grow" />
                   </div>
                 </div>
               );
