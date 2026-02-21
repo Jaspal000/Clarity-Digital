@@ -21,16 +21,23 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-navy overflow-hidden">
-      {/* Stone texture */}
-      <div className="stone-texture absolute inset-0" />
-
-      {/* Gold top divider */}
-      <div className="relative z-10 section-padding">
-        <div className="w-full h-px bg-gold/30" />
+      {/* Subtle grid texture at 2% opacity */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23F4F1EA' fill-opacity='0.5'%3E%3Cpath d='M0 0h30v30H0V0zm30 30h30v30H30V30z'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
       </div>
 
-      <div className="relative z-10 section-padding py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
+      {/* Thin gold top divider */}
+      <div className="relative z-10 section-padding pt-12">
+        <div className="w-full h-px bg-gold/25" />
+      </div>
+
+      <div className="relative z-10 section-padding py-16 lg:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-20">
           {/* Left: Company Info */}
           <div>
             <Logo variant="footer" color="ivory" />
@@ -42,10 +49,10 @@ export default function Footer() {
 
           {/* Center: Navigation */}
           <div className="md:text-center">
-            <h4 className="text-xs uppercase tracking-wider text-ivory/40 mb-6">
+            <h4 className="text-xs uppercase tracking-widest text-ivory/30 mb-8 font-semibold">
               Navigation
             </h4>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.id}
@@ -54,7 +61,7 @@ export default function Footer() {
                     e.preventDefault();
                     scrollToSection(link.id);
                   }}
-                  className="text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 relative inline-block group"
+                  className="text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 relative inline-block group tracking-wide"
                 >
                   {link.label}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
@@ -63,43 +70,41 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Right: Contact */}
+          {/* Right: Contact & Social */}
           <div className="md:text-right">
-            <h4 className="text-xs uppercase tracking-wider text-ivory/40 mb-6">
+            <h4 className="text-xs uppercase tracking-widest text-ivory/30 mb-8 font-semibold">
               Contact
             </h4>
-            <div className="space-y-4">
+            <div className="space-y-5">
               <a
                 href="mailto:contact@clarte-digital.fr"
-                className="inline-flex items-center gap-2 text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 group"
+                className="flex md:justify-end items-center gap-2 text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 group"
               >
-                <Mail size={16} strokeWidth={1.5} className="text-gold/60 group-hover:text-gold transition-colors" />
+                <Mail size={16} strokeWidth={1.5} className="text-gold/50 group-hover:text-gold transition-colors duration-300" />
                 <span>{t('footer.email')}</span>
               </a>
-              <div>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 group"
-                >
-                  <Linkedin size={16} strokeWidth={1.5} className="text-gold/60 group-hover:text-gold transition-colors" />
-                  <span>{t('footer.linkedin')}</span>
-                </a>
-              </div>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex md:justify-end items-center gap-2 text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 group"
+              >
+                <Linkedin size={16} strokeWidth={1.5} className="text-gold/50 group-hover:text-gold transition-colors duration-300" />
+                <span>{t('footer.linkedin')}</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="relative z-10 section-padding pb-8">
-        <div className="w-full h-px bg-gold/20 mb-6" />
+      <div className="relative z-10 section-padding py-8">
+        <div className="w-full h-px bg-gold/15 mb-6" />
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-ivory/40">
+          <p className="text-xs text-ivory/35 tracking-wide">
             {t('footer.copyright')} — {t('footer.rights')}
           </p>
-          <p className="text-xs text-ivory/30">
+          <p className="text-xs text-ivory/25 tracking-wide">
             {t('footer.siret')}
           </p>
         </div>
