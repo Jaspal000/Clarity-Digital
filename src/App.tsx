@@ -13,7 +13,7 @@ import Footer from '@/sections/Footer';
 function App() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-ivory">
+      <div className="min-h-screen bg-ivory overflow-x-hidden w-full">
         <Header />
         <main>
           <Hero />
