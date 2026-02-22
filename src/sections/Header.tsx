@@ -4,7 +4,8 @@ import { Menu, X } from 'lucide-react';
 import Logo from '@/components/Logo';
 
 export default function Header() {
-  const { language, setLanguage, t, isTransitioning } = useLanguage();
+  // Removed isTransitioning to fix TS6133 error
+  const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -36,7 +37,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/90 backdrop-blur-sm border-b border-gold/10' // Changed bg to white so black text is visible
+          ? 'bg-white/90 backdrop-blur-sm border-b border-gold/10'
           : 'bg-transparent'
       }`}
     >
@@ -53,7 +54,7 @@ export default function Header() {
           >
             <Logo 
               variant="header" 
-              color={isScrolled ? 'navy' : 'navy'} // Keep logo dark
+              color="navy" // Keeping logo consistent since background is now light
             />
           </a>
 
@@ -67,11 +68,10 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                /* Added 'group' for hover effect and 'text-black' for color */
                 className="group relative text-sm font-medium tracking-wide transition-colors duration-300 text-black"
               >
                 {item.label}
-                {/* This span creates the gold underline hover effect */}
+                {/* Gold hover underline effect */}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
