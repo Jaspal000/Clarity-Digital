@@ -26,164 +26,160 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       className="relative"
-      style={{ minHeight: '100vh', overflow: 'visible' }}
+      style={{ minHeight: '100vh', overflowX: 'hidden', overflowY: 'visible' }}
     >
-      {/* ====== LAYER 0: EIFFEL TOWER IMAGE ====== */}
+
+      {/* ====== EIFFEL TOWER BACKGROUND ======
+          KEY: object-contain so tower is never cropped.
+          Centered horizontally, anchored to top.
+          On mobile: takes full viewport height so tower
+          fills entire background on first glance.
+          On desktop: same — full height, centered.
+      ====== */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
-        className="absolute left-0 pointer-events-none"
         style={{
-          zIndex: 0,
-          opacity: 0.7,
-          filter: 'saturate(0.8)',
+          position: 'absolute',
           top: 0,
+          left: 0,
           width: '100%',
           height: '100%',
-          objectFit: 'cover',
+          objectFit: 'contain',
           objectPosition: 'center top',
+          opacity: 0.75,
+          filter: 'saturate(0.8)',
+          zIndex: 0,
+          pointerEvents: 'none',
         }}
       />
 
-      {/* ====== LAYER 1: Top blur mask ====== */}
+      {/* ====== TOP BLUR — hides tower behind header only ====== */}
       <div
-        className="absolute inset-0 pointer-events-none"
         style={{
+          position: 'absolute',
+          inset: 0,
           backdropFilter: 'blur(4px)',
           WebkitBackdropFilter: 'blur(4px)',
           zIndex: 1,
-          mask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 15%)',
-          WebkitMask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 15%)',
+          mask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 12%)',
+          WebkitMask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 12%)',
+          pointerEvents: 'none',
         }}
       />
 
-      {/* ====== LAYER 2: Gradient overlays ====== */}
+      {/* ====== MOBILE GRADIENT OVERLAY ======
+          Light ivory wash at the very top so text
+          is readable, fades out quickly so tower
+          shows clearly through the rest of the hero.
+      ====== */}
       <div
-        className="absolute top-0 left-0 w-full pointer-events-none lg:hidden"
+        className="lg:hidden"
         style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
           height: '100%',
-          background: 'linear-gradient(180deg, rgba(244,241,234,0.9) 0%, rgba(244,241,234,0.8) 45%, rgba(244,241,234,0.5) 70%, rgba(244,241,234,0.2) 88%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(244,241,234,0.88) 0%, rgba(244,241,234,0.7) 25%, rgba(244,241,234,0.35) 50%, rgba(244,241,234,0.1) 75%, transparent 100%)',
           zIndex: 1,
+          pointerEvents: 'none',
         }}
       />
+
+      {/* ====== DESKTOP GRADIENT OVERLAY ======
+          Left side more opaque for text readability.
+          Right side very transparent so tower shows.
+      ====== */}
       <div
-        className="absolute inset-0 pointer-events-none hidden lg:block"
+        className="hidden lg:block"
         style={{
-          background: 'linear-gradient(90deg, rgba(244,241,234,0.92) 0%, rgba(244,241,234,0.75) 30%, rgba(244,241,234,0.5) 50%, rgba(244,241,234,0.2) 70%, rgba(244,241,234,0.1) 100%)',
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(90deg, rgba(244,241,234,0.88) 0%, rgba(244,241,234,0.7) 25%, rgba(244,241,234,0.4) 45%, rgba(244,241,234,0.15) 65%, rgba(244,241,234,0.05) 100%)',
           zIndex: 1,
+          pointerEvents: 'none',
         }}
       />
 
-      {/* ====== LAYER 3: Bottom blend desktop ====== */}
+      {/* ====== GRAIN TEXTURE ====== */}
       <div
-        className="absolute bottom-0 left-0 right-0 pointer-events-none hidden lg:block"
         style={{
-          height: '20%',
-          background: 'linear-gradient(180deg, rgba(244,241,234,0) 0%, rgba(244,241,234,0.5) 100%)',
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.012,
           zIndex: 1,
+          pointerEvents: 'none',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%23F4F1EA'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* ====== LAYER 4: Grain ====== */}
-      <div className="absolute inset-0 opacity-[0.012] pointer-events-none" style={{ zIndex: 1 }}>
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%23F4F1EA'/%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
-
-      {/* ====== LAYER 5: CONTENT ====== */}
-      <div className="relative" style={{ zIndex: 2 }}>
+      {/* ====== CONTENT ====== */}
+      <div style={{ position: 'relative', zIndex: 2 }}>
         <style>{`
 
-          /* ================================================
-             MOBILE (< 1024px) — tuned for 120% zoom
+          /* ============================================
+             MOBILE < 1024px
+             120% zoom: CSS values × 1.2 = visual size
              
-             At 120% zoom: CSS px × 1.2 = visual px
-             So to match target image visually:
-             — padding-top: 92px CSS = 110px visual ✓
-             — headline: 2rem CSS = 2.4rem visual ✓
-             — subtext: 0.875rem CSS = 1.05rem visual ✓
-             
-             Effective viewport height at 120% zoom:
-             ~900px phone → 750px CSS height available
-             
-             Budget: 92 + 36 + 8 + 96 + 8 + 80 + 12 + 52 + 12 + 52 = 448px
-             Fits comfortably in 750px ✓
-             ================================================ */
+             Goal on first glance:
+             ✓ Eiffel Tower filling background
+             ✓ Badge with healthy gap below header
+             ✓ Large serif headline (3 lines)
+             ✓ Subtext paragraph
+             ✓ Both CTA buttons fully visible
+             ✗ Google card hidden below fold
+             ============================================ */
           @media (max-width: 1023px) {
             .hero-outer {
               display: flex;
               flex-direction: column;
               min-height: 100vh;
-              /*
-                92px CSS × 1.2 zoom = 110px visual.
-                This matches the large gap seen in
-                target image between header and badge.
-              */
               padding-top: 92px;
-              padding-bottom: 2rem;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
+              padding-bottom: 2rem;
               box-sizing: border-box;
             }
             .hero-left {
               width: 100%;
               display: flex;
               flex-direction: column;
-              justify-content: flex-start;
             }
             .hero-badge {
-              /*
-                Full width pill as seen in image.
-                Comfortable padding, not too cramped.
-              */
-              display: inline-flex !important;
               margin-bottom: 0.75rem !important;
-              padding-top: 0.45rem !important;
-              padding-bottom: 0.45rem !important;
             }
             .hero-headline {
-              /*
-                2rem CSS = 2.4rem visual at 120% zoom.
-                In target image headline is very large
-                serif taking up ~3 lines prominently.
-                line-height 1.2 keeps 3 lines compact.
-              */
+              /* 2rem CSS = 2.4rem visual at 120% zoom */
               font-size: 2rem !important;
               line-height: 1.2 !important;
               margin-bottom: 0.75rem !important;
             }
             .hero-subheadline {
-              /*
-                0.875rem CSS = 1.05rem visual.
-                Matches readable but not oversized
-                subtext in target image.
-              */
+              /* 0.875rem CSS = 1.05rem visual */
               font-size: 0.875rem !important;
               line-height: 1.55 !important;
               margin-bottom: 1rem !important;
             }
             .hero-cta {
-              /*
-                Buttons stack vertically (flex-col)
-                matching target image full-width buttons.
-                gap keeps them close but distinct.
-              */
               display: flex !important;
               flex-direction: column !important;
               gap: 0.65rem !important;
             }
+            /* Desktop card: completely hidden on mobile */
             .hero-right {
               display: none !important;
             }
+            /* 
+              Mobile card: pushed far below fold.
+              margin-top: 5rem = 6rem visual at 120%.
+              Guarantees card is NOT visible on first glance.
+            */
             .hero-card-mobile {
               display: block;
               width: 100%;
-              margin-top: 2rem;
+              margin-top: 5rem;
             }
             .hero-card-mobile .google-mockup {
               width: 100%;
@@ -197,12 +193,12 @@ export default function Hero() {
             }
           }
 
-          /* ================================================
-             DESKTOP (>= 1024px)
+          /* ============================================
+             DESKTOP >= 1024px
              Normal zoom — clean 60/40 split
-             No negative margin tricks
-             Card fully visible on first load
-             ================================================ */
+             Eiffel Tower visible behind left column
+             Google card fully visible on right column
+             ============================================ */
           @media (min-width: 1024px) {
             .hero-outer {
               display: flex;
@@ -269,7 +265,7 @@ export default function Hero() {
 
         <div className="hero-outer">
 
-          {/* ---- LEFT: Hero Text ---- */}
+          {/* ---- LEFT: Hero Text — both mobile and desktop ---- */}
           <div className="hero-left">
 
             {/* Trust badge */}
@@ -315,13 +311,13 @@ export default function Hero() {
               </button>
             </div>
 
-            {/* MOBILE ONLY: Card below CTA */}
+            {/* MOBILE ONLY: Google card — pushed 5rem below CTA */}
             <div className="hero-card-mobile">
               <GoogleMockup t={t} />
             </div>
           </div>
 
-          {/* ---- RIGHT: Desktop only 40% card ---- */}
+          {/* ---- RIGHT: Desktop only 40% sticky card ---- */}
           <div className="hero-right hero-card-desktop">
             <div
               className={`transition-all duration-1000 delay-400 ${
@@ -338,12 +334,17 @@ export default function Hero() {
   );
 }
 
-/* ---- Shared Google Mockup ---- */
+/* ==============================
+   Shared Google Business Mockup
+   Used once on mobile (below CTA)
+   Used once on desktop (right col)
+   ============================== */
 function GoogleMockup({ t }: { t: (key: string) => unknown }) {
   return (
     <div className="animate-float">
       <div className="google-mockup w-full">
 
+        {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 flex items-center gap-3">
           <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
             <span className="text-blue-600 font-bold text-sm">G</span>
@@ -351,7 +352,10 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
           <span className="text-white text-sm font-medium truncate">Google Business Profile</span>
         </div>
 
+        {/* Content */}
         <div className="p-4 sm:p-5">
+
+          {/* Business Name & Rating */}
           <div className="mb-4">
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 break-words">
               {t('googleMockup.businessName') as string}
@@ -369,6 +373,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             <p className="text-sm text-gray-600">{t('googleMockup.category') as string}</p>
           </div>
 
+          {/* Action Buttons */}
           <div className="flex gap-2 mb-5">
             <button className="flex-1 bg-blue-600 text-white text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-blue-700 transition-colors min-w-0 truncate">
               Itinéraire
@@ -381,6 +386,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             </button>
           </div>
 
+          {/* Info */}
           <div className="space-y-3 mb-5">
             <div className="flex items-start gap-3">
               <MapPin size={18} className="text-gray-400 mt-0.5 flex-shrink-0" />
@@ -399,12 +405,14 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             </div>
           </div>
 
+          {/* Description */}
           <div className="border-t pt-4 mb-4">
             <p className="text-sm text-gray-700 leading-relaxed break-words">
               {t('googleMockup.description') as string}
             </p>
           </div>
 
+          {/* Review */}
           <div className="border-t pt-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-xs font-medium flex-shrink-0">
@@ -425,6 +433,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             </p>
           </div>
 
+          {/* Post */}
           <div className="border-t pt-4 mt-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-6 h-6 bg-gray-200 rounded flex items-center justify-center flex-shrink-0">
@@ -438,6 +447,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
         </div>
       </div>
 
+      {/* Half star gradient */}
       <svg width="0" height="0" className="absolute">
         <defs>
           <linearGradient id="half-star" x1="0%" y1="0%" x2="100%" y2="0%">
