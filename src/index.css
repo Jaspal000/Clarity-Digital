@@ -356,11 +356,11 @@ html, body {
     gap: 2rem;
   }
 
-  /* Desktop: Layout container with left text and right card that can overlap */
+  /* Desktop: 60/40 split with card able to overlap image */
   @media (min-width: 1024px) {
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 3fr 2fr;
       gap: 0;
       align-items: start;
       position: relative;
@@ -381,8 +381,8 @@ html, body {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      /* Negative margin to allow card to overlap left side */
-      margin-left: -15%;
+      /* Negative margin allows card to overlap the Eiffel Tower image */
+      margin-left: -12%;
       z-index: 10;
     }
 
