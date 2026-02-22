@@ -100,67 +100,80 @@ export default function Hero() {
         <style>{`
 
           /* ================================
-             MOBILE — accounts for 120% zoom
-             Effective viewport = ~83% of px
-             So all spacing is kept minimal
-             to ensure CTA visible on load
+             MOBILE (< 1024px)
+             120% zoom accounted for —
+             all spacing kept minimal so
+             badge + headline + subtext +
+             CTA all visible on first load
              ================================ */
-@media (max-width: 1023px) {
-  .hero-outer {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    /*
-      110px clears header with healthy breathing room.
-      Compensated by tighter font/margin below.
-    */
-    padding-top: 110px;
-    padding-bottom: 1.25rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    box-sizing: border-box;
-  }
-  .hero-left {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  .hero-badge {
-    margin-bottom: 0.4rem !important;
-    padding-top: 0.3rem !important;
-    padding-bottom: 0.3rem !important;
-  }
-  .hero-headline {
-    font-size: clamp(1.4rem, 5vw, 1.85rem) !important;
-    line-height: 1.2 !important;
-    margin-bottom: 0.4rem !important;
-  }
-  .hero-subheadline {
-    font-size: 0.78rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 0.7rem !important;
-  }
-  .hero-cta {
-    gap: 0.5rem !important;
-  }
+          @media (max-width: 1023px) {
+            .hero-outer {
+              display: flex;
+              flex-direction: column;
+              min-height: 100vh;
+              padding-top: 110px;
+              padding-bottom: 1.25rem;
+              padding-left: 1rem;
+              padding-right: 1rem;
+              box-sizing: border-box;
+            }
+            .hero-left {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+            }
+            .hero-badge {
+              margin-bottom: 0.4rem !important;
+              padding-top: 0.3rem !important;
+              padding-bottom: 0.3rem !important;
+            }
+            .hero-headline {
+              font-size: clamp(1.4rem, 5vw, 1.85rem) !important;
+              line-height: 1.2 !important;
+              margin-bottom: 0.4rem !important;
+            }
+            .hero-subheadline {
+              font-size: 0.78rem !important;
+              line-height: 1.4 !important;
+              margin-bottom: 0.7rem !important;
+            }
+            .hero-cta {
+              gap: 0.5rem !important;
+            }
+            .hero-right {
+              display: none !important;
+            }
+            .hero-card-mobile {
+              display: block;
+              width: 100%;
+              margin-top: 2rem;
+            }
+            .hero-card-mobile .google-mockup {
+              width: 100%;
+              box-sizing: border-box;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            }
+            .hero-card-desktop {
+              display: none !important;
+            }
+          }
 
           /* ================================
-             DESKTOP — normal zoom, 60/40
-             Card fully visible first load
+             DESKTOP (>= 1024px)
+             Normal zoom — 60/40 split
+             Card fully visible on first load
+             NO negative margin tricks
              ================================ */
           @media (min-width: 1024px) {
             .hero-outer {
               display: flex;
               flex-direction: row;
               align-items: flex-start;
-              width: 100vw;
+              width: 100%;
               min-height: 100vh;
-              position: relative;
-              left: 50%;
-              right: 50%;
-              margin-left: -50vw;
-              margin-right: -50vw;
               padding-top: 88px;
               padding-bottom: 3rem;
               box-sizing: border-box;
