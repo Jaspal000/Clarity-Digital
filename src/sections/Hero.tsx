@@ -105,85 +105,45 @@ export default function Hero() {
              So all spacing is kept minimal
              to ensure CTA visible on load
              ================================ */
-          @media (max-width: 1023px) {
-            .hero-outer {
-              display: flex;
-              flex-direction: column;
-              /* 
-                100vh at 120% zoom = real screen height.
-                We use min-height not height so content
-                can grow below fold (for the card).
-              */
-              min-height: 100vh;
-              /*
-                70px clears header on mobile.
-                Do NOT increase — at 120% zoom
-                more padding = CTA pushed below fold.
-              */
-              padding-top: 70px;
-              padding-bottom: 1.25rem;
-              padding-left: 1rem;
-              padding-right: 1rem;
-              box-sizing: border-box;
-            }
-            .hero-left {
-              width: 100%;
-              display: flex;
-              flex-direction: column;
-              /*
-                We want badge + headline + subtext + CTA
-                to ALL fit within 100vh - 70px = ~83vh
-                at normal zoom, but at 120% zoom
-                effective space = ~69vh. Keep tight.
-              */
-              justify-content: flex-start;
-            }
-            .hero-badge {
-              /* reduce bottom gap — saves vertical space */
-              margin-bottom: 0.5rem !important;
-              padding-top: 0.35rem !important;
-              padding-bottom: 0.35rem !important;
-            }
-            .hero-headline {
-              /*
-                At 120% zoom a 2rem font = 2.4rem visually.
-                clamp keeps it readable but not too tall.
-                max 2rem so 3-line headline doesn't overflow.
-              */
-              font-size: clamp(1.5rem, 5.5vw, 2rem) !important;
-              line-height: 1.25 !important;
-              margin-bottom: 0.5rem !important;
-            }
-            .hero-subheadline {
-              font-size: 0.82rem !important;
-              line-height: 1.45 !important;
-              /* tight margin so CTA stays on screen */
-              margin-bottom: 0.85rem !important;
-            }
-            .hero-cta {
-              gap: 0.6rem !important;
-            }
-            /* Desktop card: hidden on mobile */
-            .hero-right {
-              display: none !important;
-            }
-            /* Mobile card: below CTA, scrollable */
-            .hero-card-mobile {
-              display: block;
-              width: 100%;
-              margin-top: 1.25rem;
-            }
-            .hero-card-mobile .google-mockup {
-              width: 100%;
-              box-sizing: border-box;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            }
-            .hero-card-desktop {
-              display: none !important;
-            }
-          }
+@media (max-width: 1023px) {
+  .hero-outer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /*
+      110px clears header with healthy breathing room.
+      Compensated by tighter font/margin below.
+    */
+    padding-top: 110px;
+    padding-bottom: 1.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+  }
+  .hero-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .hero-badge {
+    margin-bottom: 0.4rem !important;
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+  }
+  .hero-headline {
+    font-size: clamp(1.4rem, 5vw, 1.85rem) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .hero-subheadline {
+    font-size: 0.78rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.7rem !important;
+  }
+  .hero-cta {
+    gap: 0.5rem !important;
+  }
 
           /* ================================
              DESKTOP — normal zoom, 60/40
