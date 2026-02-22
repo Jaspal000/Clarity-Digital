@@ -354,16 +354,34 @@ html, body {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
+    width: 100%;
   }
 
-  /* Desktop: 60/40 split with card able to overlap image */
+  /* Desktop: 60/40 split with card able to overlap image and extend beyond padding */
   @media (min-width: 1024px) {
     .hero-grid {
       display: grid;
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 1fr 1fr;
       gap: 0;
       align-items: start;
       position: relative;
+      /* Extend beyond section-padding on the right by using negative margin equal to section-padding */
+      margin-right: -4rem;
+      width: calc(100% + 4rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-grid {
+      margin-right: -5rem;
+      width: calc(100% + 5rem);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .hero-grid {
+      margin-right: -7rem;
+      width: calc(100% + 7rem);
     }
   }
 
@@ -379,17 +397,28 @@ html, body {
     .hero-card-column {
       padding: 0;
       padding-top: 2rem;
+      padding-right: 4rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      /* No negative margin - card stays on extreme right, occupying full 40% column width */
-      margin-left: 0;
       z-index: 10;
     }
 
     .hero-card-column .google-mockup {
       width: 100%;
       max-width: 100%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-card-column {
+      padding-right: 5rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .hero-card-column {
+      padding-right: 7rem;
     }
   }
 }
