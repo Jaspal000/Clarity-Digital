@@ -54,27 +54,27 @@ export default function Header() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <div className="flex items-center justify-between h-[85px] lg:h-[110px]">
-          {/* Logo Section */}
+      <div className="section-padding relative z-10">
+        {/* Reverted header heights back to original */}
+        <div className="flex items-center justify-between h-[78px] lg:h-[92px]">
+          
+          {/* Logo Section - Reverted to normal size */}
           <a
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('hero');
             }}
-            className="group flex items-center transform-gpu transition-all duration-500 hover:opacity-90"
+            className="flex items-center transition-opacity duration-300 hover:opacity-80"
           >
-            <div className="scale-125 lg:scale-[1.65] origin-left transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.3] lg:group-hover:scale-[1.70]">
-              <Logo 
-                variant="header" 
-                color={isScrolled ? "ivory" : "navy"} // Adapts based on scroll
-              />
-            </div>
+            <Logo 
+              variant="header" 
+              color={isScrolled ? "ivory" : "navy"} 
+            />
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-14">
+          {/* Desktop Navigation - Reverted to original text-sm styling */}
+          <nav className="hidden lg:flex items-center gap-12">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -83,52 +83,63 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className={`group relative text-[15px] font-semibold uppercase tracking-[0.1em] transition-colors duration-300 antialiased ${
-                  isScrolled ? 'text-ivory/80 hover:text-ivory' : 'text-black'
+                className={`group relative text-sm font-medium tracking-wide transition-colors duration-300 ${
+                  isScrolled ? 'text-ivory/70 hover:text-ivory' : 'text-black'
                 }`}
               >
                 {item.label}
-                <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-gold transition-all duration-500 ease-out group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </nav>
 
           {/* Right Side: Language + CTA */}
-          <div className="hidden lg:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-8">
+            
+            {/* Language Switcher - Ultra Pro High Quality Flags */}
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setLanguage('fr')}
-                className={`text-xs font-bold tracking-tighter transition-all duration-300 ${
+                className={`relative overflow-hidden w-6 h-6 rounded-full transition-all duration-300 ring-2 ring-offset-1 ${
+                  isScrolled ? 'ring-offset-navy' : 'ring-offset-[#F4F1EA]' // Matches your hero bg
+                } ${
                   language === 'fr' 
-                    ? (isScrolled ? 'text-ivory border-b-2 border-gold pb-0.5' : 'text-black border-b-2 border-gold pb-0.5')
-                    : (isScrolled ? 'text-ivory/40 hover:text-ivory' : 'text-black/40 hover:text-black')
+                    ? 'ring-gold scale-110 opacity-100' 
+                    : 'ring-transparent opacity-40 hover:opacity-80 hover:scale-105'
                 }`}
+                title="Français"
               >
-                FR
+                <img src="https://flagcdn.com/fr.svg" alt="FR" className="w-full h-full object-cover" />
               </button>
-              <span className={`text-xs ${isScrolled ? 'text-ivory/20' : 'text-black/10'}`}>/</span>
+              
+              <span className={`text-sm ${isScrolled ? 'text-ivory/20' : 'text-black/10'}`}>|</span>
+              
               <button
                 onClick={() => setLanguage('en')}
-                className={`text-xs font-bold tracking-tighter transition-all duration-300 ${
+                className={`relative overflow-hidden w-6 h-6 rounded-full transition-all duration-300 ring-2 ring-offset-1 ${
+                  isScrolled ? 'ring-offset-navy' : 'ring-offset-[#F4F1EA]'
+                } ${
                   language === 'en' 
-                    ? (isScrolled ? 'text-ivory border-b-2 border-gold pb-0.5' : 'text-black border-b-2 border-gold pb-0.5')
-                    : (isScrolled ? 'text-ivory/40 hover:text-ivory' : 'text-black/40 hover:text-black')
+                    ? 'ring-gold scale-110 opacity-100' 
+                    : 'ring-transparent opacity-40 hover:opacity-80 hover:scale-105'
                 }`}
+                title="English"
               >
-                EN
+                <img src="https://flagcdn.com/gb.svg" alt="EN" className="w-full h-full object-cover" />
               </button>
             </div>
 
+            {/* CTA Button - Reverted to normal size */}
             <a
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection('contact');
               }}
-              className={`text-[13px] font-bold uppercase tracking-widest px-9 py-4 rounded-sm transition-all duration-500 shadow-lg shadow-black/5 ${
+              className={`text-sm font-semibold uppercase tracking-wide px-7 py-3 rounded transition-all duration-300 ${
                 isScrolled 
                   ? 'bg-gold text-navy hover:bg-ivory hover:text-navy' 
-                  : 'bg-black text-white hover:bg-gold hover:text-black'
+                  : 'bg-navy text-white hover:bg-navy/90'
               }`}
             >
               {t('nav.cta')}
@@ -142,7 +153,7 @@ export default function Header() {
               isScrolled ? 'text-ivory' : 'text-black'
             }`}
           >
-            {isMobileMenuOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -152,11 +163,11 @@ export default function Header() {
         className={`lg:hidden absolute top-full left-0 right-0 shadow-2xl transition-all duration-500 ease-in-out ${
           isMobileMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'
         } ${
-          isScrolled ? 'bg-navy border-t border-gold/25' : 'bg-white border-t border-gray-50'
+          isScrolled ? 'bg-navy border-t border-gold/25' : 'bg-white border-t border-gray-100'
         }`}
       >
-        <div className="px-8 py-12 relative z-10">
-          <nav className="flex flex-col gap-8">
+        <div className="section-padding py-8 relative z-10">
+          <nav className="flex flex-col gap-6">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -165,14 +176,39 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className={`text-2xl font-light tracking-tight transition-colors ${
-                  isScrolled ? 'text-ivory hover:text-gold' : 'text-black hover:text-gold'
+                className={`text-lg font-medium transition-colors ${
+                  isScrolled ? 'text-ivory/80 hover:text-gold' : 'text-black hover:text-gold'
                 }`}
               >
                 {item.label}
               </a>
             ))}
           </nav>
+
+          {/* Mobile Language Switcher Flags */}
+          <div className={`flex items-center gap-5 mt-8 pt-6 border-t ${isScrolled ? 'border-gold/10' : 'border-gray-100'}`}>
+            <button
+              onClick={() => setLanguage('fr')}
+              className={`flex items-center gap-3 transition-all duration-300 ${language === 'fr' ? 'opacity-100' : 'opacity-40'}`}
+            >
+              <div className={`w-8 h-8 rounded-full overflow-hidden ring-2 ${language === 'fr' ? 'ring-gold' : 'ring-transparent'}`}>
+                <img src="https://flagcdn.com/fr.svg" alt="FR" className="w-full h-full object-cover" />
+              </div>
+              <span className={`text-base font-semibold ${isScrolled ? 'text-ivory' : 'text-black'}`}>FR</span>
+            </button>
+            
+            <span className={`text-base ${isScrolled ? 'text-ivory/20' : 'text-black/10'}`}>|</span>
+            
+            <button
+              onClick={() => setLanguage('en')}
+              className={`flex items-center gap-3 transition-all duration-300 ${language === 'en' ? 'opacity-100' : 'opacity-40'}`}
+            >
+              <div className={`w-8 h-8 rounded-full overflow-hidden ring-2 ${language === 'en' ? 'ring-gold' : 'ring-transparent'}`}>
+                <img src="https://flagcdn.com/gb.svg" alt="EN" className="w-full h-full object-cover" />
+              </div>
+              <span className={`text-base font-semibold ${isScrolled ? 'text-ivory' : 'text-black'}`}>EN</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>
