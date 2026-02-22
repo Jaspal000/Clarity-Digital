@@ -104,16 +104,17 @@ export default function Hero() {
       {/* ====== LAYER 5: CONTENT — always above tower ====== */}
       <div className="relative" style={{ zIndex: 2 }}>
         <div className="section-padding lg:!px-0">
-          {/* Mobile: pt-[90px] + center with flexbox. Desktop: flex row for 60/40 split with vertical centering */}
+          {/* Mobile: pt-[90px] clears header. Desktop: flex row for 60/40 split positioned in upper-middle area */}
           <div 
             className="w-full"
             style={{
               display: 'flex',
               flexDirection: 'column',
               minHeight: '100vh',
-              justifyContent: 'center',
-              paddingTop: 'clamp(90px, 12vh, 150px)',
+              paddingTop: 'clamp(90px, 10vh, 120px)',
               paddingBottom: '3rem',
+              justifyContent: 'flex-start',
+              paddingBottom: '5rem',
             }}
           >
             {/* Desktop only: switch to row layout */}
@@ -122,7 +123,7 @@ export default function Hero() {
                 [data-hero-wrapper] {
                   display: flex !important;
                   flex-direction: row !important;
-                  align-items: center !important;
+                  align-items: flex-start !important;
                   width: 100vw !important;
                   position: relative !important;
                   left: 50% !important;
@@ -142,14 +143,14 @@ export default function Hero() {
                   max-width: 40%;
                   padding: 1.5rem 4rem 0 1.5rem;
                   box-sizing: border-box;
-                  align-self: center;
+                  align-self: flex-start;
                   z-index: 10;
                   position: relative;
                 }
               }
             `}</style>
             <div 
-              className="hero-grid items-center w-full"
+              className="hero-grid items-start w-full"
               data-hero-wrapper
               style={{
                 display: 'flex',
