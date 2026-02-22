@@ -111,29 +111,33 @@ export default function Hero() {
       />
 
       {/* CONTENT */}
-      <div style={{ position: 'relative', zIndex: 2 }}>
+      <div style={{ position: 'relative', zIndex: 2, height: '100%' }}>
         <style>{`
 
           /* ============================================
              MOBILE < 1024px
 
-             hero-left is a flex column that fills
-             the full 100vh (minus header padding).
-             
-             hero-text-group sits at the top naturally.
-             
-             hero-cta uses margin-top: auto which
-             pushes it to the very bottom of the
-             flex container — filling the empty space
-             below the Eiffel Tower image.
-             
-             This is reliable, no absolute positioning.
+             Key fix: hero-outer is height: 100svh
+             (svh = small viewport height, accounts for
+             mobile browser chrome like address bar).
+             This forces the container to EXACTLY fill
+             the visible screen — no more, no less.
+
+             hero-left fills that height via flex: 1.
+             CTA uses margin-top: auto to pin to bottom.
+             Empty beige space is now filled.
              ============================================ */
           @media (max-width: 1023px) {
             .hero-outer {
               display: flex;
               flex-direction: column;
-              min-height: 100vh;
+              /*
+                100svh = exact visible screen height
+                on mobile, accounting for browser bars.
+                This is the key — not min-height.
+              */
+              height: 100svh;
+              min-height: 100vh; /* fallback for old browsers */
               padding-top: 100px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
@@ -144,13 +148,11 @@ export default function Hero() {
               width: 100%;
               display: flex;
               flex-direction: column;
-              /* fills full remaining height after header */
-              flex: 1;
-              min-height: calc(100vh - 100px);
+              flex: 1; /* fills remaining height after padding-top */
               padding-bottom: 2.5rem;
+              box-sizing: border-box;
             }
             .hero-text-group {
-              /* stays at top */
               display: flex;
               flex-direction: column;
             }
@@ -168,9 +170,10 @@ export default function Hero() {
               margin-bottom: 0 !important;
             }
             /*
-              margin-top: auto pushes CTA to bottom.
-              Fills the empty beige space below tower.
-              Fully visible, no clipping, no overflow.
+              margin-top: auto pushes CTA to the very
+              bottom of hero-left which now fills the
+              exact screen height. Empty beige space
+              is fully occupied. Buttons clearly visible.
             */
             .hero-cta {
               margin-top: auto !important;
@@ -185,7 +188,7 @@ export default function Hero() {
             .hero-card-mobile {
               display: block;
               width: 100%;
-              margin-top: 10rem;
+              margin-top: 3rem;
             }
             .hero-card-mobile .google-mockup {
               width: 100%;
@@ -201,14 +204,8 @@ export default function Hero() {
 
           /* ============================================
              DESKTOP >= 1024px
-
-             Hero text slightly lower than before:
-             padding-top on hero-left increased to 3rem
-             (was 2.5rem) and justify-content flex-start
-             keeps text in upper area but lower than
-             the "centered" version.
-
-             Card: fills full right 40% top to bottom.
+             Card fills full right 40% top to bottom.
+             Text slightly lower via padding-top.
              ============================================ */
           @media (min-width: 1024px) {
             .hero-outer {
@@ -224,10 +221,6 @@ export default function Hero() {
             .hero-left {
               flex: 0 0 60%;
               max-width: 60%;
-              /*
-                padding-top: 3.5rem pushes text
-                slightly down from header — was 2.5rem.
-              */
               padding: 3.5rem 3rem 3rem 5rem;
               box-sizing: border-box;
               display: flex;
@@ -250,7 +243,6 @@ export default function Hero() {
               margin-top: 0 !important;
               padding-top: 0 !important;
             }
-            /* Card fills full right column height */
             .hero-right {
               flex: 0 0 40%;
               max-width: 40%;
@@ -303,7 +295,6 @@ export default function Hero() {
           {/* LEFT: Hero Text */}
           <div className="hero-left">
 
-            {/* Text group — stays at top */}
             <div className="hero-text-group">
               {/* Trust badge */}
               <div
@@ -334,7 +325,7 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* CTA — pushed to bottom on mobile via margin-top: auto */}
+            {/* CTA — margin-top auto pins to bottom */}
             <div
               className={`hero-cta flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
@@ -349,13 +340,13 @@ export default function Hero() {
               </button>
             </div>
 
-            {/* MOBILE ONLY: Google card below CTA */}
+            {/* MOBILE ONLY: Google card scrolled to below */}
             <div className="hero-card-mobile">
               <GoogleMockup t={t} />
             </div>
           </div>
 
-          {/* RIGHT: Desktop card — fills full 40% */}
+          {/* RIGHT: Desktop card — full 40% height */}
           <div className="hero-right hero-card-desktop">
             <div
               className={`card-wrapper transition-all duration-1000 delay-400 ${
