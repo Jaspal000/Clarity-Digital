@@ -33,7 +33,7 @@ export default function Hero() {
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
-        className="hidden lg:block"
+        className="hidden md:block"
         style={{
           position: 'absolute',
           top: 0, left: 0,
@@ -52,7 +52,7 @@ export default function Hero() {
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
-        className="lg:hidden"
+        className="md:hidden"
         style={{
           position: 'absolute',
           top: 0, left: 0,
@@ -80,7 +80,7 @@ export default function Hero() {
       }} />
 
       {/* MOBILE GRADIENT */}
-      <div className="lg:hidden" style={{
+      <div className="md:hidden" style={{
         position: 'absolute', top: 0, left: 0,
         width: '100%', height: '100svh',
         background: 'linear-gradient(180deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.45) 15%, rgba(244,241,234,0.2) 30%, rgba(244,241,234,0.05) 55%, transparent 100%)',
@@ -88,7 +88,7 @@ export default function Hero() {
       }} />
 
       {/* DESKTOP GRADIENT */}
-      <div className="hidden lg:block" style={{
+      <div className="hidden md:block" style={{
         position: 'absolute', inset: 0,
         background: 'linear-gradient(90deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.6) 20%, rgba(244,241,234,0.3) 42%, rgba(244,241,234,0.08) 60%, rgba(244,241,234,0.15) 100%)',
         zIndex: 1, pointerEvents: 'none',
@@ -106,7 +106,7 @@ export default function Hero() {
         <style>{`
 
           /* ============================================
-             MOBILE < 1024px
+             MOBILE < 768px
 
              FIX 1 — padding-top: 115px
              Header height ≈ 88px CSS.
@@ -122,7 +122,7 @@ export default function Hero() {
 
              FIX 3 — badge width handled in JSX inline style
              ============================================ */
-          @media (max-width: 1023px) {
+          @media (max-width: 767px) {
             .first-screen {
               display: flex;
               flex-direction: column;
@@ -190,9 +190,9 @@ export default function Hero() {
           }
 
           /* ============================================
-             DESKTOP >= 1024px
+             DESKTOP >= 768px
              ============================================ */
-          @media (min-width: 1024px) {
+          @media (min-width: 768px) {
             .first-screen {
               display: flex;
               flex-direction: row;
