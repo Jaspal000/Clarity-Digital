@@ -97,177 +97,58 @@ export default function Hero() {
 
       {/* ====== LAYER 5: CONTENT ====== */}
       <div className="relative" style={{ zIndex: 2 }}>
-        <style>{`
-
-          /* ================================
-             MOBILE — accounts for 120% zoom
-             Effective viewport = ~83% of px
-             So all spacing is kept minimal
-             to ensure CTA visible on load
-             ================================ */
-          @media (max-width: 1023px) {
-            .hero-outer {
-              display: flex;
-              flex-direction: column;
-              /* 
-                100vh at 120% zoom = real screen height.
-                We use min-height not height so content
-                can grow below fold (for the card).
-              */
-              min-height: 100vh;
-              /*
-                70px clears header on mobile.
-                Do NOT increase — at 120% zoom
-                more padding = CTA pushed below fold.
-              */
-              padding-top: 70px;
-              padding-bottom: 1.25rem;
-              padding-left: 1rem;
-              padding-right: 1rem;
-              box-sizing: border-box;
-            }
-            .hero-left {
-              width: 100%;
-              display: flex;
-              flex-direction: column;
-              /*
-                We want badge + headline + subtext + CTA
-                to ALL fit within 100vh - 70px = ~83vh
-                at normal zoom, but at 120% zoom
-                effective space = ~69vh. Keep tight.
-              */
-              justify-content: flex-start;
-            }
-            .hero-badge {
-              /* reduce bottom gap — saves vertical space */
-              margin-bottom: 0.5rem !important;
-              padding-top: 0.35rem !important;
-              padding-bottom: 0.35rem !important;
-            }
-            .hero-headline {
-              /*
-                At 120% zoom a 2rem font = 2.4rem visually.
-                clamp keeps it readable but not too tall.
-                max 2rem so 3-line headline doesn't overflow.
-              */
-              font-size: clamp(1.5rem, 5.5vw, 2rem) !important;
-              line-height: 1.25 !important;
-              margin-bottom: 0.5rem !important;
-            }
-            .hero-subheadline {
-              font-size: 0.82rem !important;
-              line-height: 1.45 !important;
-              /* tight margin so CTA stays on screen */
-              margin-bottom: 0.85rem !important;
-            }
-            .hero-cta {
-              gap: 0.6rem !important;
-            }
-            /* Desktop card: hidden on mobile */
-            .hero-right {
-              display: none !important;
-            }
-            /* Mobile card: below CTA, scrollable */
-            .hero-card-mobile {
-              display: block;
-              width: 100%;
-              margin-top: 1.25rem;
-            }
-            .hero-card-mobile .google-mockup {
-              width: 100%;
-              box-sizing: border-box;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            }
-            .hero-card-desktop {
-              display: none !important;
-            }
-          }
-
-          /* ================================
-             DESKTOP — normal zoom, 60/40
-             Card fully visible first load
-             ================================ */
-          @media (min-width: 1024px) {
-            .hero-outer {
-              display: flex;
-              flex-direction: row;
-              align-items: flex-start;
-              width: 100vw;
-              min-height: 100vh;
-              position: relative;
-              left: 50%;
-              right: 50%;
-              margin-left: -50vw;
-              margin-right: -50vw;
-              padding-top: 88px;
-              padding-bottom: 3rem;
-              box-sizing: border-box;
-            }
-            .hero-left {
-              flex: 0 0 60%;
-              max-width: 60%;
-              padding: 3rem 3rem 2rem 5rem;
-              box-sizing: border-box;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-            }
-            .hero-headline {
-              font-size: clamp(2.5rem, 4vw, 3.75rem) !important;
-              line-height: 1.15 !important;
-            }
-            .hero-subheadline {
-              font-size: 1.1rem !important;
-              margin-bottom: 2rem !important;
-            }
-            .hero-right {
-              flex: 0 0 40%;
-              max-width: 40%;
-              padding: 1.5rem 3rem 1.5rem 1rem;
-              box-sizing: border-box;
-              align-self: flex-start;
-              position: sticky;
-              top: 88px;
-              max-height: calc(100vh - 88px);
-              overflow-y: auto;
-              overflow-x: hidden;
-            }
-            .hero-right::-webkit-scrollbar {
-              width: 4px;
-            }
-            .hero-right::-webkit-scrollbar-thumb {
-              background: rgba(0,0,0,0.15);
-              border-radius: 2px;
-            }
-            .google-mockup {
-              width: 100%;
-              max-width: 100%;
-              box-sizing: border-box;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 12px 48px rgba(0,0,0,0.18);
-            }
-            .hero-card-mobile {
-              display: none !important;
-            }
-            .hero-card-desktop {
-              display: block !important;
-            }
-          }
-        `}</style>
-
-        <div className="hero-outer">
-
-          {/* ---- LEFT: Hero Text (both views) ---- */}
-          <div className="hero-left">
-
-            {/* Trust badge */}
-            <div
-              className={`hero-badge inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
+        <div className="section-padding lg:!px-0">
+          {/* Mobile: pt-[90px] clears header. Desktop: flex row for 60/40 split positioned in upper-middle area */}
+          <div 
+            className="w-full"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '100vh',
+              paddingTop: 'clamp(60px, 6vh, 80px)',
+              paddingBottom: '5rem',
+              justifyContent: 'flex-start',
+            }}
+          >
+            {/* Desktop only: switch to row layout */}
+            <style>{`
+              @media (min-width: 1024px) {
+                [data-hero-wrapper] {
+                  display: flex !important;
+                  flex-direction: row !important;
+                  align-items: flex-start !important;
+                  width: 100vw !important;
+                  position: relative !important;
+                  left: 50% !important;
+                  right: 50% !important;
+                  margin-left: -50vw !important;
+                  margin-right: -50vw !important;
+                  padding: 0 !important;
+                  min-height: auto !important;
+                }
+                [data-hero-left] {
+                  flex: 0 0 60%;
+                  max-width: 60%;
+                  padding: 0 4rem;
+                }
+                [data-hero-right] {
+                  flex: 0 0 40%;
+                  max-width: 40%;
+                  padding: 1.5rem 4rem 0 1.5rem;
+                  box-sizing: border-box;
+                  align-self: flex-start;
+                  z-index: 10;
+                  position: relative;
+                }
+              }
+            `}</style>
+            <div 
+              className="hero-grid items-start w-full"
+              data-hero-wrapper
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
             >
               <MapPin size={14} className="text-gold" />
               <span className="text-xs text-charcoal/70 tracking-wide">{t('hero.trustLine')}</span>
