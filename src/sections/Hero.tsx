@@ -112,9 +112,8 @@ export default function Hero() {
               flexDirection: 'column',
               minHeight: '100vh',
               paddingTop: 'clamp(90px, 10vh, 120px)',
-              paddingBottom: '3rem',
-              justifyContent: 'flex-start',
               paddingBottom: '5rem',
+              justifyContent: 'flex-start',
             }}
           >
             {/* Desktop only: switch to row layout */}
