@@ -138,15 +138,16 @@ export default function Hero() {
                   padding: 0 4rem;
                 }
                 [data-hero-right] {
-                  flex: 0 0 40%;
-                  max-width: 40%;
-                  padding: 0 4rem 0 1.5rem;
-                  margin-top: 5rem;
-                  box-sizing: border-box;
-                  align-self: flex-start;
-                  z-index: 10;
-                  position: relative;
-                }
+  flex: 0 0 40%;
+  max-width: 40%;
+  padding: 1rem 2rem 0 1rem;
+  box-sizing: border-box;
+  align-self: flex-start;
+  z-index: 10;
+  position: relative;
+  overflow-y: auto;
+  max-height: calc(100vh - 80px);
+}
               }
             `}</style>
             <div 
