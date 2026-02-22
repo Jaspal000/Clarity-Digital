@@ -378,11 +378,12 @@ html, body {
   @media (min-width: 1024px) {
     .hero-card-column {
       padding: 0;
+      padding-top: 2rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      /* Negative margin allows card to overlap the Eiffel Tower image */
-      margin-left: -12%;
+      /* No negative margin - card stays on extreme right, occupying full 40% column width */
+      margin-left: 0;
       z-index: 10;
     }
 
