@@ -102,14 +102,10 @@ export default function Hero() {
       </div>
 
       {/* ====== LAYER 5: CONTENT — always above tower ====== */}
-      <div className="relative" style={{ zIndex: 2 }}>
-        <div className="section-padding">
-          {/* Mobile: pt-[90px] clears header (78px + 12px gap). Desktop: uses CSS Grid for strict 60/40 split */}
-          <div className="min-h-screen flex items-start pt-[90px]">
-            <div className="hero-grid items-start w-full pb-12">
-
-              {/* ---- Left: Text Content — 60% on desktop ---- */}
-              <div className="max-w-xl">
+      <div className="relative min-h-screen" style={{ zIndex: 2 }}>
+        {/* Left side: Text content with section padding */}
+        <div className="section-padding absolute top-0 left-0 h-full lg:w-1/2 flex items-start pt-[90px]">
+          <div className="max-w-xl">
                 {/* Trust badge */}
                 <div
                   className={`inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
@@ -153,15 +149,18 @@ export default function Hero() {
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
-              {/* ---- Right: Google Mockup — 40% on desktop ---- */}
-              {/* Positioned on extreme right, occupying full 40% width with top padding on desktop */}
-              <div
-                className={`hero-card-column relative transition-all duration-1000 delay-400 lg:mt-0 ${
-                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-                }`}
-                style={{ zIndex: 5 }}
-              >
+        {/* Right side: Google Business Card - positioned absolutely to extend beyond padding */}
+        <div className="absolute top-0 right-0 h-full w-full lg:w-1/2 flex items-start pt-[90px] lg:pt-8 pointer-events-none">
+          <div
+            className={`hero-card-column relative transition-all duration-1000 delay-400 w-full ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+            }`}
+            style={{ zIndex: 5, pointerEvents: 'auto' }}
+          >
                 <div className="animate-float">
                   <div className="google-mockup w-full">
                     {/* Mockup Header */}

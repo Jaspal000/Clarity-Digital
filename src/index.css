@@ -348,77 +348,44 @@ html, body {
     overflow-x: hidden;
   }
 
-  /* ===== HERO GRID LAYOUT ===== */
-  /* Mobile: single column stack, card below text */
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
-    width: 100%;
-  }
-
-  /* Desktop: 60/40 split with card able to overlap image and extend beyond padding */
-  @media (min-width: 1024px) {
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      align-items: start;
-      position: relative;
-      /* Extend beyond section-padding on the right by using negative margin equal to section-padding */
-      margin-right: -4rem;
-      width: calc(100% + 4rem);
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .hero-grid {
-      margin-right: -5rem;
-      width: calc(100% + 5rem);
-    }
-  }
-
-  @media (min-width: 1536px) {
-    .hero-grid {
-      margin-right: -7rem;
-      width: calc(100% + 7rem);
-    }
-  }
-
-  /* Card column styling */
+  /* ===== HERO CARD POSITIONING ===== */
+  /* Card column: responsive padding to keep card within bounds with margin on right */
+  
   @media (max-width: 1023px) {
     .hero-card-column {
-      padding: 0;
+      padding: 0 1.5rem;
       margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
     }
   }
 
   @media (min-width: 1024px) {
     .hero-card-column {
-      padding: 0;
-      padding-top: 2rem;
-      padding-right: 4rem;
+      padding: 0 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      z-index: 10;
+      width: 100%;
     }
 
     .hero-card-column .google-mockup {
       width: 100%;
       max-width: 100%;
+      margin-left: auto;
+      margin-right: 0;
     }
   }
 
   @media (min-width: 1280px) {
     .hero-card-column {
-      padding-right: 5rem;
+      padding: 0 2rem;
     }
   }
 
   @media (min-width: 1536px) {
     .hero-card-column {
-      padding-right: 7rem;
+      padding: 0 2.5rem;
     }
   }
 }
