@@ -157,8 +157,16 @@ export default function Hero() {
               margin-bottom: 0 !important;
             }
             .hero-cta {
-              margin-top: auto !important;
-              padding-top: 1.5rem;
+              /*
+                clamp(2rem, 12vh, 5rem):
+                - On small phone (750px effective at 120% zoom):
+                  12vh = ~90px — pushes CTA nicely toward bottom
+                - On tall desktop-mode mobile browser (900px+):
+                  caps at 5rem = 80px — no massive gap
+                - auto was creating 400px+ gap on tall viewports
+              */
+              margin-top: clamp(2rem, 12vh, 5rem) !important;
+              padding-top: 0;
               display: flex !important;
               flex-direction: column !important;
               gap: 0.65rem !important;
