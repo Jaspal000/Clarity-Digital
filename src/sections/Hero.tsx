@@ -144,7 +144,12 @@ export default function Hero() {
                 of tower image — sits ON the image
                 not floating above it in beige space.
               */
-              padding-top: 80px;
+              /*
+                95px pushes badge fully below header
+                so ALL text sits on the tower image.
+                Nothing straddles the image boundary.
+              */
+              padding-top: 95px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
               /*
