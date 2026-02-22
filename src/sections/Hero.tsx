@@ -47,7 +47,7 @@ export default function Hero() {
         }}
       />
 
-      {/* EIFFEL TOWER — MOBILE: only covers first screen */}
+      {/* EIFFEL TOWER — MOBILE */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
@@ -68,70 +68,59 @@ export default function Hero() {
       />
 
       {/* TOP BLUR */}
-      <div
-        style={{
-          position: 'absolute', top: 0, left: 0, right: 0,
-          height: '100svh',
-          backdropFilter: 'blur(4px)',
-          WebkitBackdropFilter: 'blur(4px)',
-          zIndex: 1,
-          mask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 12%)',
-          WebkitMask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 12%)',
-          pointerEvents: 'none',
-        }}
-      />
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0,
+        height: '100svh',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)',
+        zIndex: 1,
+        mask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 12%)',
+        WebkitMask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 12%)',
+        pointerEvents: 'none',
+      }} />
 
-      {/* MOBILE GRADIENT — light, fades fast */}
-      <div
-        className="lg:hidden"
-        style={{
-          position: 'absolute', top: 0, left: 0,
-          width: '100%', height: '100svh',
-          background: 'linear-gradient(180deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.45) 15%, rgba(244,241,234,0.2) 30%, rgba(244,241,234,0.05) 55%, transparent 100%)',
-          zIndex: 1, pointerEvents: 'none',
-        }}
-      />
+      {/* MOBILE GRADIENT */}
+      <div className="lg:hidden" style={{
+        position: 'absolute', top: 0, left: 0,
+        width: '100%', height: '100svh',
+        background: 'linear-gradient(180deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.45) 15%, rgba(244,241,234,0.2) 30%, rgba(244,241,234,0.05) 55%, transparent 100%)',
+        zIndex: 1, pointerEvents: 'none',
+      }} />
 
       {/* DESKTOP GRADIENT */}
-      <div
-        className="hidden lg:block"
-        style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(90deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.6) 20%, rgba(244,241,234,0.3) 42%, rgba(244,241,234,0.08) 60%, rgba(244,241,234,0.15) 100%)',
-          zIndex: 1, pointerEvents: 'none',
-        }}
-      />
+      <div className="hidden lg:block" style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(90deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.6) 20%, rgba(244,241,234,0.3) 42%, rgba(244,241,234,0.08) 60%, rgba(244,241,234,0.15) 100%)',
+        zIndex: 1, pointerEvents: 'none',
+      }} />
 
       {/* GRAIN */}
-      <div
-        style={{
-          position: 'absolute', top: 0, left: 0,
-          width: '100%', height: '100svh',
-          opacity: 0.012, zIndex: 1, pointerEvents: 'none',
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%23F4F1EA'/%3E%3C/svg%3E")`,
-        }}
-      />
+      <div style={{
+        position: 'absolute', top: 0, left: 0,
+        width: '100%', height: '100svh',
+        opacity: 0.012, zIndex: 1, pointerEvents: 'none',
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%23F4F1EA'/%3E%3C/svg%3E")`,
+      }} />
 
-      {/* =====================================================
-          FIRST SCREEN BLOCK — exactly 100svh tall on mobile.
-          Contains ONLY: badge, headline, subtext, CTA buttons.
-          Google card is OUTSIDE this block entirely.
-          On desktop: becomes the 60/40 flex layout.
-      ===================================================== */}
-      <div
-        style={{ position: 'relative', zIndex: 2 }}
-      >
+      <div style={{ position: 'relative', zIndex: 2 }}>
         <style>{`
 
           /* ============================================
              MOBILE < 1024px
 
-             .first-screen is EXACTLY 100svh.
-             Nothing can peek below it.
-             Card is rendered AFTER this block in DOM.
+             FIX 1 — padding-top: 115px
+             Header height ≈ 88px CSS.
+             Image starts at exactly 88px.
+             115px = 27px inside image.
+             At 120% zoom = 138px visual — badge
+             sits clearly fully ON the tower image.
+             Nothing touches white/beige space above.
 
-             hero-left fills full height via flex.
-             CTA pinned to bottom via margin-top: auto.
+             FIX 2 — padding-bottom: 2.5rem
+             Lifts CTA buttons up from before (was 3rem→4rem).
+             Balanced gap between buttons and screen bottom.
+
+             FIX 3 — badge width handled in JSX inline style
              ============================================ */
           @media (max-width: 1023px) {
             .first-screen {
@@ -139,25 +128,10 @@ export default function Hero() {
               flex-direction: column;
               height: 100svh;
               min-height: 100vh;
-              /*
-                80px: badge now aligns with top edge
-                of tower image — sits ON the image
-                not floating above it in beige space.
-              */
-              /*
-                108px: header is ~88px, badge needs
-                ~20px inside image to sit fully on it.
-                At 120% zoom = 130px visual — badge
-                completely on tower image, nothing above.
-              */
-              padding-top: 108px;
+              padding-top: 115px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
-              /*
-                3rem bottom: CTA fully visible and
-                balanced — slightly lifted from before.
-              */
-              padding-bottom: 3rem;
+              padding-bottom: 2.5rem;
               box-sizing: border-box;
             }
             .hero-left {
@@ -165,11 +139,6 @@ export default function Hero() {
               flex-direction: column;
               flex: 1;
               width: 100%;
-            }
-            .hero-badge {
-              margin-bottom: 0.75rem !important;
-              /* desktop: shrink to content width only */
-              align-self: flex-start !important;
             }
             .hero-headline {
               font-size: 2rem !important;
@@ -181,7 +150,6 @@ export default function Hero() {
               line-height: 1.55 !important;
               margin-bottom: 0 !important;
             }
-            /* Pinned to bottom — fills empty beige space */
             .hero-cta {
               margin-top: auto !important;
               padding-top: 1.5rem;
@@ -189,11 +157,7 @@ export default function Hero() {
               flex-direction: column !important;
               gap: 0.65rem !important;
             }
-            /* Desktop right column hidden on mobile */
-            .hero-right {
-              display: none !important;
-            }
-            /* Card block: BELOW the 100svh first-screen */
+            .hero-right { display: none !important; }
             .mobile-card-block {
               display: block;
               width: 100%;
@@ -208,14 +172,11 @@ export default function Hero() {
               overflow: hidden;
               box-shadow: 0 8px 32px rgba(0,0,0,0.12);
             }
-            .desktop-card-block {
-              display: none !important;
-            }
+            .desktop-card-block { display: none !important; }
           }
 
           /* ============================================
              DESKTOP >= 1024px
-             Normal 60/40 layout. Card in right column.
              ============================================ */
           @media (min-width: 1024px) {
             .first-screen {
@@ -288,9 +249,7 @@ export default function Hero() {
               flex: 1;
               overflow-y: auto;
             }
-            .mobile-card-block {
-              display: none !important;
-            }
+            .mobile-card-block { display: none !important; }
             .desktop-card-block {
               display: flex !important;
               flex-direction: column;
@@ -299,20 +258,30 @@ export default function Hero() {
           }
         `}</style>
 
-        {/* ---- FIRST SCREEN: exactly 100svh on mobile ---- */}
+        {/* FIRST SCREEN: exactly 100svh */}
         <div className="first-screen">
-
-          {/* LEFT: text + CTA */}
           <div className="hero-left">
 
-            {/* Trust badge */}
+            {/* Badge — inline style ensures width fits content on both mobile & desktop */}
             <div
-              className={`hero-badge inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
+              className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.45rem 1rem',
+                background: 'rgba(15,23,42,0.05)',
+                borderRadius: '9999px',
+                marginBottom: '0.75rem',
+                /* KEY FIX: width fits content, not full container width */
+                width: 'fit-content',
+                maxWidth: '100%',
+              }}
             >
-              <MapPin size={14} className="text-gold" />
-              <span className="text-xs text-charcoal/70 tracking-wide">{t('hero.trustLine')}</span>
+              <MapPin size={14} className="text-gold" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: '0.75rem', color: 'rgba(30,30,30,0.7)', letterSpacing: '0.025em', whiteSpace: 'nowrap' }}>
+                {t('hero.trustLine')}
+              </span>
             </div>
 
             {/* Headline */}
@@ -333,7 +302,7 @@ export default function Hero() {
               {t('hero.subheadline')}
             </p>
 
-            {/* CTA — pushed to bottom on mobile via margin-top: auto */}
+            {/* CTA */}
             <div
               className={`hero-cta flex gap-4 transition-all duration-700 delay-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
@@ -349,35 +318,25 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT: desktop card — 40% column */}
+          {/* Desktop right card */}
           <div className="hero-right desktop-card-block">
-            <div
-              className={`card-wrapper transition-all duration-1000 delay-400 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-              }`}
-            >
+            <div className={`card-wrapper transition-all duration-1000 delay-400 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}>
               <GoogleMockup t={t} />
             </div>
           </div>
-
         </div>
 
-        {/* =====================================================
-            MOBILE CARD BLOCK
-            Completely outside the 100svh first-screen.
-            Structurally impossible to see on first load.
-            User must scroll past the hero to reach it.
-        ===================================================== */}
+        {/* MOBILE CARD — structurally outside 100svh, impossible to see on first load */}
         <div className="mobile-card-block">
           <GoogleMockup t={t} />
         </div>
-
       </div>
     </section>
   );
 }
 
-/* Shared Google Mockup */
 function GoogleMockup({ t }: { t: (key: string) => unknown }) {
   return (
     <div className="animate-float" style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100%' }}>
@@ -398,9 +357,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             <div className="flex items-center gap-2 mb-1 flex-wrap">
               <span className="text-2xl font-bold text-gray-900">{t('googleMockup.rating') as string}</span>
               <div className="flex gap-0.5">
-                {[1, 2, 3, 4].map((i) => (
-                  <Star key={i} size={16} className="text-yellow-400" fill="currentColor" />
-                ))}
+                {[1,2,3,4].map(i => <Star key={i} size={16} className="text-yellow-400" fill="currentColor" />)}
                 <Star size={16} className="text-yellow-400" fill="url(#half-star)" />
               </div>
               <span className="text-sm text-gray-500">({t('googleMockup.reviews') as string})</span>
@@ -433,9 +390,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
           </div>
 
           <div className="border-t pt-4 mb-4">
-            <p className="text-sm text-gray-700 leading-relaxed break-words">
-              {t('googleMockup.description') as string}
-            </p>
+            <p className="text-sm text-gray-700 leading-relaxed break-words">{t('googleMockup.description') as string}</p>
           </div>
 
           <div className="border-t pt-4">
@@ -444,9 +399,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
               <div className="min-w-0">
                 <p className="text-sm font-medium text-gray-900">Marie L.</p>
                 <div className="flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} size={10} className="text-yellow-400" fill="currentColor" />
-                  ))}
+                  {[1,2,3,4,5].map(i => <Star key={i} size={10} className="text-yellow-400" fill="currentColor" />)}
                 </div>
               </div>
               <span className="text-xs text-gray-400 ml-auto flex-shrink-0 whitespace-nowrap">il y a 2 sem.</span>
