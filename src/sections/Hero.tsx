@@ -63,7 +63,7 @@ export default function Hero() {
         className="absolute top-0 left-0 w-full pointer-events-none lg:hidden"
         style={{
           height: '100%',
-          background: 'linear-gradient(180deg, rgba(244,241,234,0.9) 0%, rgba(244,241,234,0.8) 50%, rgba(244,241,234,0.5) 75%, rgba(244,241,234,0.2) 90%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(244,241,234,0.9) 0%, rgba(244,241,234,0.8) 45%, rgba(244,241,234,0.5) 70%, rgba(244,241,234,0.2) 88%, transparent 100%)',
           zIndex: 1,
         }}
       />
@@ -99,22 +99,35 @@ export default function Hero() {
       <div className="relative" style={{ zIndex: 2 }}>
         <style>{`
 
-          /* ================================
-             MOBILE (< 1024px)
-             120% zoom accounted for —
-             all spacing kept minimal so
-             badge + headline + subtext +
-             CTA all visible on first load
-             ================================ */
+          /* ================================================
+             MOBILE (< 1024px) — tuned for 120% zoom
+             
+             At 120% zoom: CSS px × 1.2 = visual px
+             So to match target image visually:
+             — padding-top: 92px CSS = 110px visual ✓
+             — headline: 2rem CSS = 2.4rem visual ✓
+             — subtext: 0.875rem CSS = 1.05rem visual ✓
+             
+             Effective viewport height at 120% zoom:
+             ~900px phone → 750px CSS height available
+             
+             Budget: 92 + 36 + 8 + 96 + 8 + 80 + 12 + 52 + 12 + 52 = 448px
+             Fits comfortably in 750px ✓
+             ================================================ */
           @media (max-width: 1023px) {
             .hero-outer {
               display: flex;
               flex-direction: column;
               min-height: 100vh;
-              padding-top: 110px;
-              padding-bottom: 1.25rem;
-              padding-left: 1rem;
-              padding-right: 1rem;
+              /*
+                92px CSS × 1.2 zoom = 110px visual.
+                This matches the large gap seen in
+                target image between header and badge.
+              */
+              padding-top: 92px;
+              padding-bottom: 2rem;
+              padding-left: 1.1rem;
+              padding-right: 1.1rem;
               box-sizing: border-box;
             }
             .hero-left {
@@ -124,22 +137,45 @@ export default function Hero() {
               justify-content: flex-start;
             }
             .hero-badge {
-              margin-bottom: 0.4rem !important;
-              padding-top: 0.3rem !important;
-              padding-bottom: 0.3rem !important;
+              /*
+                Full width pill as seen in image.
+                Comfortable padding, not too cramped.
+              */
+              display: inline-flex !important;
+              margin-bottom: 0.75rem !important;
+              padding-top: 0.45rem !important;
+              padding-bottom: 0.45rem !important;
             }
             .hero-headline {
-              font-size: clamp(1.4rem, 5vw, 1.85rem) !important;
+              /*
+                2rem CSS = 2.4rem visual at 120% zoom.
+                In target image headline is very large
+                serif taking up ~3 lines prominently.
+                line-height 1.2 keeps 3 lines compact.
+              */
+              font-size: 2rem !important;
               line-height: 1.2 !important;
-              margin-bottom: 0.4rem !important;
+              margin-bottom: 0.75rem !important;
             }
             .hero-subheadline {
-              font-size: 0.78rem !important;
-              line-height: 1.4 !important;
-              margin-bottom: 0.7rem !important;
+              /*
+                0.875rem CSS = 1.05rem visual.
+                Matches readable but not oversized
+                subtext in target image.
+              */
+              font-size: 0.875rem !important;
+              line-height: 1.55 !important;
+              margin-bottom: 1rem !important;
             }
             .hero-cta {
-              gap: 0.5rem !important;
+              /*
+                Buttons stack vertically (flex-col)
+                matching target image full-width buttons.
+                gap keeps them close but distinct.
+              */
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 0.65rem !important;
             }
             .hero-right {
               display: none !important;
@@ -161,12 +197,12 @@ export default function Hero() {
             }
           }
 
-          /* ================================
+          /* ================================================
              DESKTOP (>= 1024px)
-             Normal zoom — 60/40 split
+             Normal zoom — clean 60/40 split
+             No negative margin tricks
              Card fully visible on first load
-             NO negative margin tricks
-             ================================ */
+             ================================================ */
           @media (min-width: 1024px) {
             .hero-outer {
               display: flex;
@@ -233,7 +269,7 @@ export default function Hero() {
 
         <div className="hero-outer">
 
-          {/* ---- LEFT: Hero Text (both views) ---- */}
+          {/* ---- LEFT: Hero Text ---- */}
           <div className="hero-left">
 
             {/* Trust badge */}
