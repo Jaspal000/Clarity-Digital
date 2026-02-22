@@ -113,7 +113,7 @@ export default function Hero() {
           {/* Tower image */}
           <img src="/eiffel-tower-bg.jpg" alt="" aria-hidden="true" style={{
             position: 'absolute', inset: 0, width: '100%', height: '100%',
-            objectFit: 'contain', objectPosition: 'left top',
+            objectFit: 'cover', objectPosition: 'center top',
             opacity: 0.75, filter: 'saturate(0.8)', zIndex: 0, pointerEvents: 'none',
           }} />
           {/* Blur */}
@@ -208,7 +208,7 @@ function GoogleMockup({ t, headerPaddingTop = 0 }: { t: (key: string) => unknown
       </div>
 
       {/* Scrollable content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '1.1rem 1.25rem', background: 'white' }}>
+      <div style={{ flex: 1, overflow: 'hidden', padding: '1.1rem 1.25rem', background: 'white' }}>
 
         {/* Business name + rating */}
         <div style={{ marginBottom: '1rem' }}>
