@@ -111,7 +111,7 @@ export default function Hero() {
               display: 'flex',
               flexDirection: 'column',
               minHeight: '100vh',
-              paddingTop: 'clamp(90px, 20vh, 180px)',
+              paddingTop: 'clamp(90px, 23vh, 200px)',
               paddingBottom: '5rem',
               justifyContent: 'flex-start',
             }}
@@ -140,7 +140,8 @@ export default function Hero() {
                 [data-hero-right] {
                   flex: 0 0 40%;
                   max-width: 40%;
-                  padding: 1.5rem 4rem 0 1.5rem;
+                  padding: 0 4rem 0 1.5rem;
+                  margin-top: 5rem;
                   box-sizing: border-box;
                   align-self: flex-start;
                   z-index: 10;
