@@ -26,10 +26,9 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       className="relative"
-      style={{ minHeight: '100vh', overflowX: 'hidden', overflowY: 'visible' }}
+      style={{ overflowX: 'hidden' }}
     >
-
-      {/* EIFFEL TOWER — DESKTOP: left-aligned */}
+      {/* EIFFEL TOWER — DESKTOP */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
@@ -48,7 +47,7 @@ export default function Hero() {
         }}
       />
 
-      {/* EIFFEL TOWER — MOBILE: centered */}
+      {/* EIFFEL TOWER — MOBILE: only covers first screen */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
@@ -57,7 +56,8 @@ export default function Hero() {
         style={{
           position: 'absolute',
           top: 0, left: 0,
-          width: '100%', height: '100%',
+          width: '100%',
+          height: '100svh',
           objectFit: 'contain',
           objectPosition: 'center top',
           opacity: 0.75,
@@ -70,7 +70,8 @@ export default function Hero() {
       {/* TOP BLUR */}
       <div
         style={{
-          position: 'absolute', inset: 0,
+          position: 'absolute', top: 0, left: 0, right: 0,
+          height: '100svh',
           backdropFilter: 'blur(4px)',
           WebkitBackdropFilter: 'blur(4px)',
           zIndex: 1,
@@ -80,12 +81,12 @@ export default function Hero() {
         }}
       />
 
-      {/* MOBILE GRADIENT */}
+      {/* MOBILE GRADIENT — light, fades fast */}
       <div
         className="lg:hidden"
         style={{
           position: 'absolute', top: 0, left: 0,
-          width: '100%', height: '100%',
+          width: '100%', height: '100svh',
           background: 'linear-gradient(180deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.45) 15%, rgba(244,241,234,0.2) 30%, rgba(244,241,234,0.05) 55%, transparent 100%)',
           zIndex: 1, pointerEvents: 'none',
         }}
@@ -104,57 +105,51 @@ export default function Hero() {
       {/* GRAIN */}
       <div
         style={{
-          position: 'absolute', inset: 0,
+          position: 'absolute', top: 0, left: 0,
+          width: '100%', height: '100svh',
           opacity: 0.012, zIndex: 1, pointerEvents: 'none',
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%23F4F1EA'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* CONTENT */}
-      <div style={{ position: 'relative', zIndex: 2, height: '100%' }}>
+      {/* =====================================================
+          FIRST SCREEN BLOCK — exactly 100svh tall on mobile.
+          Contains ONLY: badge, headline, subtext, CTA buttons.
+          Google card is OUTSIDE this block entirely.
+          On desktop: becomes the 60/40 flex layout.
+      ===================================================== */}
+      <div
+        style={{ position: 'relative', zIndex: 2 }}
+      >
         <style>{`
 
           /* ============================================
              MOBILE < 1024px
 
-             Key fix: hero-outer is height: 100svh
-             (svh = small viewport height, accounts for
-             mobile browser chrome like address bar).
-             This forces the container to EXACTLY fill
-             the visible screen — no more, no less.
+             .first-screen is EXACTLY 100svh.
+             Nothing can peek below it.
+             Card is rendered AFTER this block in DOM.
 
-             hero-left fills that height via flex: 1.
-             CTA uses margin-top: auto to pin to bottom.
-             Empty beige space is now filled.
+             hero-left fills full height via flex.
+             CTA pinned to bottom via margin-top: auto.
              ============================================ */
           @media (max-width: 1023px) {
-            .hero-outer {
+            .first-screen {
               display: flex;
               flex-direction: column;
-              /*
-                100svh = exact visible screen height
-                on mobile, accounting for browser bars.
-                This is the key — not min-height.
-              */
               height: 100svh;
-              min-height: 100vh; /* fallback for old browsers */
+              min-height: 100vh;
               padding-top: 100px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
-              padding-bottom: 0;
-              box-sizing: border-box;
-            }
-            .hero-left {
-              width: 100%;
-              display: flex;
-              flex-direction: column;
-              flex: 1; /* fills remaining height after padding-top */
               padding-bottom: 2.5rem;
               box-sizing: border-box;
             }
-            .hero-text-group {
+            .hero-left {
               display: flex;
               flex-direction: column;
+              flex: 1;
+              width: 100%;
             }
             .hero-badge {
               margin-bottom: 0.75rem !important;
@@ -169,12 +164,7 @@ export default function Hero() {
               line-height: 1.55 !important;
               margin-bottom: 0 !important;
             }
-            /*
-              margin-top: auto pushes CTA to the very
-              bottom of hero-left which now fills the
-              exact screen height. Empty beige space
-              is fully occupied. Buttons clearly visible.
-            */
+            /* Pinned to bottom — fills empty beige space */
             .hero-cta {
               margin-top: auto !important;
               padding-top: 1.5rem;
@@ -182,33 +172,36 @@ export default function Hero() {
               flex-direction: column !important;
               gap: 0.65rem !important;
             }
+            /* Desktop right column hidden on mobile */
             .hero-right {
               display: none !important;
             }
-            .hero-card-mobile {
+            /* Card block: BELOW the 100svh first-screen */
+            .mobile-card-block {
               display: block;
               width: 100%;
-              margin-top: 3rem;
+              padding: 2rem 1.1rem;
+              box-sizing: border-box;
+              background: #F4F1EA;
             }
-            .hero-card-mobile .google-mockup {
+            .mobile-card-block .google-mockup {
               width: 100%;
               box-sizing: border-box;
               border-radius: 12px;
               overflow: hidden;
               box-shadow: 0 8px 32px rgba(0,0,0,0.12);
             }
-            .hero-card-desktop {
+            .desktop-card-block {
               display: none !important;
             }
           }
 
           /* ============================================
              DESKTOP >= 1024px
-             Card fills full right 40% top to bottom.
-             Text slightly lower via padding-top.
+             Normal 60/40 layout. Card in right column.
              ============================================ */
           @media (min-width: 1024px) {
-            .hero-outer {
+            .first-screen {
               display: flex;
               flex-direction: row;
               align-items: stretch;
@@ -227,10 +220,6 @@ export default function Hero() {
               flex-direction: column;
               justify-content: flex-start;
             }
-            .hero-text-group {
-              display: flex;
-              flex-direction: column;
-            }
             .hero-headline {
               font-size: clamp(2.5rem, 4vw, 3.75rem) !important;
               line-height: 1.15 !important;
@@ -242,6 +231,9 @@ export default function Hero() {
             .hero-cta {
               margin-top: 0 !important;
               padding-top: 0 !important;
+              display: flex !important;
+              flex-direction: row !important;
+              gap: 1rem !important;
             }
             .hero-right {
               flex: 0 0 40%;
@@ -279,10 +271,10 @@ export default function Hero() {
               flex: 1;
               overflow-y: auto;
             }
-            .hero-card-mobile {
+            .mobile-card-block {
               display: none !important;
             }
-            .hero-card-desktop {
+            .desktop-card-block {
               display: flex !important;
               flex-direction: column;
               flex: 1;
@@ -290,44 +282,43 @@ export default function Hero() {
           }
         `}</style>
 
-        <div className="hero-outer">
+        {/* ---- FIRST SCREEN: exactly 100svh on mobile ---- */}
+        <div className="first-screen">
 
-          {/* LEFT: Hero Text */}
+          {/* LEFT: text + CTA */}
           <div className="hero-left">
 
-            <div className="hero-text-group">
-              {/* Trust badge */}
-              <div
-                className={`hero-badge inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
-                <MapPin size={14} className="text-gold" />
-                <span className="text-xs text-charcoal/70 tracking-wide">{t('hero.trustLine')}</span>
-              </div>
-
-              {/* Headline */}
-              <h1
-                className={`hero-headline font-serif text-navy leading-tight mb-5 transition-all duration-700 delay-100 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-              >
-                {t('hero.headline')}
-              </h1>
-
-              {/* Subheadline */}
-              <p
-                className={`hero-subheadline text-charcoal/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-              >
-                {t('hero.subheadline')}
-              </p>
+            {/* Trust badge */}
+            <div
+              className={`hero-badge inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              <MapPin size={14} className="text-gold" />
+              <span className="text-xs text-charcoal/70 tracking-wide">{t('hero.trustLine')}</span>
             </div>
 
-            {/* CTA — margin-top auto pins to bottom */}
+            {/* Headline */}
+            <h1
+              className={`hero-headline font-serif text-navy leading-tight mb-5 transition-all duration-700 delay-100 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              {t('hero.headline')}
+            </h1>
+
+            {/* Subheadline */}
+            <p
+              className={`hero-subheadline text-charcoal/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              {t('hero.subheadline')}
+            </p>
+
+            {/* CTA — pushed to bottom on mobile via margin-top: auto */}
             <div
-              className={`hero-cta flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-300 ${
+              className={`hero-cta flex gap-4 transition-all duration-700 delay-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
             >
@@ -339,15 +330,10 @@ export default function Hero() {
                 Voir les exemples
               </button>
             </div>
-
-            {/* MOBILE ONLY: Google card scrolled to below */}
-            <div className="hero-card-mobile">
-              <GoogleMockup t={t} />
-            </div>
           </div>
 
-          {/* RIGHT: Desktop card — full 40% height */}
-          <div className="hero-right hero-card-desktop">
+          {/* RIGHT: desktop card — 40% column */}
+          <div className="hero-right desktop-card-block">
             <div
               className={`card-wrapper transition-all duration-1000 delay-400 ${
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
@@ -358,6 +344,17 @@ export default function Hero() {
           </div>
 
         </div>
+
+        {/* =====================================================
+            MOBILE CARD BLOCK
+            Completely outside the 100svh first-screen.
+            Structurally impossible to see on first load.
+            User must scroll past the hero to reach it.
+        ===================================================== */}
+        <div className="mobile-card-block">
+          <GoogleMockup t={t} />
+        </div>
+
       </div>
     </section>
   );
