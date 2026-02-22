@@ -145,18 +145,19 @@ export default function Hero() {
                 not floating above it in beige space.
               */
               /*
-                95px pushes badge fully below header
-                so ALL text sits on the tower image.
-                Nothing straddles the image boundary.
+                108px: header is ~88px, badge needs
+                ~20px inside image to sit fully on it.
+                At 120% zoom = 130px visual — badge
+                completely on tower image, nothing above.
               */
-              padding-top: 95px;
+              padding-top: 108px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
               /*
-                4rem bottom: CTA fully visible,
-                no clipping at 120% zoom.
+                3rem bottom: CTA fully visible and
+                balanced — slightly lifted from before.
               */
-              padding-bottom: 4rem;
+              padding-bottom: 3rem;
               box-sizing: border-box;
             }
             .hero-left {
@@ -167,6 +168,8 @@ export default function Hero() {
             }
             .hero-badge {
               margin-bottom: 0.75rem !important;
+              /* desktop: shrink to content width only */
+              align-self: flex-start !important;
             }
             .hero-headline {
               font-size: 2rem !important;
