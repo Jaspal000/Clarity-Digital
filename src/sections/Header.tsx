@@ -55,25 +55,27 @@ export default function Header() {
       </div>
 
       <div className="section-padding relative z-10">
-        {/* Reverted header heights back to original */}
         <div className="flex items-center justify-between h-[78px] lg:h-[92px]">
           
-          {/* Logo Section - Reverted to normal size */}
+          {/* Logo Section - Ultra Pro High Quality & Balanced */}
           <a
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('hero');
             }}
-            className="flex items-center transition-opacity duration-300 hover:opacity-80"
+            className="group flex items-center focus:outline-none"
           >
-            <Logo 
-              variant="header" 
-              color={isScrolled ? "ivory" : "navy"} 
-            />
+            {/* Added transform-gpu, antialiased, drop-shadow, and a subtle 105% scale */}
+            <div className="transform-gpu antialiased scale-[1.05] origin-left transition-all duration-300 ease-out group-hover:scale-[1.08] group-hover:opacity-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.04)]">
+              <Logo 
+                variant="header" 
+                color={isScrolled ? "ivory" : "navy"} 
+              />
+            </div>
           </a>
 
-          {/* Desktop Navigation - Reverted to original text-sm styling */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-12">
             {navItems.map((item) => (
               <a
@@ -96,12 +98,12 @@ export default function Header() {
           {/* Right Side: Language + CTA */}
           <div className="hidden lg:flex items-center gap-8">
             
-            {/* Language Switcher - Ultra Pro High Quality Flags */}
+            {/* Language Switcher - High Quality Flags */}
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setLanguage('fr')}
                 className={`relative overflow-hidden w-6 h-6 rounded-full transition-all duration-300 ring-2 ring-offset-1 ${
-                  isScrolled ? 'ring-offset-navy' : 'ring-offset-[#F4F1EA]' // Matches your hero bg
+                  isScrolled ? 'ring-offset-navy' : 'ring-offset-[#F4F1EA]'
                 } ${
                   language === 'fr' 
                     ? 'ring-gold scale-110 opacity-100' 
@@ -129,7 +131,7 @@ export default function Header() {
               </button>
             </div>
 
-            {/* CTA Button - Reverted to normal size */}
+            {/* CTA Button */}
             <a
               href="#contact"
               onClick={(e) => {
