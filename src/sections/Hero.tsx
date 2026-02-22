@@ -37,10 +37,8 @@ export default function Hero() {
         className="hidden lg:block"
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
+          top: 0, left: 0,
+          width: '100%', height: '100%',
           objectFit: 'contain',
           objectPosition: 'left top',
           opacity: 0.75,
@@ -58,10 +56,8 @@ export default function Hero() {
         className="lg:hidden"
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
+          top: 0, left: 0,
+          width: '100%', height: '100%',
           objectFit: 'contain',
           objectPosition: 'center top',
           opacity: 0.75,
@@ -74,8 +70,7 @@ export default function Hero() {
       {/* TOP BLUR */}
       <div
         style={{
-          position: 'absolute',
-          inset: 0,
+          position: 'absolute', inset: 0,
           backdropFilter: 'blur(4px)',
           WebkitBackdropFilter: 'blur(4px)',
           zIndex: 1,
@@ -85,18 +80,14 @@ export default function Hero() {
         }}
       />
 
-      {/* MOBILE GRADIENT — light, fades fast */}
+      {/* MOBILE GRADIENT */}
       <div
         className="lg:hidden"
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
+          position: 'absolute', top: 0, left: 0,
+          width: '100%', height: '100%',
           background: 'linear-gradient(180deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.45) 15%, rgba(244,241,234,0.2) 30%, rgba(244,241,234,0.05) 55%, transparent 100%)',
-          zIndex: 1,
-          pointerEvents: 'none',
+          zIndex: 1, pointerEvents: 'none',
         }}
       />
 
@@ -104,22 +95,17 @@ export default function Hero() {
       <div
         className="hidden lg:block"
         style={{
-          position: 'absolute',
-          inset: 0,
+          position: 'absolute', inset: 0,
           background: 'linear-gradient(90deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.6) 20%, rgba(244,241,234,0.3) 42%, rgba(244,241,234,0.08) 60%, rgba(244,241,234,0.15) 100%)',
-          zIndex: 1,
-          pointerEvents: 'none',
+          zIndex: 1, pointerEvents: 'none',
         }}
       />
 
       {/* GRAIN */}
       <div
         style={{
-          position: 'absolute',
-          inset: 0,
-          opacity: 0.012,
-          zIndex: 1,
-          pointerEvents: 'none',
+          position: 'absolute', inset: 0,
+          opacity: 0.012, zIndex: 1, pointerEvents: 'none',
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%23F4F1EA'/%3E%3C/svg%3E")`,
         }}
       />
@@ -131,24 +117,40 @@ export default function Hero() {
           /* ============================================
              MOBILE < 1024px
 
-             Hero text sits in upper portion naturally.
-             CTA buttons use position: absolute pinned
-             to bottom of the 100vh section — this
-             guarantees they overlap and fill the empty
-             beige space below the Eiffel Tower image.
+             hero-left is a flex column that fills
+             the full 100vh (minus header padding).
+             
+             hero-text-group sits at the top naturally.
+             
+             hero-cta uses margin-top: auto which
+             pushes it to the very bottom of the
+             flex container — filling the empty space
+             below the Eiffel Tower image.
+             
+             This is reliable, no absolute positioning.
              ============================================ */
           @media (max-width: 1023px) {
             .hero-outer {
-              display: block;
-              position: relative;
+              display: flex;
+              flex-direction: column;
               min-height: 100vh;
               padding-top: 100px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
+              padding-bottom: 0;
               box-sizing: border-box;
             }
             .hero-left {
               width: 100%;
+              display: flex;
+              flex-direction: column;
+              /* fills full remaining height after header */
+              flex: 1;
+              min-height: calc(100vh - 100px);
+              padding-bottom: 2.5rem;
+            }
+            .hero-text-group {
+              /* stays at top */
               display: flex;
               flex-direction: column;
             }
@@ -166,16 +168,13 @@ export default function Hero() {
               margin-bottom: 0 !important;
             }
             /*
-              CTA pinned to bottom of hero section.
-              Overlaps the beige empty space below
-              the Eiffel Tower image — exactly as requested.
-              bottom: 2.5rem keeps it off the very edge.
+              margin-top: auto pushes CTA to bottom.
+              Fills the empty beige space below tower.
+              Fully visible, no clipping, no overflow.
             */
             .hero-cta {
-              position: absolute !important;
-              bottom: 2.5rem !important;
-              left: 1.1rem !important;
-              right: 1.1rem !important;
+              margin-top: auto !important;
+              padding-top: 1.5rem;
               display: flex !important;
               flex-direction: column !important;
               gap: 0.65rem !important;
@@ -203,10 +202,11 @@ export default function Hero() {
           /* ============================================
              DESKTOP >= 1024px
 
-             Hero text: justify-content: flex-start
-             with padding-top on hero-left so text
-             sits in upper portion — NOT centered.
-             This matches the "position before" state.
+             Hero text slightly lower than before:
+             padding-top on hero-left increased to 3rem
+             (was 2.5rem) and justify-content flex-start
+             keeps text in upper area but lower than
+             the "centered" version.
 
              Card: fills full right 40% top to bottom.
              ============================================ */
@@ -225,15 +225,18 @@ export default function Hero() {
               flex: 0 0 60%;
               max-width: 60%;
               /*
-                flex-start + padding-top lifts text
-                to upper portion of hero — not centered.
-                This restores the "before" position.
+                padding-top: 3.5rem pushes text
+                slightly down from header — was 2.5rem.
               */
-              padding: 2.5rem 3rem 3rem 5rem;
+              padding: 3.5rem 3rem 3rem 5rem;
               box-sizing: border-box;
               display: flex;
               flex-direction: column;
               justify-content: flex-start;
+            }
+            .hero-text-group {
+              display: flex;
+              flex-direction: column;
             }
             .hero-headline {
               font-size: clamp(2.5rem, 4vw, 3.75rem) !important;
@@ -244,7 +247,8 @@ export default function Hero() {
               margin-bottom: 2rem !important;
             }
             .hero-cta {
-              position: static !important;
+              margin-top: 0 !important;
+              padding-top: 0 !important;
             }
             /* Card fills full right column height */
             .hero-right {
@@ -258,9 +262,7 @@ export default function Hero() {
               overflow-y: auto;
               overflow-x: hidden;
             }
-            .hero-right::-webkit-scrollbar {
-              width: 4px;
-            }
+            .hero-right::-webkit-scrollbar { width: 4px; }
             .hero-right::-webkit-scrollbar-thumb {
               background: rgba(0,0,0,0.15);
               border-radius: 2px;
@@ -301,35 +303,38 @@ export default function Hero() {
           {/* LEFT: Hero Text */}
           <div className="hero-left">
 
-            {/* Trust badge */}
-            <div
-              className={`hero-badge inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-            >
-              <MapPin size={14} className="text-gold" />
-              <span className="text-xs text-charcoal/70 tracking-wide">{t('hero.trustLine')}</span>
+            {/* Text group — stays at top */}
+            <div className="hero-text-group">
+              {/* Trust badge */}
+              <div
+                className={`hero-badge inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                <MapPin size={14} className="text-gold" />
+                <span className="text-xs text-charcoal/70 tracking-wide">{t('hero.trustLine')}</span>
+              </div>
+
+              {/* Headline */}
+              <h1
+                className={`hero-headline font-serif text-navy leading-tight mb-5 transition-all duration-700 delay-100 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
+              >
+                {t('hero.headline')}
+              </h1>
+
+              {/* Subheadline */}
+              <p
+                className={`hero-subheadline text-charcoal/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
+              >
+                {t('hero.subheadline')}
+              </p>
             </div>
 
-            {/* Headline */}
-            <h1
-              className={`hero-headline font-serif text-navy leading-tight mb-5 transition-all duration-700 delay-100 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-            >
-              {t('hero.headline')}
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              className={`hero-subheadline text-charcoal/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-            >
-              {t('hero.subheadline')}
-            </p>
-
-            {/* CTA — pinned to bottom on mobile, normal flow on desktop */}
+            {/* CTA — pushed to bottom on mobile via margin-top: auto */}
             <div
               className={`hero-cta flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
@@ -373,7 +378,6 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
     <div className="animate-float" style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100%' }}>
       <div className="google-mockup w-full" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
 
-        {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 flex items-center gap-3 flex-shrink-0">
           <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
             <span className="text-blue-600 font-bold text-sm">G</span>
@@ -381,9 +385,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
           <span className="text-white text-sm font-medium truncate">Google Business Profile</span>
         </div>
 
-        {/* Content */}
         <div className="p-4 sm:p-5 bg-white flex-1 overflow-y-auto">
-
           <div className="mb-4">
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 break-words">
               {t('googleMockup.businessName') as string}
@@ -402,15 +404,9 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
           </div>
 
           <div className="flex gap-2 mb-5">
-            <button className="flex-1 bg-blue-600 text-white text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-blue-700 transition-colors min-w-0 truncate">
-              Itinéraire
-            </button>
-            <button className="flex-1 bg-gray-100 text-gray-700 text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-gray-200 transition-colors min-w-0 truncate">
-              Enregistrer
-            </button>
-            <button className="flex-1 bg-gray-100 text-gray-700 text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-gray-200 transition-colors min-w-0 truncate">
-              Site web
-            </button>
+            <button className="flex-1 bg-blue-600 text-white text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-blue-700 transition-colors min-w-0 truncate">Itinéraire</button>
+            <button className="flex-1 bg-gray-100 text-gray-700 text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-gray-200 transition-colors min-w-0 truncate">Enregistrer</button>
+            <button className="flex-1 bg-gray-100 text-gray-700 text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-gray-200 transition-colors min-w-0 truncate">Site web</button>
           </div>
 
           <div className="space-y-3 mb-5">
@@ -439,9 +435,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
 
           <div className="border-t pt-4">
             <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-xs font-medium flex-shrink-0">
-                ML
-              </div>
+              <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-xs font-medium flex-shrink-0">ML</div>
               <div className="min-w-0">
                 <p className="text-sm font-medium text-gray-900">Marie L.</p>
                 <div className="flex gap-0.5">
@@ -452,9 +446,7 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
               </div>
               <span className="text-xs text-gray-400 ml-auto flex-shrink-0 whitespace-nowrap">il y a 2 sem.</span>
             </div>
-            <p className="text-sm text-gray-600 italic break-words">
-              {t('googleMockup.reviewPreview') as string}
-            </p>
+            <p className="text-sm text-gray-600 italic break-words">{t('googleMockup.reviewPreview') as string}</p>
           </div>
 
           <div className="border-t pt-4 mt-4">
