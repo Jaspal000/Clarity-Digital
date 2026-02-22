@@ -103,13 +103,58 @@ export default function Hero() {
 
       {/* ====== LAYER 5: CONTENT — always above tower ====== */}
       <div className="relative" style={{ zIndex: 2 }}>
-        <div className="section-padding">
-          {/* Mobile: pt-[90px] clears header (78px + 12px gap). Desktop: uses CSS Grid for strict 60/40 split */}
-          <div className="min-h-screen flex items-start pt-[90px]">
-            <div className="hero-grid items-start w-full pb-12">
+        <div className="section-padding lg:!px-0">
+          {/* Mobile: pt-[90px] clears header (78px + 12px gap). Desktop: flex row for 60/40 split */}
+          <div 
+            className="pt-[90px] pb-12 w-full"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '100vh',
+            }}
+          >
+            {/* Desktop only: switch to row layout */}
+            <style>{`
+              @media (min-width: 1024px) {
+                [data-hero-wrapper] {
+                  display: flex !important;
+                  flex-direction: row !important;
+                  align-items: flex-start !important;
+                  width: 100vw !important;
+                  position: relative !important;
+                  left: 50% !important;
+                  right: 50% !important;
+                  margin-left: -50vw !important;
+                  margin-right: -50vw !important;
+                  padding: 0 !important;
+                }
+                [data-hero-left] {
+                  flex: 0 0 60%;
+                  max-width: 60%;
+                  padding: 0 4rem;
+                }
+                [data-hero-right] {
+                  flex: 0 0 40%;
+                  max-width: 40%;
+                  padding: 1.5rem 4rem 0 1.5rem;
+                  box-sizing: border-box;
+                  align-self: flex-start;
+                  z-index: 10;
+                  position: relative;
+                }
+              }
+            `}</style>
+            <div 
+              className="hero-grid items-start w-full"
+              data-hero-wrapper
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
 
               {/* ---- Left: Text Content — 60% on desktop ---- */}
-              <div className="max-w-xl">
+              <div className="max-w-xl" data-hero-left>
                 {/* Trust badge */}
                 <div
                   className={`inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
@@ -160,6 +205,7 @@ export default function Hero() {
                 className={`hero-card-column relative transition-all duration-1000 delay-400 lg:mt-0 ${
                   isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
                 }`}
+                data-hero-right
                 style={{ zIndex: 5 }}
               >
                 <div className="animate-float">

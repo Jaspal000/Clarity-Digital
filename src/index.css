@@ -357,18 +357,6 @@ html, body {
     width: 100%;
   }
 
-  /* Desktop: CSS Grid 60/40 split with card positioned in right column */
-  @media (min-width: 1024px) {
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 0;
-      align-items: start;
-      position: relative;
-      width: 100%;
-    }
-  }
-
   /* Card column styling */
   @media (max-width: 1023px) {
     .hero-card-column {
@@ -381,13 +369,10 @@ html, body {
   @media (min-width: 1024px) {
     .hero-card-column {
       width: 100%;
-      padding: 1.5rem 1.5rem 0 1.5rem;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      z-index: 10;
-      align-self: start;
     }
 
     .hero-card-column .google-mockup {
