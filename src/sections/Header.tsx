@@ -36,7 +36,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-navy/90 backdrop-blur-sm border-b border-gold/10'
+          ? 'bg-white/90 backdrop-blur-sm border-b border-gold/10' // Changed bg to white so black text is visible
           : 'bg-transparent'
       }`}
     >
@@ -53,7 +53,7 @@ export default function Header() {
           >
             <Logo 
               variant="header" 
-              color={isScrolled ? 'ivory' : 'navy'}
+              color={isScrolled ? 'navy' : 'navy'} // Keep logo dark
             />
           </a>
 
@@ -67,13 +67,11 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${
-                  isScrolled
-                    ? 'text-ivory/70 hover:text-ivory'
-                    : 'text-charcoal/70 hover:text-charcoal'
-                }`}
+                /* Added 'group' for hover effect and 'text-black' for color */
+                className="group relative text-sm font-medium tracking-wide transition-colors duration-300 text-black"
               >
                 {item.label}
+                {/* This span creates the gold underline hover effect */}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
@@ -85,21 +83,21 @@ export default function Header() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setLanguage('fr')}
-                className={`text-sm transition-all duration-300 ${
+                className={`text-sm transition-all duration-300 font-medium ${
                   language === 'fr' 
-                    ? (isScrolled ? 'text-ivory border-b border-gold pb-0.5' : 'text-navy border-b border-gold pb-0.5')
-                    : (isScrolled ? 'text-ivory/50 hover:text-ivory/80' : 'text-charcoal/50 hover:text-charcoal/80')
+                    ? 'text-black border-b border-gold pb-0.5' 
+                    : 'text-black/50 hover:text-black'
                 }`}
               >
                 FR
               </button>
-              <span className={`text-sm ${isScrolled ? 'text-ivory/30' : 'text-charcoal/30'}`}>|</span>
+              <span className="text-black/30 text-sm">|</span>
               <button
                 onClick={() => setLanguage('en')}
-                className={`text-sm transition-all duration-300 ${
+                className={`text-sm transition-all duration-300 font-medium ${
                   language === 'en' 
-                    ? (isScrolled ? 'text-ivory border-b border-gold pb-0.5' : 'text-navy border-b border-gold pb-0.5')
-                    : (isScrolled ? 'text-ivory/50 hover:text-ivory/80' : 'text-charcoal/50 hover:text-charcoal/80')
+                    ? 'text-black border-b border-gold pb-0.5' 
+                    : 'text-black/50 hover:text-black'
                 }`}
               >
                 EN
@@ -113,11 +111,7 @@ export default function Header() {
                 e.preventDefault();
                 scrollToSection('contact');
               }}
-              className={`text-sm font-semibold uppercase tracking-wide px-7 py-3 rounded transition-all duration-300 ${
-                isScrolled
-                  ? 'bg-navy text-ivory border border-gold/30 hover:bg-navy-light hover:border-gold/50'
-                  : 'bg-navy text-ivory border border-gold/30 hover:bg-navy-light hover:border-gold/50'
-              }`}
+              className="text-sm font-semibold uppercase tracking-wide px-7 py-3 rounded transition-all duration-300 bg-navy text-white hover:bg-navy/90"
             >
               {t('nav.cta')}
             </a>
@@ -126,9 +120,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden p-2 transition-colors duration-300 ${
-              isScrolled ? 'text-ivory' : 'text-navy'
-            }`}
+            className="lg:hidden p-2 transition-colors duration-300 text-black"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -137,7 +129,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden absolute top-full left-0 right-0 bg-navy transition-all duration-300 ${
+        className={`lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 transition-all duration-300 ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
@@ -151,7 +143,7 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className="text-ivory/80 hover:text-ivory text-lg font-medium transition-colors"
+                className="text-black hover:text-gold text-lg font-medium transition-colors"
               >
                 {item.label}
               </a>
@@ -159,42 +151,23 @@ export default function Header() {
           </nav>
 
           {/* Mobile Language Switcher */}
-          <div className="flex items-center gap-4 mt-8 pt-6 border-t border-ivory/10">
+          <div className="flex items-center gap-4 mt-8 pt-6 border-t border-gray-100">
             <button
               onClick={() => setLanguage('fr')}
-              className={`text-base font-semibold tracking-widest ${language === 'fr' ? 'text-ivory border-b-2 border-gold pb-0.5' : 'text-ivory/50'}`}
+              className={`text-base font-semibold tracking-widest ${language === 'fr' ? 'text-black border-b-2 border-gold pb-0.5' : 'text-black/40'}`}
             >
               FR
             </button>
-            <span className="text-ivory/30 text-base">|</span>
+            <span className="text-black/20 text-base">|</span>
             <button
               onClick={() => setLanguage('en')}
-              className={`text-base font-semibold tracking-widest ${language === 'en' ? 'text-ivory border-b-2 border-gold pb-0.5' : 'text-ivory/50'}`}
+              className={`text-base font-semibold tracking-widest ${language === 'en' ? 'text-black border-b-2 border-gold pb-0.5' : 'text-black/40'}`}
             >
               EN
             </button>
           </div>
-
-          {/* Mobile CTA */}
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('contact');
-            }}
-            className="inline-block mt-6 bg-gold text-navy text-sm font-medium uppercase tracking-widest px-8 py-4"
-          >
-            {t('nav.cta')}
-          </a>
         </div>
       </div>
-
-      {/* Content Transition Overlay */}
-      <div
-        className={`fixed inset-0 bg-ivory z-40 pointer-events-none transition-opacity duration-300 ${
-          isTransitioning ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
     </header>
   );
 }
