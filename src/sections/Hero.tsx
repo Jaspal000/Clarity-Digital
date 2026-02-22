@@ -139,10 +139,19 @@ export default function Hero() {
               flex-direction: column;
               height: 100svh;
               min-height: 100vh;
-              padding-top: 100px;
+              /*
+                80px: badge now aligns with top edge
+                of tower image — sits ON the image
+                not floating above it in beige space.
+              */
+              padding-top: 80px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
-              padding-bottom: 2.5rem;
+              /*
+                4rem bottom: CTA fully visible,
+                no clipping at 120% zoom.
+              */
+              padding-bottom: 4rem;
               box-sizing: border-box;
             }
             .hero-left {
