@@ -347,4 +347,41 @@ html, body {
     max-width: 100%;
     overflow-x: hidden;
   }
+
+  /* ===== HERO GRID LAYOUT ===== */
+  /* Mobile: single column stack, card below text */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  /* Desktop: strict 60/40 split (3fr / 2fr) */
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 3fr 2fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+  }
+
+  /* Card column on desktop: 100% width with side padding (24px = 1.5rem) */
+  @media (max-width: 1023px) {
+    .hero-card-column {
+      padding: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-card-column {
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .hero-card-column .google-mockup {
+      width: 100%;
+    }
+  }
 }
