@@ -29,17 +29,42 @@ export default function Hero() {
       style={{ minHeight: '100vh', overflowX: 'hidden', overflowY: 'visible' }}
     >
 
-      {/* ====== EIFFEL TOWER BACKGROUND ======
-          KEY: object-contain so tower is never cropped.
-          Centered horizontally, anchored to top.
-          On mobile: takes full viewport height so tower
-          fills entire background on first glance.
-          On desktop: same — full height, centered.
-      ====== */}
+      {/* ======================================================
+          EIFFEL TOWER — DESKTOP
+          Left-aligned so tower fills the left 60% column
+          behind hero text. objectFit: contain = never cropped.
+      ====================================================== */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
+        className="hidden lg:block"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain',
+          objectPosition: 'left top',
+          opacity: 0.75,
+          filter: 'saturate(0.8)',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* ======================================================
+          EIFFEL TOWER — MOBILE
+          Centered so full tower is visible as background.
+          objectFit: contain = full tower always visible,
+          never cropped top or bottom.
+      ====================================================== */}
+      <img
+        src="/eiffel-tower-bg.jpg"
+        alt=""
+        aria-hidden="true"
+        className="lg:hidden"
         style={{
           position: 'absolute',
           top: 0,
@@ -55,7 +80,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ====== TOP BLUR — hides tower behind header only ====== */}
+      {/* ====== TOP BLUR — softens very top behind header ====== */}
       <div
         style={{
           position: 'absolute',
@@ -69,11 +94,14 @@ export default function Hero() {
         }}
       />
 
-      {/* ====== MOBILE GRADIENT OVERLAY ======
-          Light ivory wash at the very top so text
-          is readable, fades out quickly so tower
-          shows clearly through the rest of the hero.
-      ====== */}
+      {/* ======================================================
+          MOBILE GRADIENT OVERLAY
+          Very light and fast-fading so Eiffel Tower is
+          maximally visible as a native background.
+          Only the very top gets a wash for text readability.
+          Below 55% of the hero = fully transparent = tower
+          shows at full natural opacity.
+      ====================================================== */}
       <div
         className="lg:hidden"
         style={{
@@ -82,22 +110,24 @@ export default function Hero() {
           left: 0,
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(180deg, rgba(244,241,234,0.88) 0%, rgba(244,241,234,0.7) 25%, rgba(244,241,234,0.35) 50%, rgba(244,241,234,0.1) 75%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.45) 15%, rgba(244,241,234,0.2) 30%, rgba(244,241,234,0.05) 55%, transparent 100%)',
           zIndex: 1,
           pointerEvents: 'none',
         }}
       />
 
-      {/* ====== DESKTOP GRADIENT OVERLAY ======
-          Left side more opaque for text readability.
-          Right side very transparent so tower shows.
-      ====== */}
+      {/* ======================================================
+          DESKTOP GRADIENT OVERLAY
+          Strong on far left edge for text readability.
+          Fades toward center so tower shows through left col.
+          Very transparent on right — card area stays clean.
+      ====================================================== */}
       <div
         className="hidden lg:block"
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(90deg, rgba(244,241,234,0.88) 0%, rgba(244,241,234,0.7) 25%, rgba(244,241,234,0.4) 45%, rgba(244,241,234,0.15) 65%, rgba(244,241,234,0.05) 100%)',
+          background: 'linear-gradient(90deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.6) 20%, rgba(244,241,234,0.3) 42%, rgba(244,241,234,0.08) 60%, rgba(244,241,234,0.15) 100%)',
           zIndex: 1,
           pointerEvents: 'none',
         }}
@@ -121,15 +151,15 @@ export default function Hero() {
 
           /* ============================================
              MOBILE < 1024px
-             120% zoom: CSS values × 1.2 = visual size
-             
-             Goal on first glance:
-             ✓ Eiffel Tower filling background
+             120% zoom: CSS × 1.2 = visual size
+
+             First glance shows ONLY:
+             ✓ Full Eiffel Tower visible as background
              ✓ Badge with healthy gap below header
              ✓ Large serif headline (3 lines)
              ✓ Subtext paragraph
              ✓ Both CTA buttons fully visible
-             ✗ Google card hidden below fold
+             ✗ Google card — 10rem below CTA = invisible
              ============================================ */
           @media (max-width: 1023px) {
             .hero-outer {
@@ -157,7 +187,7 @@ export default function Hero() {
               margin-bottom: 0.75rem !important;
             }
             .hero-subheadline {
-              /* 0.875rem CSS = 1.05rem visual */
+              /* 0.875rem CSS = 1.05rem visual at 120% zoom */
               font-size: 0.875rem !important;
               line-height: 1.55 !important;
               margin-bottom: 1rem !important;
@@ -171,15 +201,15 @@ export default function Hero() {
             .hero-right {
               display: none !important;
             }
-            /* 
-              Mobile card: pushed far below fold.
-              margin-top: 5rem = 6rem visual at 120%.
-              Guarantees card is NOT visible on first glance.
+            /*
+              10rem margin = 12rem visual at 120% zoom.
+              Card is completely invisible on first load.
+              User must scroll down to see it.
             */
             .hero-card-mobile {
               display: block;
               width: 100%;
-              margin-top: 5rem;
+              margin-top: 10rem;
             }
             .hero-card-mobile .google-mockup {
               width: 100%;
@@ -195,9 +225,9 @@ export default function Hero() {
 
           /* ============================================
              DESKTOP >= 1024px
-             Normal zoom — clean 60/40 split
-             Eiffel Tower visible behind left column
-             Google card fully visible on right column
+             Tower left-aligned — fills left 60% column.
+             Google card in right 40% — fully visible.
+             Clean layout, no negative margin tricks.
              ============================================ */
           @media (min-width: 1024px) {
             .hero-outer {
@@ -311,7 +341,7 @@ export default function Hero() {
               </button>
             </div>
 
-            {/* MOBILE ONLY: Google card — pushed 5rem below CTA */}
+            {/* MOBILE ONLY: Google card — 10rem below CTA, hidden on first glance */}
             <div className="hero-card-mobile">
               <GoogleMockup t={t} />
             </div>
@@ -336,8 +366,8 @@ export default function Hero() {
 
 /* ==============================
    Shared Google Business Mockup
-   Used once on mobile (below CTA)
-   Used once on desktop (right col)
+   Used on mobile (below CTA)
+   Used on desktop (right column)
    ============================== */
 function GoogleMockup({ t }: { t: (key: string) => unknown }) {
   return (
