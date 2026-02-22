@@ -29,10 +29,7 @@ export default function Hero() {
       style={{ minHeight: '100vh', overflowX: 'hidden', overflowY: 'visible' }}
     >
 
-      {/* ======================================================
-          EIFFEL TOWER — DESKTOP
-          Left-aligned, fills left 60% behind hero text.
-      ====================================================== */}
+      {/* EIFFEL TOWER — DESKTOP: left-aligned */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
@@ -53,10 +50,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ======================================================
-          EIFFEL TOWER — MOBILE
-          Centered, full tower visible as native background.
-      ====================================================== */}
+      {/* EIFFEL TOWER — MOBILE: centered */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
@@ -77,7 +71,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ====== TOP BLUR ====== */}
+      {/* TOP BLUR */}
       <div
         style={{
           position: 'absolute',
@@ -91,7 +85,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ====== MOBILE GRADIENT — light, fades fast for max tower visibility ====== */}
+      {/* MOBILE GRADIENT — light, fades fast */}
       <div
         className="lg:hidden"
         style={{
@@ -106,7 +100,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ====== DESKTOP GRADIENT ====== */}
+      {/* DESKTOP GRADIENT */}
       <div
         className="hidden lg:block"
         style={{
@@ -118,7 +112,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ====== GRAIN ====== */}
+      {/* GRAIN */}
       <div
         style={{
           position: 'absolute',
@@ -130,48 +124,31 @@ export default function Hero() {
         }}
       />
 
-      {/* ====== CONTENT ====== */}
+      {/* CONTENT */}
       <div style={{ position: 'relative', zIndex: 2 }}>
         <style>{`
 
           /* ============================================
-             MOBILE < 1024px — 120% zoom accounted for
+             MOBILE < 1024px
 
-             Changes vs before:
-             - padding-top increased: pushes hero text
-               slightly lower for balanced layout
-             - justify-content: space-between pushes
-               CTA buttons toward bottom of viewport
-               filling the empty space under tower
-             - min-height: 100vh on hero-left so content
-               spreads across full screen height
+             Hero text sits in upper portion naturally.
+             CTA buttons use position: absolute pinned
+             to bottom of the 100vh section — this
+             guarantees they overlap and fill the empty
+             beige space below the Eiffel Tower image.
              ============================================ */
           @media (max-width: 1023px) {
             .hero-outer {
-              display: flex;
-              flex-direction: column;
+              display: block;
+              position: relative;
               min-height: 100vh;
               padding-top: 100px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
-              padding-bottom: 0;
               box-sizing: border-box;
             }
             .hero-left {
               width: 100%;
-              display: flex;
-              flex-direction: column;
-              /*
-                space-between spreads content across
-                full height — badge+headline+subtext
-                at top, CTA buttons pushed toward
-                bottom — fills empty space under tower
-              */
-              justify-content: space-between;
-              min-height: calc(100vh - 100px);
-              padding-bottom: 2.5rem;
-            }
-            .hero-text-group {
               display: flex;
               flex-direction: column;
             }
@@ -188,11 +165,20 @@ export default function Hero() {
               line-height: 1.55 !important;
               margin-bottom: 0 !important;
             }
+            /*
+              CTA pinned to bottom of hero section.
+              Overlaps the beige empty space below
+              the Eiffel Tower image — exactly as requested.
+              bottom: 2.5rem keeps it off the very edge.
+            */
             .hero-cta {
+              position: absolute !important;
+              bottom: 2.5rem !important;
+              left: 1.1rem !important;
+              right: 1.1rem !important;
               display: flex !important;
               flex-direction: column !important;
               gap: 0.65rem !important;
-              /* CTA naturally pushed to bottom by space-between */
             }
             .hero-right {
               display: none !important;
@@ -217,14 +203,12 @@ export default function Hero() {
           /* ============================================
              DESKTOP >= 1024px
 
-             Card changes:
-             - No padding on right column — card fills
-               full 40% width edge to edge
-             - position: absolute fills full height
-               from header bottom to hero bottom
-             - Card stretches top to bottom of hero
-             - Lifted close to header with 1rem gap
-             - No overlap with header (top = 88px)
+             Hero text: justify-content: flex-start
+             with padding-top on hero-left so text
+             sits in upper portion — NOT centered.
+             This matches the "position before" state.
+
+             Card: fills full right 40% top to bottom.
              ============================================ */
           @media (min-width: 1024px) {
             .hero-outer {
@@ -236,20 +220,20 @@ export default function Hero() {
               padding-top: 88px;
               padding-bottom: 0;
               box-sizing: border-box;
-              position: relative;
             }
             .hero-left {
               flex: 0 0 60%;
               max-width: 60%;
-              padding: 3rem 3rem 3rem 5rem;
+              /*
+                flex-start + padding-top lifts text
+                to upper portion of hero — not centered.
+                This restores the "before" position.
+              */
+              padding: 2.5rem 3rem 3rem 5rem;
               box-sizing: border-box;
               display: flex;
               flex-direction: column;
-              justify-content: center;
-            }
-            .hero-text-group {
-              display: flex;
-              flex-direction: column;
+              justify-content: flex-start;
             }
             .hero-headline {
               font-size: clamp(2.5rem, 4vw, 3.75rem) !important;
@@ -259,11 +243,10 @@ export default function Hero() {
               font-size: 1.1rem !important;
               margin-bottom: 2rem !important;
             }
-            /*
-              Right column: stretches full height of hero.
-              No padding so card fills wall to wall.
-              Card lifts right to 1rem below header.
-            */
+            .hero-cta {
+              position: static !important;
+            }
+            /* Card fills full right column height */
             .hero-right {
               flex: 0 0 40%;
               max-width: 40%;
@@ -282,11 +265,6 @@ export default function Hero() {
               background: rgba(0,0,0,0.15);
               border-radius: 2px;
             }
-            /*
-              Card fills full right column —
-              grows to match parent height.
-              Left border radius only (right edge = screen edge).
-            */
             .hero-right .card-wrapper {
               flex: 1;
               display: flex;
@@ -320,40 +298,38 @@ export default function Hero() {
 
         <div className="hero-outer">
 
-          {/* ---- LEFT: Hero Text ---- */}
+          {/* LEFT: Hero Text */}
           <div className="hero-left">
-            <div className="hero-text-group">
 
-              {/* Trust badge */}
-              <div
-                className={`hero-badge inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
-                <MapPin size={14} className="text-gold" />
-                <span className="text-xs text-charcoal/70 tracking-wide">{t('hero.trustLine')}</span>
-              </div>
-
-              {/* Headline */}
-              <h1
-                className={`hero-headline font-serif text-navy leading-tight mb-5 transition-all duration-700 delay-100 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-              >
-                {t('hero.headline')}
-              </h1>
-
-              {/* Subheadline */}
-              <p
-                className={`hero-subheadline text-charcoal/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-              >
-                {t('hero.subheadline')}
-              </p>
+            {/* Trust badge */}
+            <div
+              className={`hero-badge inline-flex items-center gap-2 px-4 py-2 bg-navy/5 rounded-full mb-6 transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              <MapPin size={14} className="text-gold" />
+              <span className="text-xs text-charcoal/70 tracking-wide">{t('hero.trustLine')}</span>
             </div>
 
-            {/* CTA Buttons — pushed to bottom on mobile via space-between */}
+            {/* Headline */}
+            <h1
+              className={`hero-headline font-serif text-navy leading-tight mb-5 transition-all duration-700 delay-100 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              {t('hero.headline')}
+            </h1>
+
+            {/* Subheadline */}
+            <p
+              className={`hero-subheadline text-charcoal/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              {t('hero.subheadline')}
+            </p>
+
+            {/* CTA — pinned to bottom on mobile, normal flow on desktop */}
             <div
               className={`hero-cta flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
@@ -374,7 +350,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ---- RIGHT: Desktop card fills full 40% height ---- */}
+          {/* RIGHT: Desktop card — fills full 40% */}
           <div className="hero-right hero-card-desktop">
             <div
               className={`card-wrapper transition-all duration-1000 delay-400 ${
@@ -391,9 +367,7 @@ export default function Hero() {
   );
 }
 
-/* ==============================
-   Shared Google Business Mockup
-   ============================== */
+/* Shared Google Mockup */
 function GoogleMockup({ t }: { t: (key: string) => unknown }) {
   return (
     <div className="animate-float" style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100%' }}>
@@ -410,7 +384,6 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
         {/* Content */}
         <div className="p-4 sm:p-5 bg-white flex-1 overflow-y-auto">
 
-          {/* Business Name & Rating */}
           <div className="mb-4">
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 break-words">
               {t('googleMockup.businessName') as string}
@@ -428,7 +401,6 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             <p className="text-sm text-gray-600">{t('googleMockup.category') as string}</p>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex gap-2 mb-5">
             <button className="flex-1 bg-blue-600 text-white text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-blue-700 transition-colors min-w-0 truncate">
               Itinéraire
@@ -441,7 +413,6 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             </button>
           </div>
 
-          {/* Info */}
           <div className="space-y-3 mb-5">
             <div className="flex items-start gap-3">
               <MapPin size={18} className="text-gray-400 mt-0.5 flex-shrink-0" />
@@ -460,14 +431,12 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             </div>
           </div>
 
-          {/* Description */}
           <div className="border-t pt-4 mb-4">
             <p className="text-sm text-gray-700 leading-relaxed break-words">
               {t('googleMockup.description') as string}
             </p>
           </div>
 
-          {/* Review */}
           <div className="border-t pt-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-xs font-medium flex-shrink-0">
@@ -488,7 +457,6 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
             </p>
           </div>
 
-          {/* Post */}
           <div className="border-t pt-4 mt-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-6 h-6 bg-gray-200 rounded flex items-center justify-center flex-shrink-0">
@@ -502,7 +470,6 @@ function GoogleMockup({ t }: { t: (key: string) => unknown }) {
         </div>
       </div>
 
-      {/* Half star */}
       <svg width="0" height="0" className="absolute">
         <defs>
           <linearGradient id="half-star" x1="0%" y1="0%" x2="100%" y2="0%">
