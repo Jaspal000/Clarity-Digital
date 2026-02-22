@@ -319,7 +319,7 @@ export default function Hero() {
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
               }`}
             >
-              <GoogleMockup t={t} isVisible={isVisible} />
+              <GoogleMockup t={t} />
             </div>
           </div>
 
@@ -330,7 +330,7 @@ export default function Hero() {
 }
 
 /* ---- Shared Google Mockup ---- */
-function GoogleMockup({ t, isVisible }: { t: (key: string) => unknown; isVisible: boolean }) {
+function GoogleMockup({ t }: { t: (key: string) => unknown }) {
   return (
     <div className="animate-float">
       <div className="google-mockup w-full">
