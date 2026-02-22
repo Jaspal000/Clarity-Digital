@@ -308,7 +308,7 @@ export default function Hero() {
 
             {/* MOBILE ONLY: Card below CTA */}
             <div className="hero-card-mobile">
-              <GoogleMockup t={t} isVisible={isVisible} />
+              <GoogleMockup t={t} />
             </div>
           </div>
 
