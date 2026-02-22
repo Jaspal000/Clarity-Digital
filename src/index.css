@@ -356,32 +356,39 @@ html, body {
     gap: 2rem;
   }
 
-  /* Desktop: strict 60/40 split (3fr / 2fr) */
+  /* Desktop: Layout container with left text and right card that can overlap */
   @media (min-width: 1024px) {
     .hero-grid {
-      grid-template-columns: 3fr 2fr;
-      gap: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
       align-items: start;
+      position: relative;
     }
   }
 
-  /* Card column on desktop: 100% width with side padding (24px = 1.5rem) */
+  /* Card column styling */
   @media (max-width: 1023px) {
     .hero-card-column {
       padding: 0;
+      margin-top: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .hero-card-column {
-      padding: 0 1.5rem;
+      padding: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      /* Negative margin to allow card to overlap left side */
+      margin-left: -15%;
+      z-index: 10;
     }
 
     .hero-card-column .google-mockup {
       width: 100%;
+      max-width: 100%;
     }
   }
 }
