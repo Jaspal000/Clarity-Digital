@@ -131,7 +131,13 @@ export default function Hero() {
               padding-top: 115px;
               padding-left: 1.1rem;
               padding-right: 1.1rem;
-              padding-bottom: 2.5rem;
+              /*
+                5rem bottom = 6rem visual at 120% zoom.
+                Both buttons fully visible, balanced gap
+                from bottom of screen. Was 2.5rem which
+                was clipping the second button.
+              */
+              padding-bottom: 5rem;
               box-sizing: border-box;
             }
             .hero-left {
