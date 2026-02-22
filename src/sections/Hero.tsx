@@ -39,7 +39,7 @@ export default function Hero() {
         <img src="/eiffel-tower-bg.jpg" alt="" aria-hidden="true" style={{
           position: 'absolute', inset: 0, width: '100%', height: '100%',
           objectFit: 'contain', objectPosition: 'center top',
-          opacity: 0.75, filter: 'saturate(0.8)', zIndex: 0, pointerEvents: 'none',
+          opacity: 0.4, filter: 'saturate(0.8)', zIndex: 0, pointerEvents: 'none',
         }} />
         <div style={{
           position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
@@ -49,7 +49,7 @@ export default function Hero() {
         }} />
         <div style={{
           position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-          background: 'linear-gradient(180deg,rgba(244,241,234,0.82) 0%,rgba(244,241,234,0.45) 15%,rgba(244,241,234,0.2) 30%,rgba(244,241,234,0.05) 55%,transparent 100%)',
+          background: 'linear-gradient(180deg,rgba(244,241,234,0.92) 0%,rgba(244,241,234,0.7) 15%,rgba(244,241,234,0.45) 35%,rgba(244,241,234,0.15) 60%,transparent 100%)',
         }} />
         <div style={{
           position: 'relative', zIndex: 2, flex: 1, height: '100%',
@@ -114,7 +114,7 @@ export default function Hero() {
           <img src="/eiffel-tower-bg.jpg" alt="" aria-hidden="true" style={{
             position: 'absolute', inset: 0, width: '100%', height: '100%',
             objectFit: 'cover', objectPosition: 'center top',
-            opacity: 0.75, filter: 'saturate(0.8)', zIndex: 0, pointerEvents: 'none',
+            opacity: 0.4, filter: 'saturate(0.8)', zIndex: 0, pointerEvents: 'none',
           }} />
           {/* Blur */}
           <div style={{
@@ -126,7 +126,7 @@ export default function Hero() {
           {/* Gradient */}
           <div style={{
             position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-            background: 'linear-gradient(90deg,rgba(244,241,234,0.88) 0%,rgba(244,241,234,0.65) 25%,rgba(244,241,234,0.3) 55%,rgba(244,241,234,0.05) 85%,transparent 100%)',
+            background: 'linear-gradient(90deg,rgba(244,241,234,0.96) 0%,rgba(244,241,234,0.82) 25%,rgba(244,241,234,0.5) 55%,rgba(244,241,234,0.1) 85%,transparent 100%)',
           }} />
           {/* Hero text — vertically centered in space below header */}
           <div style={{
