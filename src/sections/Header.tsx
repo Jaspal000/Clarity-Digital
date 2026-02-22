@@ -4,7 +4,6 @@ import { Menu, X } from 'lucide-react';
 import Logo from '@/components/Logo';
 
 export default function Header() {
-  // Removed isTransitioning to fix TS6133 error
   const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -35,31 +34,47 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${
         isScrolled
-          ? 'bg-white/90 backdrop-blur-sm border-b border-gold/10'
+          ? 'bg-navy border-b border-gold/25 shadow-lg'
           : 'bg-transparent'
       }`}
     >
-      <div className="section-padding">
-        <div className="flex items-center justify-between h-[78px] lg:h-[92px]">
-          {/* Logo */}
+      {/* Texture Background (Matches Footer, only visible when scrolled) */}
+      <div 
+        className={`absolute inset-0 transition-opacity duration-700 pointer-events-none ${
+          isScrolled ? 'opacity-[0.02]' : 'opacity-0'
+        }`}
+      >
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23F4F1EA' fill-opacity='0.5'%3E%3Cpath d='M0 0h30v30H0V0zm30 30h30v30H30V30z'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="flex items-center justify-between h-[85px] lg:h-[110px]">
+          {/* Logo Section */}
           <a
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('hero');
             }}
-            className="flex items-center transition-opacity duration-300 hover:opacity-80"
+            className="group flex items-center transform-gpu transition-all duration-500 hover:opacity-90"
           >
-            <Logo 
-              variant="header" 
-              color="navy" // Keeping logo consistent since background is now light
-            />
+            <div className="scale-125 lg:scale-[1.65] origin-left transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.3] lg:group-hover:scale-[1.70]">
+              <Logo 
+                variant="header" 
+                color={isScrolled ? "ivory" : "navy"} // Adapts based on scroll
+              />
+            </div>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-12">
+          <nav className="hidden lg:flex items-center gap-14">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -68,50 +83,53 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className="group relative text-sm font-medium tracking-wide transition-colors duration-300 text-black"
+                className={`group relative text-[15px] font-semibold uppercase tracking-[0.1em] transition-colors duration-300 antialiased ${
+                  isScrolled ? 'text-ivory/80 hover:text-ivory' : 'text-black'
+                }`}
               >
                 {item.label}
-                {/* Gold hover underline effect */}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-gold transition-all duration-500 ease-out group-hover:w-full" />
               </a>
             ))}
           </nav>
 
           {/* Right Side: Language + CTA */}
-          <div className="hidden lg:flex items-center gap-8">
-            {/* Language Switcher */}
-            <div className="flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-10">
+            <div className="flex items-center gap-3">
               <button
                 onClick={() => setLanguage('fr')}
-                className={`text-sm transition-all duration-300 font-medium ${
+                className={`text-xs font-bold tracking-tighter transition-all duration-300 ${
                   language === 'fr' 
-                    ? 'text-black border-b border-gold pb-0.5' 
-                    : 'text-black/50 hover:text-black'
+                    ? (isScrolled ? 'text-ivory border-b-2 border-gold pb-0.5' : 'text-black border-b-2 border-gold pb-0.5')
+                    : (isScrolled ? 'text-ivory/40 hover:text-ivory' : 'text-black/40 hover:text-black')
                 }`}
               >
                 FR
               </button>
-              <span className="text-black/30 text-sm">|</span>
+              <span className={`text-xs ${isScrolled ? 'text-ivory/20' : 'text-black/10'}`}>/</span>
               <button
                 onClick={() => setLanguage('en')}
-                className={`text-sm transition-all duration-300 font-medium ${
+                className={`text-xs font-bold tracking-tighter transition-all duration-300 ${
                   language === 'en' 
-                    ? 'text-black border-b border-gold pb-0.5' 
-                    : 'text-black/50 hover:text-black'
+                    ? (isScrolled ? 'text-ivory border-b-2 border-gold pb-0.5' : 'text-black border-b-2 border-gold pb-0.5')
+                    : (isScrolled ? 'text-ivory/40 hover:text-ivory' : 'text-black/40 hover:text-black')
                 }`}
               >
                 EN
               </button>
             </div>
 
-            {/* CTA Button */}
             <a
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection('contact');
               }}
-              className="text-sm font-semibold uppercase tracking-wide px-7 py-3 rounded transition-all duration-300 bg-navy text-white hover:bg-navy/90"
+              className={`text-[13px] font-bold uppercase tracking-widest px-9 py-4 rounded-sm transition-all duration-500 shadow-lg shadow-black/5 ${
+                isScrolled 
+                  ? 'bg-gold text-navy hover:bg-ivory hover:text-navy' 
+                  : 'bg-black text-white hover:bg-gold hover:text-black'
+              }`}
             >
               {t('nav.cta')}
             </a>
@@ -120,21 +138,25 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 transition-colors duration-300 text-black"
+            className={`lg:hidden p-2 transition-colors duration-300 ${
+              isScrolled ? 'text-ivory' : 'text-black'
+            }`}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       <div
-        className={`lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 transition-all duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        className={`lg:hidden absolute top-full left-0 right-0 shadow-2xl transition-all duration-500 ease-in-out ${
+          isMobileMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'
+        } ${
+          isScrolled ? 'bg-navy border-t border-gold/25' : 'bg-white border-t border-gray-50'
         }`}
       >
-        <div className="section-padding py-8">
-          <nav className="flex flex-col gap-6">
+        <div className="px-8 py-12 relative z-10">
+          <nav className="flex flex-col gap-8">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -143,29 +165,14 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className="text-black hover:text-gold text-lg font-medium transition-colors"
+                className={`text-2xl font-light tracking-tight transition-colors ${
+                  isScrolled ? 'text-ivory hover:text-gold' : 'text-black hover:text-gold'
+                }`}
               >
                 {item.label}
               </a>
             ))}
           </nav>
-
-          {/* Mobile Language Switcher */}
-          <div className="flex items-center gap-4 mt-8 pt-6 border-t border-gray-100">
-            <button
-              onClick={() => setLanguage('fr')}
-              className={`text-base font-semibold tracking-widest ${language === 'fr' ? 'text-black border-b-2 border-gold pb-0.5' : 'text-black/40'}`}
-            >
-              FR
-            </button>
-            <span className="text-black/20 text-base">|</span>
-            <button
-              onClick={() => setLanguage('en')}
-              className={`text-base font-semibold tracking-widest ${language === 'en' ? 'text-black border-b-2 border-gold pb-0.5' : 'text-black/40'}`}
-            >
-              EN
-            </button>
-          </div>
         </div>
       </div>
     </header>
