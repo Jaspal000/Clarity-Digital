@@ -38,18 +38,40 @@ export default function Footer() {
 
       <div className="relative z-10 section-padding py-16 lg:py-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-20">
-          {/* Left: Company Info */}
+          
+          {/* Left: Company Info (Ultra Premium Treatment) */}
           <div>
-            <Logo variant="footer" color="ivory" />
-            <div className="flex items-center gap-2 text-sm text-ivory/50 mt-6">
-              <MapPin size={14} strokeWidth={1.5} />
-              <span>{t('footer.location')}</span>
+            {/* Logo - Hardware Accelerated & Interactive */}
+            <a
+              href="#hero"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('hero');
+              }}
+              className="group inline-block focus:outline-none"
+            >
+              <div className="transform-gpu antialiased scale-[1.05] origin-left transition-all duration-500 ease-out group-hover:scale-[1.08] group-hover:opacity-95 drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
+                <Logo variant="footer" color="ivory" />
+              </div>
+            </a>
+
+            {/* Location Text - Elevated Luxury Styling */}
+            <div className="flex items-center gap-4 mt-10 group cursor-default">
+              {/* Premium Icon Wrapper */}
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-ivory/5 border border-ivory/10 transition-all duration-500 ease-out group-hover:border-gold/40 group-hover:bg-gold/10 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.15)] flex-shrink-0">
+                <MapPin size={16} strokeWidth={1.5} className="text-gold/70 transition-colors duration-500 group-hover:text-gold" />
+              </div>
+              
+              {/* Premium Typography */}
+              <span className="text-[15px] font-light tracking-wide text-ivory/70 transition-colors duration-500 group-hover:text-ivory antialiased leading-relaxed">
+                {t('footer.location')}
+              </span>
             </div>
           </div>
 
           {/* Center: Navigation */}
           <div className="md:text-center">
-            <h4 className="text-xs uppercase tracking-widest text-ivory/30 mb-8 font-semibold">
+            <h4 className="text-xs uppercase tracking-[0.2em] text-ivory/30 mb-8 font-semibold antialiased">
               Navigation
             </h4>
             <nav className="flex flex-col gap-4">
@@ -61,10 +83,10 @@ export default function Footer() {
                     e.preventDefault();
                     scrollToSection(link.id);
                   }}
-                  className="text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 relative inline-block group tracking-wide"
+                  className="text-sm font-light text-ivory/60 hover:text-ivory transition-colors duration-300 relative inline-block group tracking-wide antialiased"
                 >
                   {link.label}
-                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
             </nav>
@@ -72,13 +94,13 @@ export default function Footer() {
 
           {/* Right: Contact & Social */}
           <div className="md:text-right">
-            <h4 className="text-xs uppercase tracking-widest text-ivory/30 mb-8 font-semibold">
+            <h4 className="text-xs uppercase tracking-[0.2em] text-ivory/30 mb-8 font-semibold antialiased">
               Contact
             </h4>
             <div className="space-y-5">
               <a
                 href="mailto:contact@clarte-digital.fr"
-                className="flex md:justify-end items-center gap-2 text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 group"
+                className="flex md:justify-end items-center gap-3 text-sm font-light text-ivory/60 hover:text-ivory transition-colors duration-300 group antialiased tracking-wide"
               >
                 <Mail size={16} strokeWidth={1.5} className="text-gold/50 group-hover:text-gold transition-colors duration-300" />
                 <span>{t('footer.email')}</span>
@@ -87,7 +109,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex md:justify-end items-center gap-2 text-sm text-ivory/60 hover:text-ivory transition-colors duration-300 group"
+                className="flex md:justify-end items-center gap-3 text-sm font-light text-ivory/60 hover:text-ivory transition-colors duration-300 group antialiased tracking-wide"
               >
                 <Linkedin size={16} strokeWidth={1.5} className="text-gold/50 group-hover:text-gold transition-colors duration-300" />
                 <span>{t('footer.linkedin')}</span>
@@ -101,10 +123,10 @@ export default function Footer() {
       <div className="relative z-10 section-padding py-8">
         <div className="w-full h-px bg-gold/15 mb-6" />
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-ivory/35 tracking-wide">
+          <p className="text-xs text-ivory/35 tracking-wider antialiased font-light">
             {t('footer.copyright')} — {t('footer.rights')}
           </p>
-          <p className="text-xs text-ivory/25 tracking-wide">
+          <p className="text-xs text-ivory/25 tracking-wider antialiased font-light">
             {t('footer.siret')}
           </p>
         </div>
