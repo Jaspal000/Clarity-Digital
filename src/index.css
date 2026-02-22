@@ -301,12 +301,29 @@
   }
   
   /* ===== HERO SECTION ===== */
-  /* Eiffel Tower is an <img> with object-fit: contain + object-position: center top. */
-  /* It fills the full section height — no cropping, no translateX overflow. */
-
+  /* Mobile: Eiffel positioned below header with constrained height (65%) */
+  /* Desktop: Full height, object-contain aligned LEFT */
+  
   #hero {
     min-height: 100vh;
     overflow: hidden;
+    position: relative;
+  }
+
+  /* Mobile Eiffel tower positioning */
+  @media (max-width: 1023px) {
+    #hero img[src*="eiffel"] {
+      top: 110px !important;
+      height: 65% !important;
+    }
+  }
+
+  /* Desktop: Eiffel tower returns to top */
+  @media (min-width: 1024px) {
+    #hero img[src*="eiffel"] {
+      top: 0 !important;
+      height: 100% !important;
+    }
   }
 
   /* All sections prevent horizontal overflow */

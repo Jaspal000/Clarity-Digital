@@ -29,20 +29,22 @@ export default function Hero() {
       style={{ minHeight: '100vh' }}
     >
       {/* ====== LAYER 0: EIFFEL TOWER IMAGE ====== */}
+      {/* MOBILE: positioned below header (top: 110px), height 65-70% of viewport */}
+      {/* to frame the tower inside hero without extending beyond CTA area. */}
       {/* DESKTOP: full-width, full-height, object-contain aligned LEFT so the */}
       {/* tower fills the left half behind the hero text, not the Google card. */}
-      {/* MOBILE: top-0, h-[60%] so it covers ONLY the hero text area. */}
       <img
         src="/eiffel-tower-bg.jpg"
         alt=""
         aria-hidden="true"
-        className="absolute top-0 left-0 w-full pointer-events-none
-          h-[60%] object-contain object-[center_top]
-          lg:h-full lg:object-contain lg:object-left"
+        className="absolute left-0 w-full pointer-events-none
+          h-[65%] object-contain object-[center_top]
+          lg:top-0 lg:h-full lg:object-left"
         style={{
           zIndex: 0,
           opacity: 0.7,
           filter: 'saturate(0.8)',
+          top: 'clamp(0px, 110px, calc(100vh - 65vh))',
         }}
       />
 
@@ -102,8 +104,8 @@ export default function Hero() {
       {/* ====== LAYER 5: CONTENT — always above tower ====== */}
       <div className="relative" style={{ zIndex: 2 }}>
         <div className="section-padding">
-          {/* Mobile: pt-[90px] clears header. Desktop: pt-[100px] — lifted up for healthy header gap */}
-          <div className="min-h-screen flex items-start pt-[90px] lg:pt-[100px]">
+          {/* Mobile: pt-[90px] clears header (78px + 12px gap). Desktop: pt-[120px] for more breathing room */}
+          <div className="min-h-screen flex items-start pt-[90px] lg:pt-[120px]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-start w-full pb-12 lg:pb-0">
 
               {/* ---- Left: Text Content ---- */}
