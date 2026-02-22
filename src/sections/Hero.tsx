@@ -155,9 +155,9 @@ export default function Hero() {
               </div>
 
               {/* ---- Right: Google Mockup — 40% on desktop ---- */}
-              {/* mt-6 on mobile pushes it below the hero text. Desktop: positioned in right column with padding */}
+              {/* Positioned on extreme right, occupying full 40% width with top padding on desktop */}
               <div
-                className={`hero-card-column relative transition-all duration-1000 delay-400 mt-6 ${
+                className={`hero-card-column relative transition-all duration-1000 delay-400 lg:mt-0 ${
                   isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
                 }`}
                 style={{ zIndex: 5 }}
