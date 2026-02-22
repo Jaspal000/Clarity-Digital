@@ -155,15 +155,15 @@ export default function Hero() {
               </div>
 
               {/* ---- Right: Google Mockup ---- */}
-              {/* mt-6 on mobile pushes it below the hero text. Desktop: flush right, lifted up */}
+              {/* mt-6 on mobile pushes it below the hero text. Desktop: positioned with negative top margin to align with header gap */}
               <div
-                className={`relative transition-all duration-1000 delay-400 mt-6 lg:mt-0 ${
+                className={`relative transition-all duration-1000 delay-400 mt-6 lg:mt-0 lg:-mt-[120px] lg:h-fit ${
                   isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
                 }`}
                 style={{ zIndex: 5 }}
               >
                 <div className="animate-float">
-                  <div className="google-mockup w-full max-w-md mx-auto lg:ml-auto lg:mr-0">
+                  <div className="google-mockup w-full mx-auto lg:mx-0">
                     {/* Mockup Header */}
                     <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 flex items-center gap-3">
                       <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
