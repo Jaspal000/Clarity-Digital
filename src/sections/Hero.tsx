@@ -12,429 +12,355 @@ export default function Hero() {
   }, []);
 
   const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById('contact');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToBeforeAfter = () => {
-    const element = document.getElementById('before-after');
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById('before-after');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section
-      id="hero"
-      ref={sectionRef}
-      className="relative"
-      style={{ overflowX: 'hidden' }}
-    >
-      {/* EIFFEL TOWER — DESKTOP */}
-      <img
-        src="/eiffel-tower-bg.jpg"
-        alt=""
-        aria-hidden="true"
-        className="hidden md:block"
-        style={{
-          position: 'absolute',
-          top: 0, left: 0,
-          width: '100%', height: '100%',
-          objectFit: 'contain',
-          objectPosition: 'left top',
-          opacity: 0.75,
-          filter: 'saturate(0.8)',
-          zIndex: 0,
-          pointerEvents: 'none',
-        }}
-      />
+    <>
+      {/* =====================================================
+          MOBILE HERO — shown below 768px (native small phone)
+          Full screen, tower centered, CTA at bottom
+      ===================================================== */}
+      <section
+        id="hero"
+        className="md:hidden relative"
+        style={{ height: '100svh', minHeight: '100vh', overflowX: 'hidden', overflowY: 'hidden' }}
+      >
+        {/* Tower */}
+        <img
+          src="/eiffel-tower-bg.jpg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute', top: 0, left: 0,
+            width: '100%', height: '100%',
+            objectFit: 'contain', objectPosition: 'center top',
+            opacity: 0.75, filter: 'saturate(0.8)',
+            zIndex: 0, pointerEvents: 'none',
+          }}
+        />
+        {/* Top blur */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
+          zIndex: 1, pointerEvents: 'none',
+          mask: 'linear-gradient(180deg,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 12%)',
+          WebkitMask: 'linear-gradient(180deg,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 12%)',
+        }} />
+        {/* Gradient */}
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
+          background: 'linear-gradient(180deg,rgba(244,241,234,0.82) 0%,rgba(244,241,234,0.45) 15%,rgba(244,241,234,0.2) 30%,rgba(244,241,234,0.05) 55%,transparent 100%)',
+        }} />
 
-      {/* EIFFEL TOWER — MOBILE */}
-      <img
-        src="/eiffel-tower-bg.jpg"
-        alt=""
-        aria-hidden="true"
-        className="md:hidden"
-        style={{
-          position: 'absolute',
-          top: 0, left: 0,
-          width: '100%',
-          height: '100svh',
-          objectFit: 'contain',
-          objectPosition: 'center top',
-          opacity: 0.75,
-          filter: 'saturate(0.8)',
-          zIndex: 0,
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* TOP BLUR */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0,
-        height: '100svh',
-        backdropFilter: 'blur(4px)',
-        WebkitBackdropFilter: 'blur(4px)',
-        zIndex: 1,
-        mask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 12%)',
-        WebkitMask: 'linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 12%)',
-        pointerEvents: 'none',
-      }} />
-
-      {/* MOBILE GRADIENT */}
-      <div className="md:hidden" style={{
-        position: 'absolute', top: 0, left: 0,
-        width: '100%', height: '100svh',
-        background: 'linear-gradient(180deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.45) 15%, rgba(244,241,234,0.2) 30%, rgba(244,241,234,0.05) 55%, transparent 100%)',
-        zIndex: 1, pointerEvents: 'none',
-      }} />
-
-      {/* DESKTOP GRADIENT */}
-      <div className="hidden md:block" style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(90deg, rgba(244,241,234,0.82) 0%, rgba(244,241,234,0.6) 20%, rgba(244,241,234,0.3) 42%, rgba(244,241,234,0.08) 60%, rgba(244,241,234,0.15) 100%)',
-        zIndex: 1, pointerEvents: 'none',
-      }} />
-
-      {/* GRAIN */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0,
-        width: '100%', height: '100svh',
-        opacity: 0.012, zIndex: 1, pointerEvents: 'none',
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' fill='%23F4F1EA'/%3E%3C/svg%3E")`,
-      }} />
-
-      <div style={{ position: 'relative', zIndex: 2 }}>
-        <style>{`
-
-          /* ============================================
-             MOBILE < 768px
-
-             FIX 1 — padding-top: 115px
-             Header height ≈ 88px CSS.
-             Image starts at exactly 88px.
-             115px = 27px inside image.
-             At 120% zoom = 138px visual — badge
-             sits clearly fully ON the tower image.
-             Nothing touches white/beige space above.
-
-             FIX 2 — padding-bottom: 2.5rem
-             Lifts CTA buttons up from before (was 3rem→4rem).
-             Balanced gap between buttons and screen bottom.
-
-             FIX 3 — badge width handled in JSX inline style
-             ============================================ */
-          @media (max-width: 767px) {
-            .first-screen {
-              display: flex;
-              flex-direction: column;
-              height: 100svh;
-              min-height: 100vh;
-              padding-top: 115px;
-              padding-left: 1.1rem;
-              padding-right: 1.1rem;
-              /*
-                5rem bottom = 6rem visual at 120% zoom.
-                Both buttons fully visible, balanced gap
-                from bottom of screen. Was 2.5rem which
-                was clipping the second button.
-              */
-              padding-bottom: 5rem;
-              box-sizing: border-box;
-            }
-            .hero-left {
-              display: flex;
-              flex-direction: column;
-              flex: 1;
-              width: 100%;
-            }
-            .hero-headline {
-              font-size: 2rem !important;
-              line-height: 1.2 !important;
-              margin-bottom: 0.75rem !important;
-            }
-            .hero-subheadline {
-              font-size: 0.875rem !important;
-              line-height: 1.55 !important;
-              margin-bottom: 0 !important;
-            }
-            .hero-cta {
-              /*
-                clamp(2rem, 12vh, 5rem):
-                - On small phone (750px effective at 120% zoom):
-                  12vh = ~90px — pushes CTA nicely toward bottom
-                - On tall desktop-mode mobile browser (900px+):
-                  caps at 5rem = 80px — no massive gap
-                - auto was creating 400px+ gap on tall viewports
-              */
-              margin-top: clamp(2rem, 12vh, 5rem) !important;
-              padding-top: 0;
-              display: flex !important;
-              flex-direction: column !important;
-              gap: 0.65rem !important;
-            }
-            .hero-right { display: none !important; }
-            .mobile-card-block {
-              display: block;
-              width: 100%;
-              padding: 2rem 1.1rem;
-              box-sizing: border-box;
-              background: #F4F1EA;
-            }
-            .mobile-card-block .google-mockup {
-              width: 100%;
-              box-sizing: border-box;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            }
-            .desktop-card-block { display: none !important; }
-          }
-
-          /* ============================================
-             DESKTOP >= 768px
-             ============================================ */
-          @media (min-width: 768px) {
-            .first-screen {
-              display: flex;
-              flex-direction: row;
-              align-items: stretch;
-              width: 100%;
-              min-height: 100vh;
-              padding-top: 88px;
-              padding-bottom: 0;
-              box-sizing: border-box;
-            }
-            .hero-left {
-              flex: 0 0 60%;
-              max-width: 60%;
-              padding: 3.5rem 3rem 3rem 5rem;
-              box-sizing: border-box;
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-            }
-            .hero-headline {
-              font-size: clamp(2.5rem, 4vw, 3.75rem) !important;
-              line-height: 1.15 !important;
-            }
-            .hero-subheadline {
-              font-size: 1.1rem !important;
-              margin-bottom: 2rem !important;
-            }
-            .hero-cta {
-              margin-top: 0 !important;
-              padding-top: 0 !important;
-              display: flex !important;
-              flex-direction: row !important;
-              gap: 1rem !important;
-            }
-            .hero-right {
-              flex: 0 0 40%;
-              max-width: 40%;
-              padding: 1rem 0 0 0;
-              box-sizing: border-box;
-              align-self: stretch;
-              display: flex;
-              flex-direction: column;
-              overflow-y: auto;
-              overflow-x: hidden;
-            }
-            .hero-right::-webkit-scrollbar { width: 4px; }
-            .hero-right::-webkit-scrollbar-thumb {
-              background: rgba(0,0,0,0.15);
-              border-radius: 2px;
-            }
-            .hero-right .card-wrapper {
-              flex: 1;
-              display: flex;
-              flex-direction: column;
-            }
-            .google-mockup {
-              width: 100%;
-              max-width: 100%;
-              box-sizing: border-box;
-              border-radius: 12px 0 0 12px;
-              overflow: hidden;
-              box-shadow: -8px 0 48px rgba(0,0,0,0.12);
-              flex: 1;
-              display: flex;
-              flex-direction: column;
-            }
-            .google-mockup > div:last-child {
-              flex: 1;
-              overflow-y: auto;
-            }
-            .mobile-card-block { display: none !important; }
-            .desktop-card-block {
-              display: flex !important;
-              flex-direction: column;
-              flex: 1;
-            }
-          }
-        `}</style>
-
-        {/* FIRST SCREEN: exactly 100svh */}
-        <div className="first-screen">
-          <div className="hero-left">
-
-            {/* Badge — inline style ensures width fits content on both mobile & desktop */}
-            <div
-              className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.45rem 1rem',
-                background: 'rgba(15,23,42,0.05)',
-                borderRadius: '9999px',
-                marginBottom: '0.75rem',
-                /* KEY FIX: width fits content, not full container width */
-                width: 'fit-content',
-                maxWidth: '100%',
-              }}
-            >
-              <MapPin size={14} className="text-gold" style={{ flexShrink: 0 }} />
-              <span style={{ fontSize: '0.75rem', color: 'rgba(30,30,30,0.7)', letterSpacing: '0.025em', whiteSpace: 'nowrap' }}>
-                {t('hero.trustLine')}
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h1
-              className={`hero-headline font-serif text-navy leading-tight mb-5 transition-all duration-700 delay-100 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-            >
-              {t('hero.headline')}
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              className={`hero-subheadline text-charcoal/70 leading-relaxed mb-8 transition-all duration-700 delay-200 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-            >
-              {t('hero.subheadline')}
-            </p>
-
-            {/* CTA */}
-            <div
-              className={`hero-cta flex gap-4 transition-all duration-700 delay-300 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-            >
-              <button onClick={scrollToContact} className="btn-primary group">
-                <span>{t('hero.cta')}</span>
-                <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
-              </button>
-              <button onClick={scrollToBeforeAfter} className="btn-outline">
-                Voir les exemples
-              </button>
-            </div>
+        {/* Content */}
+        <div style={{
+          position: 'relative', zIndex: 2,
+          height: '100%',
+          display: 'flex', flexDirection: 'column',
+          paddingTop: '115px',
+          paddingLeft: '1.1rem', paddingRight: '1.1rem',
+          paddingBottom: '5rem',
+          boxSizing: 'border-box',
+        }}>
+          {/* Badge */}
+          <div
+            className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.45rem 1rem', background: 'rgba(15,23,42,0.05)',
+              borderRadius: '9999px', marginBottom: '0.75rem',
+              width: 'fit-content',
+            }}
+          >
+            <MapPin size={14} className="text-gold" style={{ flexShrink: 0 }} />
+            <span style={{ fontSize: '0.75rem', color: 'rgba(30,30,30,0.7)', letterSpacing: '0.025em', whiteSpace: 'nowrap' }}>
+              {t('hero.trustLine')}
+            </span>
           </div>
 
-          {/* Desktop right card */}
-          <div className="hero-right desktop-card-block">
-            <div className={`card-wrapper transition-all duration-1000 delay-400 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}>
-              <GoogleMockup t={t} />
-            </div>
+          {/* Headline */}
+          <h1
+            className={`font-serif text-navy transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            style={{ fontSize: '2rem', lineHeight: 1.2, marginBottom: '0.75rem' }}
+          >
+            {t('hero.headline')}
+          </h1>
+
+          {/* Subheadline */}
+          <p
+            className={`text-charcoal/70 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            style={{ fontSize: '0.875rem', lineHeight: 1.55, marginBottom: 0 }}
+          >
+            {t('hero.subheadline')}
+          </p>
+
+          {/* CTA — pushed to bottom */}
+          <div
+            className={`transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            style={{ marginTop: 'clamp(2rem, 12vh, 5rem)', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}
+          >
+            <button onClick={scrollToContact} className="btn-primary group">
+              <span>{t('hero.cta')}</span>
+              <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+            </button>
+            <button onClick={scrollToBeforeAfter} className="btn-outline">
+              Voir les exemples
+            </button>
           </div>
         </div>
+      </section>
 
-        {/* MOBILE CARD — structurally outside 100svh, impossible to see on first load */}
-        <div className="mobile-card-block">
-          <GoogleMockup t={t} />
-        </div>
+      {/* Mobile card — after hero, scroll to see */}
+      <div className="md:hidden" style={{ padding: '2rem 1.1rem', background: '#F4F1EA' }}>
+        <GoogleMockup t={t} />
       </div>
-    </section>
+
+      {/* =====================================================
+          DESKTOP HERO — shown at 768px+ (desktop + desktop-mode mobile)
+          Strict height: 100vh. 60/40 split. No overflow.
+          Tower left-aligned. Card fills right column exactly.
+      ===================================================== */}
+      <section
+        id="hero-desktop"
+        className="hidden md:flex relative"
+        style={{
+          height: '100vh',
+          maxHeight: '100vh',
+          overflow: 'hidden',
+          flexDirection: 'row',
+        }}
+      >
+        {/* Tower — desktop left aligned */}
+        <img
+          src="/eiffel-tower-bg.jpg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute', top: 0, left: 0,
+            width: '100%', height: '100%',
+            objectFit: 'contain', objectPosition: 'left top',
+            opacity: 0.75, filter: 'saturate(0.8)',
+            zIndex: 0, pointerEvents: 'none',
+          }}
+        />
+        {/* Top blur */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
+          zIndex: 1, pointerEvents: 'none',
+          mask: 'linear-gradient(180deg,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 12%)',
+          WebkitMask: 'linear-gradient(180deg,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 12%)',
+        }} />
+        {/* Gradient */}
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
+          background: 'linear-gradient(90deg,rgba(244,241,234,0.82) 0%,rgba(244,241,234,0.6) 20%,rgba(244,241,234,0.3) 42%,rgba(244,241,234,0.08) 60%,rgba(244,241,234,0.15) 100%)',
+        }} />
+
+        {/* LEFT — 60% hero text */}
+        <div
+          style={{
+            position: 'relative', zIndex: 2,
+            flex: '0 0 60%', maxWidth: '60%',
+            display: 'flex', flexDirection: 'column',
+            justifyContent: 'flex-start',
+            padding: '3.5rem 3rem 3rem 5rem',
+            boxSizing: 'border-box',
+            paddingTop: 'calc(88px + 2.5rem)',
+          }}
+        >
+          {/* Badge */}
+          <div
+            className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.45rem 1rem', background: 'rgba(15,23,42,0.05)',
+              borderRadius: '9999px', marginBottom: '1rem',
+              width: 'fit-content',
+            }}
+          >
+            <MapPin size={14} className="text-gold" style={{ flexShrink: 0 }} />
+            <span style={{ fontSize: '0.75rem', color: 'rgba(30,30,30,0.7)', letterSpacing: '0.025em', whiteSpace: 'nowrap' }}>
+              {t('hero.trustLine')}
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1
+            className={`font-serif text-navy transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            style={{ fontSize: 'clamp(2.5rem, 4vw, 3.75rem)', lineHeight: 1.15, marginBottom: '1.25rem' }}
+          >
+            {t('hero.headline')}
+          </h1>
+
+          {/* Subheadline */}
+          <p
+            className={`text-charcoal/70 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            style={{ fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '2rem' }}
+          >
+            {t('hero.subheadline')}
+          </p>
+
+          {/* CTA */}
+          <div
+            className={`transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            style={{ display: 'flex', flexDirection: 'row', gap: '1rem', flexWrap: 'wrap' }}
+          >
+            <button onClick={scrollToContact} className="btn-primary group">
+              <span>{t('hero.cta')}</span>
+              <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+            </button>
+            <button onClick={scrollToBeforeAfter} className="btn-outline">
+              Voir les exemples
+            </button>
+          </div>
+        </div>
+
+        {/* RIGHT — 40% card, fills exactly 100vh */}
+        <div
+          style={{
+            position: 'relative', zIndex: 2,
+            flex: '0 0 40%', maxWidth: '40%',
+            display: 'flex', flexDirection: 'column',
+            paddingTop: '88px',
+            boxSizing: 'border-box',
+            height: '100vh',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            className={`transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+            style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
+          >
+            <GoogleMockup t={t} desktop />
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
-function GoogleMockup({ t }: { t: (key: string) => unknown }) {
+function GoogleMockup({ t, desktop = false }: { t: (key: string) => unknown; desktop?: boolean }) {
   return (
-    <div className="animate-float" style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100%' }}>
-      <div className="google-mockup w-full" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-
-        <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 flex items-center gap-3 flex-shrink-0">
-          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+    <div style={{
+      display: 'flex', flexDirection: 'column',
+      flex: 1, height: '100%',
+    }}>
+      <div style={{
+        display: 'flex', flexDirection: 'column', flex: 1,
+        borderRadius: desktop ? '12px 0 0 0' : '12px',
+        overflow: 'hidden',
+        boxShadow: desktop ? '-8px 0 48px rgba(0,0,0,0.12)' : '0 8px 32px rgba(0,0,0,0.12)',
+      }}>
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-500 flex items-center gap-3 flex-shrink-0"
+          style={{ padding: '0.75rem 1rem' }}>
+          <div style={{
+            width: 32, height: 32, background: 'white', borderRadius: '50%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+          }}>
             <span className="text-blue-600 font-bold text-sm">G</span>
           </div>
           <span className="text-white text-sm font-medium truncate">Google Business Profile</span>
         </div>
 
-        <div className="p-4 sm:p-5 bg-white flex-1 overflow-y-auto">
-          <div className="mb-4">
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 break-words">
+        {/* Scrollable content */}
+        <div className="bg-white" style={{ flex: 1, overflowY: 'auto', padding: '1rem 1.25rem' }}>
+          <div style={{ marginBottom: '1rem' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#111', marginBottom: '0.5rem' }}>
               {t('googleMockup.businessName') as string}
             </h3>
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className="text-2xl font-bold text-gray-900">{t('googleMockup.rating') as string}</span>
-              <div className="flex gap-0.5">
-                {[1,2,3,4].map(i => <Star key={i} size={16} className="text-yellow-400" fill="currentColor" />)}
-                <Star size={16} className="text-yellow-400" fill="url(#half-star)" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.25rem' }}>
+              <span style={{ fontSize: '1.5rem', fontWeight: 700, color: '#111' }}>{t('googleMockup.rating') as string}</span>
+              <div style={{ display: 'flex', gap: 2 }}>
+                {[1,2,3,4].map(i => <Star key={i} size={15} className="text-yellow-400" fill="currentColor" />)}
+                <Star size={15} className="text-yellow-400" fill="url(#half-star)" />
               </div>
-              <span className="text-sm text-gray-500">({t('googleMockup.reviews') as string})</span>
+              <span style={{ fontSize: '0.8rem', color: '#666' }}>({t('googleMockup.reviews') as string})</span>
             </div>
-            <p className="text-sm text-gray-600">{t('googleMockup.category') as string}</p>
+            <p style={{ fontSize: '0.8rem', color: '#555' }}>{t('googleMockup.category') as string}</p>
           </div>
 
-          <div className="flex gap-2 mb-5">
-            <button className="flex-1 bg-blue-600 text-white text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-blue-700 transition-colors min-w-0 truncate">Itinéraire</button>
-            <button className="flex-1 bg-gray-100 text-gray-700 text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-gray-200 transition-colors min-w-0 truncate">Enregistrer</button>
-            <button className="flex-1 bg-gray-100 text-gray-700 text-xs sm:text-sm font-medium py-2.5 rounded-full hover:bg-gray-200 transition-colors min-w-0 truncate">Site web</button>
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+            {['Itinéraire','Enregistrer','Site web'].map((label, i) => (
+              <button key={label} style={{
+                flex: 1, fontSize: '0.75rem', fontWeight: 500,
+                padding: '0.5rem 0.25rem', borderRadius: '9999px',
+                background: i === 0 ? '#2563EB' : '#F3F4F6',
+                color: i === 0 ? 'white' : '#374151',
+                border: 'none', cursor: 'pointer', minWidth: 0,
+                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+              }}>{label}</button>
+            ))}
           </div>
 
-          <div className="space-y-3 mb-5">
-            <div className="flex items-start gap-3">
-              <MapPin size={18} className="text-gray-400 mt-0.5 flex-shrink-0" />
-              <span className="text-sm text-gray-700 break-words">{t('googleMockup.address') as string}</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+              <MapPin size={15} style={{ color: '#9CA3AF', flexShrink: 0, marginTop: 2 }} />
+              <span style={{ fontSize: '0.8rem', color: '#374151' }}>{t('googleMockup.address') as string}</span>
             </div>
-            <div className="flex items-start gap-3">
-              <Clock size={18} className="text-gray-400 mt-0.5 flex-shrink-0" />
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+              <Clock size={15} style={{ color: '#9CA3AF', flexShrink: 0, marginTop: 2 }} />
               <div>
-                <span className="text-sm text-green-600 font-medium">Ouvert</span>
-                <span className="text-sm text-gray-700 ml-2">{t('googleMockup.hours') as string}</span>
+                <span style={{ fontSize: '0.8rem', color: '#16A34A', fontWeight: 500 }}>Ouvert</span>
+                <span style={{ fontSize: '0.8rem', color: '#374151', marginLeft: '0.4rem' }}>{t('googleMockup.hours') as string}</span>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <Phone size={18} className="text-gray-400 mt-0.5 flex-shrink-0" />
-              <span className="text-sm text-gray-700">01 42 34 56 78</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <Phone size={15} style={{ color: '#9CA3AF', flexShrink: 0 }} />
+              <span style={{ fontSize: '0.8rem', color: '#374151' }}>01 42 34 56 78</span>
             </div>
           </div>
 
-          <div className="border-t pt-4 mb-4">
-            <p className="text-sm text-gray-700 leading-relaxed break-words">{t('googleMockup.description') as string}</p>
+          <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: '0.75rem', marginBottom: '0.75rem' }}>
+            <p style={{ fontSize: '0.8rem', color: '#374151', lineHeight: 1.5 }}>
+              {t('googleMockup.description') as string}
+            </p>
           </div>
 
-          <div className="border-t pt-4">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-xs font-medium flex-shrink-0">ML</div>
-              <div className="min-w-0">
-                <p className="text-sm font-medium text-gray-900">Marie L.</p>
-                <div className="flex gap-0.5">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={10} className="text-yellow-400" fill="currentColor" />)}
+          <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+              <div style={{
+                width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+                background: 'linear-gradient(135deg,#A78BFA,#F472B6)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'white', fontSize: '0.7rem', fontWeight: 500,
+              }}>ML</div>
+              <div style={{ minWidth: 0 }}>
+                <p style={{ fontSize: '0.8rem', fontWeight: 500, color: '#111' }}>Marie L.</p>
+                <div style={{ display: 'flex', gap: 1 }}>
+                  {[1,2,3,4,5].map(i => <Star key={i} size={9} className="text-yellow-400" fill="currentColor" />)}
                 </div>
               </div>
-              <span className="text-xs text-gray-400 ml-auto flex-shrink-0 whitespace-nowrap">il y a 2 sem.</span>
+              <span style={{ fontSize: '0.7rem', color: '#9CA3AF', marginLeft: 'auto', whiteSpace: 'nowrap', flexShrink: 0 }}>il y a 2 sem.</span>
             </div>
-            <p className="text-sm text-gray-600 italic break-words">{t('googleMockup.reviewPreview') as string}</p>
+            <p style={{ fontSize: '0.8rem', color: '#555', fontStyle: 'italic' }}>
+              {t('googleMockup.reviewPreview') as string}
+            </p>
           </div>
 
-          <div className="border-t pt-4 mt-4">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-6 h-6 bg-gray-200 rounded flex items-center justify-center flex-shrink-0">
-                <span className="text-xs">📸</span>
-              </div>
-              <span className="text-xs text-gray-500">Publié il y a 3 jours</span>
+          <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: '0.75rem', marginTop: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+              <div style={{
+                width: 22, height: 22, background: '#E5E7EB', borderRadius: 4,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>📸</div>
+              <span style={{ fontSize: '0.7rem', color: '#9CA3AF' }}>Publié il y a 3 jours</span>
             </div>
-            <p className="text-sm font-medium text-gray-900 break-words">{t('googleMockup.postTitle') as string}</p>
-            <p className="text-sm text-gray-600 break-words">{t('googleMockup.postContent') as string}</p>
+            <p style={{ fontSize: '0.8rem', fontWeight: 500, color: '#111' }}>{t('googleMockup.postTitle') as string}</p>
+            <p style={{ fontSize: '0.8rem', color: '#555' }}>{t('googleMockup.postContent') as string}</p>
           </div>
         </div>
       </div>
 
-      <svg width="0" height="0" className="absolute">
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <linearGradient id="half-star" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="50%" stopColor="#FACC15" />
