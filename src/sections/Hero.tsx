@@ -111,7 +111,7 @@ export default function Hero() {
               display: 'flex',
               flexDirection: 'column',
               minHeight: '100vh',
-              paddingTop: 'clamp(90px, 10vh, 120px)',
+              paddingTop: 'clamp(60px, 6vh, 80px)',
               paddingBottom: '5rem',
               justifyContent: 'flex-start',
             }}
