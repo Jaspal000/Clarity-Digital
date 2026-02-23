@@ -20,15 +20,14 @@ export default function Hero() {
           640px–1024px: side-by-side flex-row with auto height
           1024px+: full desktop 100vh layout
       ═══════════════════════════════════════════════════════ */}
-      <div className="flex flex-col min-[768px]:flex-row min-h-0 h-auto min-[1024px]:h-screen min-[1024px]:max-h-screen items-start min-[1024px]:items-stretch" style={{
+      <div className="flex flex-col md:flex-row relative h-auto items-start" style={{
         position: 'relative',
         width: '100%',
         overflow: 'hidden',
       }}>
-        {/* LEFT COLUMN: Tower + hero text (flex-1 on all sizes) */}
-        <div className="flex-1 relative w-full min-[768px]:w-auto min-[1024px]:w-3/5" style={{
+        {/* LEFT COLUMN: Tower + hero text (60% from 768px up) */}
+        <div className="relative w-full md:w-[60%]" style={{
           overflow: 'hidden',
-          minHeight: '0',
         }}>
           {/* Tower image */}
           <img src="/eiffel-tower-bg.jpg" alt="" aria-hidden="true" style={{
@@ -77,8 +76,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Google card (flex-1 on all sizes) */}
-        <div className="flex-1 relative w-full min-[768px]:w-auto min-[1024px]:w-2/5 min-h-0 h-auto" style={{
+        {/* RIGHT COLUMN: Google card (40% from 768px up) */}
+        <div className="relative w-full md:w-[40%]" style={{
           overflow: 'hidden',
           background: 'white',
           boxShadow: '-12px 0 40px rgba(0,0,0,0.08)',
