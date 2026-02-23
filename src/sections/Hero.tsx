@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { ArrowRight, Star, MapPin, Clock, Phone } from "lucide-react";
+import { ArrowRight, MapPin, Star, Clock, Phone } from "lucide-react";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -17,11 +17,11 @@ export default function Hero() {
     document.getElementById("before-after")?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-[#F4F1EA]">
-
+    <section
+      id="hero"
+      className="relative overflow-hidden bg-[#F4F1EA]"
+    >
       <div className="mx-auto max-w-7xl px-6">
-
-        {/* Layout Wrapper */}
         <div className="flex flex-col md:flex-row items-center md:items-start">
 
           {/* ================= LEFT COLUMN (60%) ================= */}
@@ -97,13 +97,78 @@ export default function Hero() {
           </div>
 
           {/* ================= RIGHT COLUMN (40%) ================= */}
-          <div className="w-full md:w-[40%] mt-12 md:mt-0 bg-white shadow-2xl">
-
+          <div className="w-full md:w-[40%] mt-12 md:mt-0 bg-white shadow-2xl rounded-xl overflow-hidden">
             <GoogleMockup t={t} />
-
           </div>
+
         </div>
       </div>
     </section>
+  );
+}
+
+/* ================= GOOGLE MOCKUP ================= */
+
+function GoogleMockup({ t }: { t: (key: string) => unknown }) {
+  return (
+    <div className="flex flex-col">
+
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-4 py-3 flex items-center gap-3">
+        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+          <span className="text-sm font-bold text-blue-600">G</span>
+        </div>
+        <span className="text-white text-sm font-semibold">
+          Google Business Profile
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="p-5">
+
+        {/* Business Name */}
+        <h3 className="text-lg font-bold mb-2">
+          {t("googleMockup.businessName") as string}
+        </h3>
+
+        {/* Rating */}
+        <div className="flex items-center gap-2 mb-3">
+          <span className="font-semibold">
+            {t("googleMockup.rating") as string}
+          </span>
+          <div className="flex gap-1">
+            {[1,2,3,4,5].map(i => (
+              <Star key={i} size={14} className="text-yellow-400" fill="currentColor" />
+            ))}
+          </div>
+        </div>
+
+        {/* Info */}
+        <div className="space-y-3 text-sm text-gray-600 mb-4">
+
+          <div className="flex items-start gap-2">
+            <MapPin size={16} className="text-gray-400 mt-1" />
+            <span>{t("googleMockup.address") as string}</span>
+          </div>
+
+          <div className="flex items-start gap-2">
+            <Clock size={16} className="text-gray-400 mt-1" />
+            <span>{t("googleMockup.hours") as string}</span>
+          </div>
+
+          <div className="flex items-start gap-2">
+            <Phone size={16} className="text-gray-400 mt-1" />
+            <span>01 42 34 56 78</span>
+          </div>
+
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-gray-700 leading-relaxed">
+          {t("googleMockup.description") as string}
+        </p>
+
+      </div>
+    </div>
   );
 }
