@@ -25,6 +25,30 @@ export default function Hero() {
           .h-mobile-card   { display: none !important; }
           .h-desktop       { display: flex !important; }
         }
+
+        /* ─ Constrained desktop optimization: 768px–1100px ─ */
+        @media (min-width: 768px) and (max-width: 1100px) {
+          .h-desktop {
+            height: auto !important;
+            max-height: none !important;
+            flex-direction: column !important;
+          }
+          .h-desktop > div:first-child {
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            height: auto !important;
+          }
+          .h-desktop > div:first-child > div:nth-child(4) {
+            padding: calc(88px + 1.25rem) 1.5rem 2rem 2.5rem !important;
+          }
+          .h-desktop > div:last-child {
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            height: 380px !important;
+            max-height: 380px !important;
+            box-shadow: -12px 0 40px rgba(0,0,0,0.08), 0 -12px 40px rgba(0,0,0,0.08) !important;
+          }
+        }
       `}</style>
 
       {/* ═══════════════════════════════════════════════════════
