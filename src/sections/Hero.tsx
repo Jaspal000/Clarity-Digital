@@ -14,153 +14,21 @@ export default function Hero() {
   return (
     <section id="hero" style={{ overflowX: 'hidden' }}>
 
-      {/* ─── RESPONSIVE BREAKPOINT: 480px tablet mode, 1024px+ full desktop ─── */}
-      <style>{`
-        .h-mobile        { display: flex; flex-direction: column; }
-        .h-mobile-card   { display: block; }
-        .h-desktop       { display: none; }
-
-        /* Activate two-column layout at 480px (tablet/mobile desktop mode) */
-        @media (min-width: 480px) {
-          .h-mobile        { display: none !important; }
-          .h-mobile-card   { display: none !important; }
-          .h-desktop       { display: flex !important; }
-        }
-
-        /* Keep true mobile stacked below 480px */
-        @media (max-width: 479px) {
-          .h-mobile        { display: flex !important; }
-          .h-mobile-card   { display: block !important; }
-          .h-desktop       { display: none !important; }
-        }
-
-        /* Full desktop layout: 1024px+ */
-        @media (min-width: 1024px) {
-          .h-desktop {
-            height: 100vh !important;
-            max-height: 100vh !important;
-            flex-direction: row !important;
-          }
-          .h-desktop > div:first-child {
-            flex: 0 0 60% !important;
-            width: 60% !important;
-            height: 100vh !important;
-          }
-          .h-desktop > div:last-child {
-            flex: 0 0 40% !important;
-            width: 40% !important;
-            height: 100vh !important;
-            max-height: 100vh !important;
-          }
-        }
-
-        /* Constrained desktop: 480px–1023px (tablet/small desktop) */
-        @media (min-width: 480px) and (max-width: 1023px) {
-          .h-desktop {
-            height: auto !important;
-            max-height: none !important;
-            flex-direction: column !important;
-          }
-          .h-desktop > div:first-child {
-            flex: 0 0 auto !important;
-            width: 100% !important;
-            height: auto !important;
-          }
-          .h-desktop > div:first-child > div:nth-child(4) {
-            padding: calc(88px + 1.25rem) 1.5rem 2rem 2.5rem !important;
-          }
-          .h-desktop > div:last-child {
-            flex: 0 0 auto !important;
-            width: 100% !important;
-            height: 380px !important;
-            max-height: 380px !important;
-            box-shadow: -12px 0 40px rgba(0,0,0,0.08), 0 -12px 40px rgba(0,0,0,0.08) !important;
-          }
-        }
-      `}</style>
-
       {/* ═══════════════════════════════════════════════════════
-          MOBILE  < 768px
-          Single column. Tower centered. CTA near bottom.
+          RESPONSIVE HERO LAYOUT
+          Below 640px: mobile stacked layout
+          640px–1024px: side-by-side flex-row with auto height
+          1024px+: full desktop 100vh layout
       ═══════════════════════════════════════════════════════ */}
-      <div className="h-mobile" style={{
-        position: 'relative',
-        height: 'auto', minHeight: 'auto',
-        overflow: 'hidden', flexDirection: 'column',
-      }}>
-        <img src="/eiffel-tower-bg.jpg" alt="" aria-hidden="true" style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
-          objectFit: 'contain', objectPosition: 'center top',
-          opacity: 0.4, filter: 'saturate(0.8)', zIndex: 0, pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-          backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
-          mask: 'linear-gradient(180deg,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 12%)',
-          WebkitMask: 'linear-gradient(180deg,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 12%)',
-        }} />
-        <div style={{
-          position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-          background: 'linear-gradient(180deg,rgba(244,241,234,0.92) 0%,rgba(244,241,234,0.7) 15%,rgba(244,241,234,0.45) 35%,rgba(244,241,234,0.15) 60%,transparent 100%)',
-        }} />
-        <div style={{
-          position: 'relative', zIndex: 2, flex: 1, height: '100%',
-          display: 'flex', flexDirection: 'column',
-          padding: '115px 1.1rem 5rem', boxSizing: 'border-box',
-        }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 1rem', background: 'rgba(15,23,42,0.05)', borderRadius: '9999px', marginBottom: '0.75rem', width: 'fit-content', opacity: isVisible ? 1 : 0, transition: 'opacity .7s, transform .7s', transform: isVisible ? 'none' : 'translateY(16px)' }}>
-            <MapPin size={14} className="text-gold" style={{ flexShrink: 0 }} />
-            <span style={{ fontSize: '0.75rem', color: 'rgba(30,30,30,0.7)', letterSpacing: '0.025em', whiteSpace: 'nowrap' }}>{t('hero.trustLine')}</span>
-          </div>
-          <h1 className="font-serif text-navy" style={{ fontSize: '2rem', lineHeight: 1.2, marginBottom: '0.75rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .1s, transform .7s .1s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
-            {t('hero.headline')}
-          </h1>
-          <p className="text-charcoal/70" style={{ fontSize: '0.875rem', lineHeight: 1.55, margin: 0, opacity: isVisible ? 1 : 0, transition: 'opacity .7s .2s, transform .7s .2s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
-            {t('hero.subheadline')}
-          </p>
-          <div style={{ marginTop: 'clamp(2rem,12vh,5rem)', display: 'flex', flexDirection: 'column', gap: '0.65rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .3s, transform .7s .3s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
-            <button onClick={scrollToContact} className="btn-primary group">
-              <span>{t('hero.cta')}</span>
-              <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
-            </button>
-            <button onClick={scrollToBeforeAfter} className="btn-outline">Voir les exemples</button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile card — below fold, scroll to see */}
-      <div className="h-mobile-card" style={{ padding: '2rem 1.1rem', background: '#F4F1EA' }}>
-        <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' }}>
-          <GoogleMockup t={t} headerPaddingTop={0} />
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════
-          DESKTOP  >= 768px
-
-          Two columns, flush to all 4 edges, exactly 100vh.
-          LEFT 60%  — tower image + hero text
-          RIGHT 40% — Google card from very top of page.
-                      Card blue header has padding-top: 88px
-                      so "Google Business Profile" text clears
-                      the nav and doesn't overlap it.
-          overflow: hidden everywhere — zero chance of bleed.
-      ═══════════════════════════════════════════════════════ */}
-      <div className="h-desktop" style={{
+      <div className="flex flex-col min-[768px]:flex-row min-h-0 h-auto min-[1024px]:h-screen min-[1024px]:max-h-screen items-center min-[1024px]:items-stretch" style={{
         position: 'relative',
         width: '100%',
-        height: '100vh',
-        maxHeight: '100vh',
         overflow: 'hidden',
-        flexDirection: 'row',
-        alignItems: 'stretch',
       }}>
-
-        {/* ── LEFT 60%: tower + text ── */}
-        <div style={{
-          position: 'relative',
-          flex: '0 0 60%', width: '60%',
-          height: '100vh', overflow: 'hidden',
+        {/* LEFT COLUMN: Tower + hero text (flex-1 on all sizes) */}
+        <div className="flex-1 relative w-full min-[768px]:w-auto min-[1024px]:w-3/5" style={{
+          overflow: 'hidden',
+          minHeight: '0',
         }}>
           {/* Tower image */}
           <img src="/eiffel-tower-bg.jpg" alt="" aria-hidden="true" style={{
@@ -180,26 +48,26 @@ export default function Hero() {
             position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
             background: 'linear-gradient(90deg,rgba(244,241,234,0.96) 0%,rgba(244,241,234,0.82) 25%,rgba(244,241,234,0.5) 55%,rgba(244,241,234,0.1) 85%,transparent 100%)',
           }} />
-          {/* Hero text — vertically centered in space below header */}
+          {/* Hero text */}
           <div style={{
             position: 'relative', zIndex: 2,
             height: '100%', display: 'flex', flexDirection: 'column',
             justifyContent: 'center',
-            /* top padding clears fixed header */
-            padding: 'calc(88px + 2rem) 3rem 3rem 5rem',
+            padding: 'max(60px, 88px) max(1.1rem, 3rem) 3rem max(1.1rem, 5rem)',
             boxSizing: 'border-box',
+            minHeight: '0',
           }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 1rem', background: 'rgba(15,23,42,0.06)', borderRadius: '9999px', marginBottom: '1.25rem', width: 'fit-content', opacity: isVisible ? 1 : 0, transition: 'opacity .7s, transform .7s', transform: isVisible ? 'none' : 'translateY(16px)' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 1rem', background: 'rgba(15,23,42,0.05)', borderRadius: '9999px', marginBottom: '0.75rem', width: 'fit-content', opacity: isVisible ? 1 : 0, transition: 'opacity .7s, transform .7s', transform: isVisible ? 'none' : 'translateY(16px)' }}>
               <MapPin size={14} className="text-gold" style={{ flexShrink: 0 }} />
-              <span style={{ fontSize: '0.8rem', color: 'rgba(30,30,30,0.7)', letterSpacing: '0.025em', whiteSpace: 'nowrap' }}>{t('hero.trustLine')}</span>
+              <span style={{ fontSize: '0.75rem', color: 'rgba(30,30,30,0.7)', letterSpacing: '0.025em', whiteSpace: 'nowrap' }}>{t('hero.trustLine')}</span>
             </div>
-            <h1 className="font-serif text-navy" style={{ fontSize: 'clamp(2.4rem,3.8vw,3.6rem)', lineHeight: 1.12, marginBottom: '1.25rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .1s, transform .7s .1s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
+            <h1 className="font-serif text-navy" style={{ fontSize: 'clamp(1.75rem,4vw,3.6rem)', lineHeight: 1.2, marginBottom: '0.75rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .1s, transform .7s .1s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
               {t('hero.headline')}
             </h1>
-            <p className="text-charcoal/70" style={{ fontSize: '1.05rem', lineHeight: 1.65, marginBottom: '2.25rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .2s, transform .7s .2s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
+            <p className="text-charcoal/70" style={{ fontSize: 'clamp(0.875rem,2vw,1.05rem)', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .2s, transform .7s .2s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
               {t('hero.subheadline')}
             </p>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .3s, transform .7s .3s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', width: 'fit-content', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .3s, transform .7s .3s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
               <button onClick={scrollToContact} className="btn-primary group">
                 <span>{t('hero.cta')}</span>
                 <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
@@ -209,28 +77,20 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── RIGHT 40%: Google card flush top-to-bottom ── */}
-        <div style={{
-          flex: '0 0 40%', width: '40%',
-          height: '100vh', maxHeight: '100vh',
-          display: 'flex', flexDirection: 'column',
+        {/* RIGHT COLUMN: Google card (flex-1 on all sizes) */}
+        <div className="flex-1 relative w-full min-[768px]:w-auto min-[1024px]:w-2/5 min-h-0" style={{
           overflow: 'hidden',
-          /* subtle shadow separating from left */
+          background: 'white',
           boxShadow: '-12px 0 40px rgba(0,0,0,0.08)',
+          minHeight: '380px',
           opacity: isVisible ? 1 : 0,
           transition: 'opacity 1s .4s, transform 1s .4s',
           transform: isVisible ? 'none' : 'translateX(32px)',
         }}>
-          {/*
-            Card starts at page top (0px).
-            The blue header has paddingTop=88px so
-            "Google Business Profile" text sits BELOW
-            the nav bar — no overlap, no gap.
-          */}
-          <GoogleMockup t={t} headerPaddingTop={88} />
+          <GoogleMockup t={t} headerPaddingTop={88} isMobile={false} />
         </div>
 
-      </div>
+
     </section>
   );
 }
@@ -239,8 +99,9 @@ export default function Hero() {
    headerPaddingTop: extra top padding on the blue header.
    On desktop: 88px clears the fixed nav.
    On mobile:  0 (no fixed nav overlap issue).
+   isMobile: determines if layout is on mobile view
 */
-function GoogleMockup({ t, headerPaddingTop = 0 }: { t: (key: string) => unknown; headerPaddingTop?: number }) {
+function GoogleMockup({ t, headerPaddingTop = 0, isMobile = false }: { t: (key: string) => unknown; headerPaddingTop?: number; isMobile?: boolean }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100%' }}>
 
