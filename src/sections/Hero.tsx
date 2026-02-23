@@ -30,14 +30,16 @@ export default function Hero() {
       {/* ═══════════════════════════════════════════════════════
           MOBILE  < 768px
           Single column. Tower centered. CTA near bottom.
+          OPTIMIZED: h-auto content, reduced padding, compact spacing.
       ═══════════════════════════════════════════════════════ */}
       <div className="h-mobile" style={{
         position: 'relative',
-        height: '100svh', minHeight: '100vh',
+        height: 'auto', minHeight: 'auto',
         overflow: 'hidden', flexDirection: 'column',
       }}>
         <img src="/eiffel-tower-bg.jpg" alt="" aria-hidden="true" style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          position: 'absolute', top: 0, left: 0, right: 0, bottom: 'auto',
+          width: '100%', height: 'auto',
           objectFit: 'contain', objectPosition: 'center top',
           opacity: 0.4, filter: 'saturate(0.8)', zIndex: 0, pointerEvents: 'none',
         }} />
@@ -52,21 +54,22 @@ export default function Hero() {
           background: 'linear-gradient(180deg,rgba(244,241,234,0.92) 0%,rgba(244,241,234,0.7) 15%,rgba(244,241,234,0.45) 35%,rgba(244,241,234,0.15) 60%,transparent 100%)',
         }} />
         <div style={{
-          position: 'relative', zIndex: 2, flex: 1, height: '100%',
+          position: 'relative', zIndex: 2, flex: 'none', height: 'auto',
           display: 'flex', flexDirection: 'column',
-          padding: '115px 1.1rem 5rem', boxSizing: 'border-box',
+          padding: '60px 1.1rem 3rem', boxSizing: 'border-box',
+          minHeight: 'auto',
         }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 1rem', background: 'rgba(15,23,42,0.05)', borderRadius: '9999px', marginBottom: '0.75rem', width: 'fit-content', opacity: isVisible ? 1 : 0, transition: 'opacity .7s, transform .7s', transform: isVisible ? 'none' : 'translateY(16px)' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 1rem', background: 'rgba(15,23,42,0.05)', borderRadius: '9999px', marginBottom: '0.5rem', width: 'fit-content', opacity: isVisible ? 1 : 0, transition: 'opacity .7s, transform .7s', transform: isVisible ? 'none' : 'translateY(16px)' }}>
             <MapPin size={14} className="text-gold" style={{ flexShrink: 0 }} />
             <span style={{ fontSize: '0.75rem', color: 'rgba(30,30,30,0.7)', letterSpacing: '0.025em', whiteSpace: 'nowrap' }}>{t('hero.trustLine')}</span>
           </div>
-          <h1 className="font-serif text-navy" style={{ fontSize: '2rem', lineHeight: 1.2, marginBottom: '0.75rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .1s, transform .7s .1s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
+          <h1 className="font-serif text-navy" style={{ fontSize: '1.75rem', lineHeight: 1.2, marginBottom: '0.5rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .1s, transform .7s .1s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
             {t('hero.headline')}
           </h1>
-          <p className="text-charcoal/70" style={{ fontSize: '0.875rem', lineHeight: 1.55, margin: 0, opacity: isVisible ? 1 : 0, transition: 'opacity .7s .2s, transform .7s .2s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
+          <p className="text-charcoal/70" style={{ fontSize: '0.875rem', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .2s, transform .7s .2s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
             {t('hero.subheadline')}
           </p>
-          <div style={{ marginTop: 'clamp(2rem,12vh,5rem)', display: 'flex', flexDirection: 'column', gap: '0.65rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .3s, transform .7s .3s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', opacity: isVisible ? 1 : 0, transition: 'opacity .7s .3s, transform .7s .3s', transform: isVisible ? 'none' : 'translateY(24px)' }}>
             <button onClick={scrollToContact} className="btn-primary group">
               <span>{t('hero.cta')}</span>
               <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
@@ -77,8 +80,8 @@ export default function Hero() {
       </div>
 
       {/* Mobile card — below fold, scroll to see */}
-      <div className="h-mobile-card" style={{ padding: '2rem 1.1rem', background: '#F4F1EA' }}>
-        <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' }}>
+      <div className="h-mobile-card" style={{ padding: '1.5rem 1.1rem', background: '#F4F1EA' }}>
+        <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.12)', maxWidth: '448px', marginLeft: 'auto', marginRight: 'auto' }}>
           <GoogleMockup t={t} headerPaddingTop={0} />
         </div>
       </div>
