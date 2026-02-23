@@ -14,20 +14,48 @@ export default function Hero() {
   return (
     <section id="hero" style={{ overflowX: 'hidden' }}>
 
-      {/* ─── PURE CSS BREAKPOINT — no Tailwind md: dependency ─── */}
+      {/* ─── RESPONSIVE BREAKPOINT: 480px tablet mode, 1024px+ full desktop ─── */}
       <style>{`
         .h-mobile        { display: flex; flex-direction: column; }
         .h-mobile-card   { display: block; }
         .h-desktop       { display: none; }
 
-        @media (min-width: 768px) {
+        /* Activate two-column layout at 480px (tablet/mobile desktop mode) */
+        @media (min-width: 480px) {
           .h-mobile        { display: none !important; }
           .h-mobile-card   { display: none !important; }
           .h-desktop       { display: flex !important; }
         }
 
-        /* ─ Constrained desktop optimization: 768px–1100px ─ */
-        @media (min-width: 768px) and (max-width: 1100px) {
+        /* Keep true mobile stacked below 480px */
+        @media (max-width: 479px) {
+          .h-mobile        { display: flex !important; }
+          .h-mobile-card   { display: block !important; }
+          .h-desktop       { display: none !important; }
+        }
+
+        /* Full desktop layout: 1024px+ */
+        @media (min-width: 1024px) {
+          .h-desktop {
+            height: 100vh !important;
+            max-height: 100vh !important;
+            flex-direction: row !important;
+          }
+          .h-desktop > div:first-child {
+            flex: 0 0 60% !important;
+            width: 60% !important;
+            height: 100vh !important;
+          }
+          .h-desktop > div:last-child {
+            flex: 0 0 40% !important;
+            width: 40% !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
+          }
+        }
+
+        /* Constrained desktop: 480px–1023px (tablet/small desktop) */
+        @media (min-width: 480px) and (max-width: 1023px) {
           .h-desktop {
             height: auto !important;
             max-height: none !important;
@@ -57,7 +85,7 @@ export default function Hero() {
       ═══════════════════════════════════════════════════════ */}
       <div className="h-mobile" style={{
         position: 'relative',
-        height: '100svh', minHeight: '100vh',
+        height: 'auto', minHeight: 'auto',
         overflow: 'hidden', flexDirection: 'column',
       }}>
         <img src="/eiffel-tower-bg.jpg" alt="" aria-hidden="true" style={{
