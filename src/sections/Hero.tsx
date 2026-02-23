@@ -87,7 +87,7 @@ export default function Hero() {
           transition: 'opacity 1s .4s, transform 1s .4s',
           transform: isVisible ? 'none' : 'translateX(32px)',
         }}>
-          <GoogleMockup t={t} headerPaddingTop={88} isMobile={false} />
+          <GoogleMockup t={t} headerPaddingTop={88} />
         </div>
       </div>
 
@@ -99,9 +99,8 @@ export default function Hero() {
    headerPaddingTop: extra top padding on the blue header.
    On desktop: 88px clears the fixed nav.
    On mobile:  0 (no fixed nav overlap issue).
-   isMobile: determines if layout is on mobile view
 */
-function GoogleMockup({ t, headerPaddingTop = 0, isMobile = false }: { t: (key: string) => unknown; headerPaddingTop?: number; isMobile?: boolean }) {
+function GoogleMockup({ t, headerPaddingTop = 0 }: { t: (key: string) => unknown; headerPaddingTop?: number }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100%' }}>
 
