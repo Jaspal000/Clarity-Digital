@@ -50,11 +50,10 @@ export default function Hero() {
           {/* Hero text */}
           <div style={{
             position: 'relative', zIndex: 2,
-            height: '100%', display: 'flex', flexDirection: 'column',
-            justifyContent: 'center',
+            display: 'flex', flexDirection: 'column',
+            justifyContent: 'flex-start',
             padding: 'max(60px, 88px) max(1.1rem, 3rem) 3rem max(1.1rem, 5rem)',
             boxSizing: 'border-box',
-            minHeight: '0',
           }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 1rem', background: 'rgba(15,23,42,0.05)', borderRadius: '9999px', marginBottom: '0.75rem', width: 'fit-content', opacity: isVisible ? 1 : 0, transition: 'opacity .7s, transform .7s', transform: isVisible ? 'none' : 'translateY(16px)' }}>
               <MapPin size={14} className="text-gold" style={{ flexShrink: 0 }} />
@@ -100,7 +99,7 @@ export default function Hero() {
 */
 function GoogleMockup({ t, headerPaddingTop = 0 }: { t: (key: string) => unknown; headerPaddingTop?: number }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, height: 'auto' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: 'auto' }}>
 
       {/* Blue header — paddingTop clears fixed nav on desktop */}
       <div style={{
