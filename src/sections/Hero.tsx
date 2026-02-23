@@ -89,7 +89,7 @@ export default function Hero() {
         }}>
           <GoogleMockup t={t} headerPaddingTop={88} isMobile={false} />
         </div>
-
+      </div>
 
     </section>
   );
