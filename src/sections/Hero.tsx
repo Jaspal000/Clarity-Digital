@@ -20,7 +20,7 @@ export default function Hero() {
           640px–1024px: side-by-side flex-row with auto height
           1024px+: full desktop 100vh layout
       ═══════════════════════════════════════════════════════ */}
-      <div className="flex flex-col min-[768px]:flex-row min-h-0 h-auto min-[1024px]:h-screen min-[1024px]:max-h-screen items-center min-[1024px]:items-stretch" style={{
+      <div className="flex flex-col min-[768px]:flex-row min-h-0 h-auto min-[1024px]:h-screen min-[1024px]:max-h-screen items-start min-[1024px]:items-stretch" style={{
         position: 'relative',
         width: '100%',
         overflow: 'hidden',
@@ -78,11 +78,10 @@ export default function Hero() {
         </div>
 
         {/* RIGHT COLUMN: Google card (flex-1 on all sizes) */}
-        <div className="flex-1 relative w-full min-[768px]:w-auto min-[1024px]:w-2/5 min-h-0" style={{
+        <div className="flex-1 relative w-full min-[768px]:w-auto min-[1024px]:w-2/5 min-h-0 h-auto" style={{
           overflow: 'hidden',
           background: 'white',
           boxShadow: '-12px 0 40px rgba(0,0,0,0.08)',
-          minHeight: '380px',
           opacity: isVisible ? 1 : 0,
           transition: 'opacity 1s .4s, transform 1s .4s',
           transform: isVisible ? 'none' : 'translateX(32px)',
@@ -102,7 +101,7 @@ export default function Hero() {
 */
 function GoogleMockup({ t, headerPaddingTop = 0 }: { t: (key: string) => unknown; headerPaddingTop?: number }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, height: 'auto' }}>
 
       {/* Blue header — paddingTop clears fixed nav on desktop */}
       <div style={{
